@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DawnToDusk"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.AddFragmentToActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.OTPVerficationActivity"
             android:exported="true" />
         <activity android:name=".view.RegistrationActivity" />

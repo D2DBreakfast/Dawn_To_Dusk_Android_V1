@@ -3,14 +3,12 @@ package com.utico.fooddelivery.view
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ActivityDashBoardBinding
-import com.utico.fooddelivery.view.fragment.OrderFragment
 
 class DashBoardActivity : AppCompatActivity() {
 
@@ -36,10 +34,18 @@ class DashBoardActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    fun replaceFragment(fragment: Fragment, tag: String){
+   /* fun replaceFragment(fragment: Fragment, tag: String){
         supportFragmentManager.beginTransaction()
             .replace(R.id.dashBoardLayout,fragment,tag).addToBackStack("").commit()
-    }
+    }*/
+
 
 
 }
+
+
+
+
+
+
+//https://www.py4u.net/discuss/601604

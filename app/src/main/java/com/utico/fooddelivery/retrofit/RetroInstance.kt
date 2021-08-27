@@ -7,7 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetroInstance {
     companion object {
-        val baseUrl = "http://10.12.12.156:5000/api/user/"
+        //val baseUrl = "http://10.12.12.156:5000/api/user/"
+        val baseUrl = "https://reqres.in/api/"
+
         fun getRetroInstance(): Retrofit {
             val logging = HttpLoggingInterceptor()
             logging.level = (HttpLoggingInterceptor.Level.BODY)

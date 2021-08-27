@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.NotificationDetailsFragment">
+
+    <ImageView
+        android:id="@+id/notification_details_imageView"
+        android:layout_width="402dp"
+        android:layout_height="197dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bannarimage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_notification_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Notification"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notification_details_imageView" />
+
+    <TextView
+        android:id="@+id/tv_notification_details_dscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
+        android:text="Leafy green vegetables are nutrient rich because leaves contain the light-catching, energy-converting machinery of plants. Salad greens contain Vitamin A, Vitamin C, beta-carotene, calcium, folate, fiber, and phytonutrients (see Table 1). Leafy vegetables are a good choice for a healthful diet because they do not contain cholesterol and are naturally low in calories and sodium. Many of the health benefits that leafy greens provide come from phytonutrients, unique compounds that provide protection for plants. These compounds are becoming recognized as part of a nutritious diet that promotes long-term health. Phytonutrients can act as antioxidants, which help to prevent chronic diseases like cancer and heart disease. Figure 1 shows the antioxidant content of different kinds of lettuce."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notification_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

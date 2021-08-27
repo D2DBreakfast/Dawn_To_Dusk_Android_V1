@@ -1,5 +1,6 @@
 package com.utico.fooddelivery.viewmodel
 
+import android.content.ClipData
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.utico.fooddelivery.`interface`.HomeInterface
 import com.utico.fooddelivery.model.FoodCategory
 import com.utico.fooddelivery.model.FoodShortDesc
+import com.utico.fooddelivery.model.FoodShortDescList
 import com.utico.fooddelivery.repositories.FoodCategoryNameRepository
 import com.utico.fooddelivery.repositories.FoodShortDescRepository
 import com.utico.fooddelivery.retrofit.ApiService
@@ -17,44 +19,35 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
-    lateinit var foodShortDescListData : MutableLiveData<FoodShortDesc>
 
+    lateinit var recylerFoodShortDescData:MutableLiveData<FoodShortDescList>
 
     init {
-        foodShortDescListData = MutableLiveData()
+      recylerFoodShortDescData = MutableLiveData()
     }
 
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun getyFoodShortDescListObserable() : MutableLiveData<FoodShortDescList>{
+      return recylerFoodShortDescData
     }
 
-    fun getFoodListShortDescObserver() : MutableLiveData<FoodShortDesc>{
-      return foodShortDescListData
+    fun makeApiCallFoodDesc(){
+      val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+      val call = retroInstance.getAllFoodShortDescDetailsList()
+          call.enqueue(object : Callback<FoodShortDescList>{
+              override fun onResponse(
+                  call: Call<FoodShortDescList>, response: Response<FoodShortDescList>) {
+                  if (response.isSuccessful){
+                      recylerFoodShortDescData.postValue(response.body())
+                  }
+              }
+
+              override fun onFailure(call: Call<FoodShortDescList>, t: Throwable) {
+                  recylerFoodShortDescData.postValue(null)
+              }
+
+          })
     }
 
-    fun makeApiCall(){
-        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-        val response = retroInstance.getAllFoodShortDesc()
-    }
-
-    val text: LiveData<String> = _text
-
-
-   /* fun getAllFoodShortDesc(){
-        val response = repository.getAllFoodShortDesc()
-        response.enqueue(object : Callback<List<FoodShortDesc>>{
-            override fun onResponse(call: Call<List<FoodShortDesc>>, response: Response<List<FoodShortDesc>>) {
-                if (response.isSuccessful){
-                    _foodShortDescList.postValue(response.body())
-                }
-            }
-
-            override fun onFailure(call: Call<List<FoodShortDesc>>, t: Throwable) {
-                errorMessage.postValue(t.message)
-            }
-
-        })
-    }*/
 }
 

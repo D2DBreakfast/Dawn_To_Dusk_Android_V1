@@ -1,27 +1,28 @@
 package com.utico.fooddelivery.view.fragment
 
-import android.icu.number.NumberFormatter.with
-import android.icu.number.NumberRangeFormatter.with
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.squareup.picasso.Picasso
+import com.utico.fooddelivery.R
 import com.utico.fooddelivery.adapter.AdapterFoodCategory
 import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
-import com.utico.fooddelivery.view.DashBoardActivity
+import com.utico.fooddelivery.model.FoodShortDescList
+import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(){
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+    lateinit var adapterFoodOrderShortDesc: AdapterFoodOrderShortDesc
 /*
     private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
 */
@@ -31,24 +32,34 @@ class HomeFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.homeViewModel = homeViewModel
+        binding.homeViewModel = viewModel
+        setHasOptionsMenu(true)
         val view: View = binding.root
-        initViewmodel(view)
+
 
         val btnMeal = binding.btnMeals
         btnMeal.setOnClickListener {
-            Toast.makeText(context, "button is clicked", Toast.LENGTH_SHORT).show()
-            val frag = MealPlanFragment.newInstance()
-            (activity as DashBoardActivity).replaceFragment(frag,MealPlanFragment.TAG)
+            /*val frag = MealPlanFragment.newInstance()
+            (activity as DashBoardActivity).replaceFragment(frag,MealPlanFragment.TAG)*/
+            /*val activity = context as AppCompatActivity
+            val mealPlanFragment = MealPlanFragment()
+            activity.supportFragmentManager.beginTransaction().replace(R.id.dashBoardLayout,mealPlanFragment).addToBackStack(null).commit()
+            */
+            val intent = Intent (context, AddFragmentToActivity::class.java)
+             intent.putExtra("FragmentName","MealPlanFragment")
+             startActivity(intent)
         }
+
+        initViewmodel(view)
+        initViewModel()
         return view
     }
 
     companion object {
-        val TAG = HomeFragment::class.java.simpleName
-        @JvmStatic
+        /*val TAG = HomeFragment::class.java.simpleName
+        @JvmStatic*/
         fun newInstance() = HomeFragment()
     }
 
@@ -70,11 +81,35 @@ class HomeFragment : Fragment(){
           foodShortxDescrecyclerview.layoutManager = LinearLayoutManager(activity)
           val decoration  = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
           foodShortxDescrecyclerview.addItemDecoration(decoration)
-          foodShortxDescrecyclerview.adapter = AdapterFoodOrderShortDesc()
+           adapterFoodOrderShortDesc = AdapterFoodOrderShortDesc()
+          foodShortxDescrecyclerview.adapter = adapterFoodOrderShortDesc
 
   }
 
 
+  fun initViewModel(){
+      viewModel.getyFoodShortDescListObserable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
+        adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
+        adapterFoodOrderShortDesc.notifyDataSetChanged()
+      })
+      viewModel.makeApiCallFoodDesc()
+  }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu,menu)
+        val searchItem = menu.findItem(R.id.app_bar_search)
+       /* if (searchItem!=null){
+            //val searchView = searchItem.actionView as SearchView
+        }*/
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.app_bar_search ->Toast.makeText(context,"Click On Search",Toast.LENGTH_LONG).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
 
 

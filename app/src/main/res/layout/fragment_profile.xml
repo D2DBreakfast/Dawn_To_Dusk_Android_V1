@@ -1,13 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.fragment.ProfileFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="138dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/foodimage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="Shivanand Patil"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_mobile_no"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="9535347309"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Shivanand123@gmail.com"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_mobile_no" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Vijayanagar Bengalure"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textColor="@color/grey"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+
+   <!-- <TextView
+        android:id="@+id/textView22"
+        android:layout_width="307dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_vertical"
+        android:text="@string/help_and_support"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address" />-->
+
+
+    <Button
+        android:id="@+id/btnw_help_support"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="@string/help_and_support"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.253"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+    <Button
+        android:id="@+id/btn_payment_mode"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_payment"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="@string/payment_mode"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnw_help_support" />
+
+    <Button
+        android:id="@+id/btn_address"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_location_green"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="@string/addresses"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_payment_mode" />
+
+    <Button
+        android:id="@+id/btn_order_history"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="@string/order_history"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_address" />
+
+    <Button
+        android:id="@+id/btn_app_settings"
+        android:layout_width="351dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_settings_24"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="@string/app_settings"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_order_history" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

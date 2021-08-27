@@ -15,6 +15,29 @@
     <string name="verification_code">Verification Code</string>
     <string name="show_error">SHOW ERROR</string>
     <string name="show_success">SHOW Success</string>
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="help_and_support">Help &amp; Support</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="addresses">Address</string>
+    <string name="order_history">Order History</string>
+    <string name="app_settings">App Settings</string>
+    <string name="faq">FAQ</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="Terms_and_condition">Terms &amp; Conditions</string>
+    <string name="contact">Contact</string>
+    <string name="apple_pay">Apple Pay</string>
+    <string name="google_pay">Google Pay</string>
+    <string name="Net_banking">NetBanking</string>
+    <string name="card_payment">Card Payment</string>
+    <string name="cod">COD</string>
+    <string name="card_holder">CARD HOLDER</string>
+    <string name="card_save">CARD SAVE</string>
+    <string name="bank">BANK</string>
+    <string name="cards">CARDS</string>
+
+
+
+
 
 
     <string-array name="months_array">

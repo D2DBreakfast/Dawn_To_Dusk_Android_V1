@@ -2,6 +2,6 @@ package com.utico.fooddelivery.viewmodel
 
 import androidx.lifecycle.ViewModel
 
-class OrderViewModel : ViewModel() {
+class PaymentModeViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

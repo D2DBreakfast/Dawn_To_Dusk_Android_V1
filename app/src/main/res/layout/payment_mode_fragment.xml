@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.PaymentModeFragment">
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_card"
+        android:layout_width="142dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Cards"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/LightCyan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_bank"
+        android:layout_width="152dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/LightCyan"
+        android:text="Bank"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toEndOf="@+id/btn_card"
+        app:layout_constraintTop_toTopOf="parent" />
+
+   <!-- <RadioButton
+        android:id="@+id/radioBtn_apply_pay"
+        android:layout_width="335dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_arrow_right"
+        android:layoutDirection="rtl"
+        android:text="@string/apple_pay"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cards" />-->
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_apple"
+        android:layoutDirection="rtl"
+        android:text="@string/apple_pay"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_bank" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_payment"
+        android:layoutDirection="rtl"
+        android:text="@string/google_pay"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_green_comment_bank"
+        android:layoutDirection="rtl"
+        android:text="@string/Net_banking"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+
+    <CheckBox
+        android:id="@+id/checkBox4"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_payment"
+        android:layoutDirection="rtl"
+        android:text="@string/card_payment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
+
+    <CheckBox
+        android:id="@+id/checkBox5"
+        android:layout_width="341dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/green_border_rectangle"
+        android:drawableLeft="@drawable/ic_payment"
+        android:layoutDirection="rtl"
+        android:text="@string/cod"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

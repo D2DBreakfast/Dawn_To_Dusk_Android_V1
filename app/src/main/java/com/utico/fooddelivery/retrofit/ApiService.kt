@@ -1,7 +1,6 @@
 package com.utico.fooddelivery.retrofit
 
-import com.utico.fooddelivery.model.FoodCategory
-import com.utico.fooddelivery.model.FoodShortDesc
+import com.utico.fooddelivery.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -21,14 +20,14 @@ interface ApiService {
 
 
     /*Registration ApiService Call*/
-    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+    @Headers("Content-Type:application/json")
     @FormUrlEncoded
-    @POST("register")
+    @POST("userRegister")
     fun userRegistration(
-            @Field("fullname") name: String,
+            @Field("fullName") name: String,
             @Field("email") email: String,
             @Field("countryCode") country_code:String,
-            @Field("mobile") mobilenumber: String
+            @Field("mobileNo") mobilenumber: String
         ): Call<ResponseBody>
 
 
@@ -37,5 +36,22 @@ interface ApiService {
 
          @GET("movielist.json")
          fun getAllFoodShortDesc() : Call<List<FoodShortDesc>>
+
+         /*Home Screen Food Short Description List*/
+         @GET("users?page=2")
+         fun getAllFoodShortDescDetailsList(): Call<FoodShortDescList>
+
+         /*Meals Plan Method*/
+          @GET("users?page=2")
+          fun getAllMealPlanList(): Call<MealPlanList>
+
+         /*Get Food SearchList*/
+         @GET("users?page=2")
+         fun searchFoodList(): Call<FoodList>
+
+         /*Get Notifications*/
+         @GET("users?page=2")
+         fun getAllNotification(): Call<NotificationList>
+
 
 }

@@ -1,5 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/black_border_rectangle.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/green_blue_orange_button_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/green_border_rectangle.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_apple.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_profile_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_email.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_comment_bank.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_headset_mic.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_lock_.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_notes.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_payment.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_shopping_cart.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_location_green.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_payment.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_white_add.xml" value="0.19282051282051282" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/isticky_note_green.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/searchview_rounded.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/spinner_border.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_add_details_fragments_to.xml" value="0.11775362318840579" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_dash_board.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_login.xml" value="0.11820652173913043" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/add_card_bank_details_fragment.xml" value="0.1" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/add_card_bank_fragment.xml" value="0.37471264367816093" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/add_fragment_activity.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/bank_details_fragment.xml" value="0.16666666666666666" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/card_payment_fragment.xml" value="0.37154989384288745" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/custom_toolbar.xml" value="0.13999999999999999" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_home.xml" value="0.16666666666666666" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_meal_plan.xml" value="0.1480978260869565" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_notifications.xml" value="0.16666666666666666" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_search.xml" value="0.14666666666666667" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/help_support_fragment.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_bank_details.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_food_category_name.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_food_details.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_food_order_desc.xml" value="0.3333333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_global_search.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_meal_plan.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_notification.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/meals_plan_details_fragment.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/notification_details_fragment.xml" value="0.14666666666666667" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_details_fragment.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_details_fragment1.xml" value="0.13360507246376813" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_fragment.xml" value="0.10190217391304347" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/payment_mode_fragment.xml" value="0.16666666666666666" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/menu.xml" value="0.1796875" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/search_menu.xml" value="0.1796875" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
