@@ -1,0 +1,2 @@
+rootProject.name = "Dawn to Dusk"
+include ':app'
