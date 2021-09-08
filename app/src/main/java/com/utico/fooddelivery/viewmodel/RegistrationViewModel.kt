@@ -17,20 +17,24 @@ class RegistrationViewModel : ViewModel() {
     var country_code:String? = null
     var mobilenumber: String? = null
     var resultData  = MutableLiveData<String>()
+    var validationResultData = MutableLiveData<String>()
 
     fun onRegistrationButtonClick(view:View){
-        var validationMessage:String = ""
-        if(name.equals("")){
-           validationMessage="Name Field is Required"
-        } else if (email.equals("")){
-            validationMessage="Email Field is Required"
-        } else if(mobilenumber.equals("")){
-            validationMessage="Mobile Number is Required"
-        }else {
-            val registerResponse =
-                registrationRepository().userRegistration(name!!, email!!,"91",mobilenumber!!)
-            registrationInterface?.registration(registerResponse)
-        }
+       if (name.equals("") || name.equals(null)){
+           validationResultData.value = "Please Provide Full Name"
+       } else if(email.equals("") || email.equals(null)){
+           validationResultData.value = "Please Provide Email"
+       }else if (mobilenumber.equals("") || mobilenumber.equals(null)){
+           validationResultData.value = "Please Provide Mobile Number"
+       } else if(mobilenumber!!.length < 10){
+           validationResultData.value = "Please Provide Valid Mobile Number"
+       }else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
+           validationResultData.value = "Please Provide Valid Email Id"
+       else{
+           val registerResponse =
+               registrationRepository().userRegistration(name!!, email!!,"91",mobilenumber!!)
+           registrationInterface?.registration(registerResponse)
+       }
     }
 
     fun getResultRegistration():MutableLiveData<String>{

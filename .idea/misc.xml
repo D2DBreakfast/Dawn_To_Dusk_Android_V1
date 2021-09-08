@@ -3,9 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/add_card_bank_fragment.xml" value="0.13134057971014493" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.10185185185185185" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigation_round_shape.xml" value="0.10185185185185185" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigationbar_round_shape.xml" value="0.10185185185185185" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_dash_board.xml" value="0.17777777777777778" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_registration.xml" value="0.1796875" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/add_card_bank_fragment.xml" value="0.3333333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/dropdown_item.xml" value="0.1796875" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_home.xml" value="0.271889400921659" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_details_fragment.xml" value="0.14666666666666667" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_fragment.xml" value="0.10190217391304347" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/toggle_button_background.xml" value="0.11865942028985507" />
       </map>
     </option>
   </component>

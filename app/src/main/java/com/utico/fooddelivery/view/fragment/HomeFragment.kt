@@ -39,7 +39,7 @@ class HomeFragment : Fragment(){
         val view: View = binding.root
 
 
-        val btnMeal = binding.btnMeals
+        val btnMeal = binding.btnMealPlan
         btnMeal.setOnClickListener {
             /*val frag = MealPlanFragment.newInstance()
             (activity as DashBoardActivity).replaceFragment(frag,MealPlanFragment.TAG)*/

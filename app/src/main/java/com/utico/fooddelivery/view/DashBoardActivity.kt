@@ -32,6 +32,7 @@ class DashBoardActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
    /* fun replaceFragment(fragment: Fragment, tag: String){

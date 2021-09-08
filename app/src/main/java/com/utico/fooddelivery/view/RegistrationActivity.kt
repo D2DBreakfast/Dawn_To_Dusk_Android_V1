@@ -3,6 +3,10 @@ package com.utico.fooddelivery.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.utico.fooddelivery.R
@@ -26,6 +30,45 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
         viewModel.getResultRegistration().observe(this, Observer {
             toast(it)
         })
+
+        viewModel.validationResultData.observe(this, Observer {
+           toast(it)
+        })
+
+
+        var fullname = binding.editname
+             fullname.doOnTextChanged { text, start, before, count ->
+                 if (text!!.isEmpty()){
+                   fullname.error = "Full Name is Required"
+                 }
+             }
+
+        var email = binding.editemail
+            email.doOnTextChanged { text, start, before, count ->
+                if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(text!!).matches())){
+                    email.error = "Pleas Provide The Valid Email ID"
+                }
+            }
+
+        var phoneNumber = binding.editmobilenumber
+            phoneNumber.doOnTextChanged { text, start, before, count ->
+                if (text!!.length < 10){
+                    phoneNumber.error ="Please Provide The Valid Phone Number"
+                }
+            }
+
+
+
+        val countryCode = resources.getStringArray(R.array.countryCode_array)
+        val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,countryCode)
+        binding.countryCode.setAdapter(arrayAdapter)
+
+        binding.countryCode.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedItem = parent.getItemAtPosition(position) as String
+                toast(selectedItem)
+            }
+
     }
 
 
@@ -36,6 +79,5 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
             startActivity(intent)
 
         })
-
     }
 }

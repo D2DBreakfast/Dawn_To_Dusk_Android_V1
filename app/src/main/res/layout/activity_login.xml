@@ -51,7 +51,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="318dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="204dp"
@@ -80,7 +80,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layout"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColorHint="@color/green"
                     android:hint="@string/country_code"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -89,18 +89,19 @@
                         android:id="@+id/country_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Mobile No">
+                    android:hint="Mobile No"
+                    app:errorEnabled="true"
+                    app:helperText="Required*"
+                    app:helperTextTextColor="@color/red"
+                    app:counterMaxLength="10"
+                    app:counterEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:text="@={loginviewmodel.mobile_number}"
@@ -108,7 +109,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:maxLength="10" />
+                        android:maxLength="10"
+                        android:drawableStart="@drawable/ic_baseline_phone_24" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
