@@ -38,7 +38,7 @@ class MealPlanFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
           viewModel = ViewModelProvider(this).get(MealPlanViewModel::class.java)
           _binding = FragmentMealPlanBinding.inflate(inflater,container,false)
-          setHasOptionsMenu(true);
+         /* setHasOptionsMenu(true);*/
 
         val view:View = binding.root
           initview()
@@ -72,12 +72,12 @@ class MealPlanFragment : Fragment() {
        viewModel.makeApiCallGetMealPlan()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu,menu)
         val searchItem = menu.findItem(R.id.app_bar_search)
-        /*if (searchItem!=null){
+        *//*if (searchItem!=null){
             val searchView = searchItem.actionView as SearchView
-        }*/
+        }*//*
         super.onCreateOptionsMenu(menu, inflater)
-    }
+    }*/
 }

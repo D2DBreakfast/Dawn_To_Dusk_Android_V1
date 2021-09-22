@@ -8,210 +8,172 @@
             name="registrationViewModel"
             type="com.utico.fooddelivery.viewmodel.RegistrationViewModel" />
     </data>
-
     <ScrollView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_">
+        android:fillViewport="true">
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:background="@drawable/background_">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_label_registration"
-            app:layout_constraintStart_toEndOf="@+id/tv_label_registration">
+     <ImageView
+         android:id="@+id/imageView6"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="76dp"
+         android:layout_marginEnd="16dp"
+         android:background="@drawable/profile"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.497"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
 
+     <TextView
+         android:id="@+id/tv_registration"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="44dp"
+         android:layout_marginEnd="16dp"
+         android:textColor="@color/green"
+         android:textStyle="bold"
+         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+         android:text="@string/tv_label_registration"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
-            <Button
-                android:id="@+id/btnregistration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="52dp"
-                android:background="@drawable/border_rectangle"
-                android:onClick="@{registrationViewModel::onRegistrationButtonClick}"
-                android:text="Registration"
-                app:backgroundTint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.619"
-                app:layout_constraintStart_toEndOf="@+id/tv_signup"
-                app:rippleColor="@color/white" />
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/full_name_textInputLayout"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="32dp"
+         android:layout_marginEnd="16dp"
+         app:errorEnabled="true"
+         app:helperText="@string/required"
+         app:helperTextTextColor="@color/red"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/tv_registration">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/sym_def_app_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.164"
-                tools:srcCompat="@tools:sample/avatars" />
-            <!-- <LinearLayout
-                 android:id="@+id/linearLayout1"
-                 android:layout_width="317dp"
-                 android:layout_height="147dp"
-                 android:layout_marginTop="24dp"
-                 android:orientation="vertical"
-                 app:layout_constraintEnd_toEndOf="@+id/tv_label_registration"
-                 app:layout_constraintHorizontal_bias="0.0"
-                 app:layout_constraintStart_toStartOf="@+id/tv_label_registration"
-                 app:layout_constraintTop_toBottomOf="@+id/tv_label_registration">
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/full_name_TextInputEdt"
+             android:text="@={registrationViewModel.name}"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:hint="@string/full_name" />
+     </com.google.android.material.textfield.TextInputLayout>
 
-             </LinearLayout>-->
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/email_TextInputLayout"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginEnd="16dp"
+         app:errorEnabled="true"
+         app:helperText="@string/required"
+         app:helperTextTextColor="@color/red"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/full_name_textInputLayout">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="318dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="130dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                app:layout_constraintVertical_bias="0.060000002">
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/email_TextInputEdt"
+             android:text="@={registrationViewModel.email}"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:hint="@string/email" />
+     </com.google.android.material.textfield.TextInputLayout>
 
-                <!--  <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/menu"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/country_code">
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/textInputLayout16"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+         android:layout_width="wrap_content"
+         android:layout_height="54dp"
+         android:layout_marginStart="16dp"
+         android:layout_marginEnd="4dp"
+         android:hint="@string/country_code"
+         app:helperText="@string/required"
+         app:helperTextTextColor="@color/red"
+         app:layout_constraintEnd_toStartOf="@+id/textInputLayout17"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/email_TextInputLayout">
 
-                <AutoCompleteTextView
-                    android:id="@+id/countery_dropdown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>-->
+         <AutoCompleteTextView
+             android:id="@+id/country_code"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:inputType="none" />
+     </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/country_code"
-                    android:textColorHint="@color/green"
-                    app:helperText="Required*"
-                    app:helperTextTextColor="@color/red">
+     <com.google.android.material.textfield.TextInputLayout
+         android:id="@+id/textInputLayout17"
+         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_marginEnd="16dp"
+         app:helperText="@string/required"
+         app:helperTextTextColor="@color/red"
+         app:errorEnabled="true"
+         app:counterMaxLength="10"
+         app:counterEnabled="true"
+         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout16"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.142"
+         app:layout_constraintStart_toEndOf="@+id/textInputLayout16"
+         app:layout_constraintTop_toTopOf="@+id/textInputLayout16"
+         app:layout_constraintVertical_bias="0.0">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/country_code"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>
+         <com.google.android.material.textfield.TextInputEditText
+             android:text="@={registrationViewModel.mobilenumber}"
+             android:id="@+id/mobile_no_TextInputEdt"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:inputType="number"
+             android:maxLength="10"
+             android:hint="@string/mobile_number" />
+     </com.google.android.material.textfield.TextInputLayout>
 
+     <Button
+         android:onClick="@{registrationViewModel::onRegistrationButtonClick}"
+         android:id="@+id/btn_registration"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="120dp"
+         android:layout_marginEnd="16dp"
+         android:background="@drawable/border_rectangle"
+         android:text="@string/tv_label_registration"
+         app:backgroundTint="@color/white"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="1.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/textInputLayout17" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile No"
-                    app:errorEnabled="true"
-                    app:helperText="Required*"
-                    app:helperTextTextColor="@color/red"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="10">
-
-                    <com.google.android.material.textfield.TextInputEditText
-
-                        android:id="@+id/editmobilenumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:text="@={registrationViewModel.mobilenumber}" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="317dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/tv_label_registration"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_label_registration"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_registration">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Full Name"
-                    app:errorEnabled="true"
-                    app:helperText="Required*"
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editname"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:maxLength="50"
-                        android:text="@={registrationViewModel.name}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="Email"
-                    app:errorEnabled="true"
-                    app:helperText="Required*"
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editemail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:text="@={registrationViewModel.email}"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_label_registration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_label_registration"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@color/green"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.109"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6"
-                app:layout_constraintVertical_bias="0.225" />
-
-            <TextView
-                android:id="@+id/tv_signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="Already have a member ? Login"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+     <TextView
+         android:id="@+id/textView37"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+         android:layout_marginTop="8dp"
+         android:layout_marginEnd="16dp"
+         android:text="@string/new_here_register_login"
+         android:textColor="@color/white"
+         android:textStyle="bold"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.075"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/btn_registration" />
 
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+ </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 </layout>

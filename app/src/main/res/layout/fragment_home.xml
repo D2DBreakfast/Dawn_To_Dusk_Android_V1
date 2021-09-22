@@ -8,34 +8,7 @@
             name="homeViewModel"
             type="com.utico.fooddelivery.viewmodel.HomeViewModel" />
     </data>
-  <!--  <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_location_green"
-                android:layout_weight="0.3"/>
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="#Vijayanagar"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:gravity="center_vertical"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_green_shopping_cart"
-                android:layout_weight="0.3"/>
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,6 +19,80 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".view.fragment.HomeFragment">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/home_custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:id="@+id/lnr_location_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_grey"
+                    >
+
+                    <ImageView
+                        android:id="@+id/location_imageview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        app:srcCompat="@drawable/ic_location_green" />
+
+                    <TextView
+                        android:id="@+id/tv_location_descrption"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@color/grey"
+                        android:text="150,1,Infantry Rd,Opp Commissioner office,Shivaji Nagar,Bengaluru,Karnatak 560001" />
+
+                   <!-- <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.1"
+                        app:srcCompat="@drawable/ic_green_shopping_cart" />-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/lnr_location_cart"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:background="@color/light_grey"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/search_here"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/title_search"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_green_search"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
 
        <!-- <EditText
             android:id="@+id/searchView"
@@ -89,23 +136,29 @@
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
-            app:checkedButton="@id/btn_order"
+            android:layout_marginEnd="16dp"
+            app:checkedButton="@id/btn_a_al_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
             app:singleSelection="true">
 
             <Button
-                android:id="@+id/btn_order"
+                android:id="@+id/btn_a_al_cart"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Order" />
+                android:text="@string/a_la_cart"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/green"
+                android:textAllCaps="false"
+                />
 
             <Button
                 android:id="@+id/btn_meal_plan"
@@ -113,17 +166,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Meal Plan" />
+                android:text="@string/meal_plans"
+                android:textAllCaps="false"/>
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/veg_switch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/veg"
+            android:track="@color/green"
+            app:layout_constraintEnd_toStartOf="@+id/food_category_recyclerview"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
+
+
         <ImageView
             android:id="@+id/bannar_imageView"
-            android:layout_width="373dp"
+            android:layout_width="match_parent"
             android:layout_height="116dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/bannarimage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.727"
@@ -143,30 +211,30 @@
             tools:listitem="@layout/item_row_food_category_name" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/food_details_recyclerview"
-            android:layout_width="wrap_content"
+            android:id="@+id/a_la_cart_recyclerview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bannar_imageView"
-            tools:listitem="@layout/item_row_food_order_desc"/>
+            tools:listitem="@layout/item_row_food_order_desc" />
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="94dp"
-            android:layout_height="40dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/meal_plans_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Switch"
-            app:layout_constraintEnd_toStartOf="@+id/food_category_recyclerview"
-            app:layout_constraintHorizontal_bias="0.51"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
-
+            app:layout_constraintTop_toBottomOf="@+id/a_la_cart_recyclerview"
+            tools:listitem="@layout/item_row_food_order_desc"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

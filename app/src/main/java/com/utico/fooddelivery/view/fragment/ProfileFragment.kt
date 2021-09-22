@@ -44,6 +44,28 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
             }
 
+        /*Set Click event for Address Button*/
+        val btnAddress = binding.btnAddress
+            btnAddress.setOnClickListener {
+                val intent = Intent(context,AddFragmentToActivity::class.java)
+                    intent.putExtra("FragmentName","AddressFragment")
+                startActivity(intent)
+            }
+
+        /*Set Click event for the Order History*/
+        val btn_history = binding.btnOrderHistory
+            btn_history.setOnClickListener {
+              val intent = Intent(context,AddFragmentToActivity::class.java)
+                  intent.putExtra("FragmentName","OrderHistoryFragment")
+                 startActivity(intent)
+            }
+
+        /*Set Click event for the Order History*/
+        val btn_AppSettings = binding.btnAppSettings
+        btn_AppSettings.setOnClickListener {
+
+        }
+
         return view
     }
 

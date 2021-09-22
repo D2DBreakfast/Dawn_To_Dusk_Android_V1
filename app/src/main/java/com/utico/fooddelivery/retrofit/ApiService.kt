@@ -7,7 +7,6 @@ import retrofit2.http.*
 
 interface ApiService {
 
-
     /*Login ApiService Call*/
     @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
@@ -31,15 +30,21 @@ interface ApiService {
         ): Call<ResponseBody>
 
 
-         @GET("movielist.json")
-         fun getAllFoodCategoryName(): Call<List<FoodCategory>>
-
-         @GET("movielist.json")
-         fun getAllFoodShortDesc() : Call<List<FoodShortDesc>>
-
          /*Home Screen Food Short Description List*/
          @GET("users?page=2")
          fun getAllFoodShortDescDetailsList(): Call<FoodShortDescList>
+
+         /*Getting the Food Sub Category Data Method*/
+         @GET("users?page=2")
+         fun getAllFoodSubCategoryList(): Call<FoodSubCategoryList>
+
+         /*Get Food Sub Category wise data*/
+         @GET("users?")
+         fun getFoodSubCategoryWiseList(@Query("page")FoodSubCategoryName:String): Call<FoodShortDescList>
+
+         /*Get Food Search*/
+         @GET("users?")
+         fun getHomeFoodSearchList(@Query("page")foodSearchText:String): Call<FoodShortDescList>
 
          /*Meals Plan Method*/
           @GET("users?page=2")

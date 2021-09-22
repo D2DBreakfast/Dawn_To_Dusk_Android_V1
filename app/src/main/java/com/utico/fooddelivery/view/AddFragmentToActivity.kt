@@ -53,6 +53,27 @@ class AddFragmentToActivity : AppCompatActivity() {
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,AddCardBankFragment(),"AddCardBankFragment")
                 .commit()
+        }else if (fragmentName.equals("AddressFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,AddressFragment(),"AddressFragment")
+                .commit()
+        }else if (fragmentName.equals("AddAddressFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,AddAddressFragment(),"AddAddressFragment")
+                .commit()
+        } else if(fragmentName.equals("GoogleLocationFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,GoogleLocationFragment(),"GoogleLocationFragment")
+                .commit()
+        }else if (fragmentName.equals("OrderHistoryFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,OrderHistoryFragment(),"OrderHistoryFragment")
+                .commit()
+
+        }else if (fragmentName.equals("MealOrderPackageDetailsFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,MealOrderPackageDetailsFragment(),"MealOrderPackageDetailsFragment")
+                .commit()
         }
 
 

@@ -3,11 +3,6 @@ package com.utico.fooddelivery.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.view.Menu
-import android.view.MenuInflater
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -24,6 +19,7 @@ import com.utico.fooddelivery.viewmodel.LoginViewModel
 class LoginActivity : AppCompatActivity(),LoginListener {
     private lateinit var binding: ActivityLoginBinding
     lateinit var viewModel: LoginViewModel
+    var mobileNumber:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +40,12 @@ class LoginActivity : AppCompatActivity(),LoginListener {
 
 
 
-        val editText_mobile_no = binding.editMobileNo
+        val editText_mobile_no = binding.textinputeditMobileNo
             editText_mobile_no.doOnTextChanged { text, start, before, count ->
                 if (text!!.length < 10){
                     editText_mobile_no.error = "Please Provide the Valid Phone Number"
                 }
+                mobileNumber = text!!.toString()
             }
 
         val countryCode = resources.getStringArray(R.array.countryCode_array)
@@ -66,6 +63,7 @@ class LoginActivity : AppCompatActivity(),LoginListener {
        loginResponse.observe(this, Observer {
            toast(it)
            val intent = Intent(this,OTPVerficationActivity::class.java)
+               intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
            startActivity(intent)
        })
 

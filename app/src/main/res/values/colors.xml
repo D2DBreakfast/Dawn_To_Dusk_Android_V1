@@ -8,9 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="darkgrey">#A9A9A9</color>
-7    <color name="green">#008000</color>
+7   <color name="green">#008000</color>
     <color name="LightCyan">#82DDCB</color>
-
+    <color name="light_grey">#F5F5F5</color>
+    <color name="card_background_light_green">#D0F0C0</color>
 
     <color name="app_theme_color"></color>
 </resources>

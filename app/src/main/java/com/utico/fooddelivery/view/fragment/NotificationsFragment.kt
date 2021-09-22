@@ -46,8 +46,8 @@ class NotificationsFragment : Fragment() {
     fun setUpUi(){
         val recyclerView = binding.notificationRecyclerview
            recyclerView.layoutManager = LinearLayoutManager(activity)
-        val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
-            recyclerView.addItemDecoration(decoration)
+        /*val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
+            recyclerView.addItemDecoration(decoration)*/
             adapterNotification = AdapterNotification()
             recyclerView.adapter = adapterNotification
     }

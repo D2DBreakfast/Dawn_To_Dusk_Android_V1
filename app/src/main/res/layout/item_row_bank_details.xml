@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="347dp"
         android:layout_height="wrap_content"
-        android:background="@color/LightCyan"
+        android:background="@color/card_background_light_green"
         android:layout_margin="4dp"
         android:paddingBottom="8dp">
 

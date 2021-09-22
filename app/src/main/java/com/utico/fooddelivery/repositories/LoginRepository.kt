@@ -9,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class userRepository {
+class LoginRepository {
     fun userLogin(email:String,country_code:String,mobile_number:String):LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val restInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)

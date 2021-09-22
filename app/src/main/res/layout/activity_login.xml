@@ -1,149 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
        <variable
            name="loginviewmodel"
            type="com.utico.fooddelivery.viewmodel.LoginViewModel"/>
     </data>
-    <ScrollView
+   <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_">
-        <androidx.constraintlayout.widget.ConstraintLayout
+       >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_"
+        android:fillViewport="true">
+
+        <ImageView
+            android:id="@+id/profile_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/tv_label_login"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_imageview" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout16"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            android:hint="@string/country_code"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
+            <AutoCompleteTextView
+                android:id="@+id/country_code"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                android:background="@android:drawable/sym_def_app_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.129"
-                tools:srcCompat="@tools:sample/avatars" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout17"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red"
+            app:errorEnabled="true"
+            app:counterMaxLength="10"
+            app:counterEnabled="true"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout16"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout16"
+            app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/tv_label_registration"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinputedit_mobile_no"
+                android:text="@={loginviewmodel.mobile_number}"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_label_login"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@color/green"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6"
-                app:layout_constraintVertical_bias="0.302"/>
+                android:inputType="number"
+                android:maxLength="10"
+                android:hint="@string/mobile_number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/border_rectangle"
+            android:onClick="@{loginviewmodel::onLoginButtonClick}"
+            android:text="@string/tv_label_login"
+            app:backgroundTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout17" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="150dp"
+            android:onClick="@{loginviewmodel::newRegistrationButtonClick}"
+            android:text="@string/new_here_register_login"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.135"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="318dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="204dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tv_label_registration"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/tv_label_registration"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_registration"
-                app:layout_constraintVertical_bias="0.55">
-
-                <!--  <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/menu"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/country_code">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/countery_dropdown"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none" />
-                </com.google.android.material.textfield.TextInputLayout>-->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/layout"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:textColorHint="@color/green"
-                    android:hint="@string/country_code"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/country_code"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="none"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Mobile No"
-                    app:errorEnabled="true"
-                    app:helperText="Required*"
-                    app:helperTextTextColor="@color/red"
-                    app:counterMaxLength="10"
-                    app:counterEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:text="@={loginviewmodel.mobile_number}"
-                        android:id="@+id/edit_mobile_no"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:drawableStart="@drawable/ic_baseline_phone_24" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_signup"
-                android:onClick="@{loginviewmodel::newRegistrationButtonClick}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="New Here ? Register"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout" />
-
-            <Button
-                android:onClick="@{loginviewmodel::onLoginButtonClick}"
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="52dp"
-                android:background="@drawable/border_rectangle"
-                android:text="Login"
-                app:backgroundTint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.898"
-                app:layout_constraintStart_toEndOf="@+id/tv_signup"
-                app:rippleColor="@color/white" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+   </ScrollView>
 </layout>

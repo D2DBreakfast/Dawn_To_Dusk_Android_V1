@@ -1,21 +1,30 @@
 <resources>
     <string name="app_name">Dawn to Dusk</string>
     <string name="tv_label_login">Login</string>
+    <string name="mobile_number">Mobile No</string>
     <string name="country_code">Country Code</string>
+    <string name="email">Email</string>
+    <string name="new_here_register_login">New Here? Register Login </string>
     <string name="tv_label_registration">Registration</string>
     <string name="tv_label_verify_otp">OTP Verify</string>
+    <string name="verify_otp">Verify OTP</string>
     <string name="title_activity_dash_board">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
+    <string name="cart">Cart</string>
+
+
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
     <string name="button_name_order">Order</string>
     <string name="button_name_meals">Meal Plan</string>
-    <string name="please_type_the_verification_code_sent_to_n_9xxxxxxx19">Please type the verification code sent to\n9XXXXXXX09</string>
+    <string name="please_type_the_verification_code_sent_to_n_9xxxxxxx19">Please type the verification code sent to</string>
+    <string name="resend">Resend</string>
     <string name="verification_code">Verification Code</string>
     <string name="show_error">SHOW ERROR</string>
     <string name="show_success">SHOW Success</string>
-    <string name="add_to_cart">ADD TO CART</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="add_cart">Add Cart</string>
     <string name="help_and_support">Help &amp; Support</string>
     <string name="payment_mode">Payment Mode</string>
     <string name="addresses">Address</string>
@@ -34,26 +43,82 @@
     <string name="card_save">CARD SAVE</string>
     <string name="bank">BANK</string>
     <string name="cards">CARDS</string>
+    <string name="full_name"> Full Name</string>
+    <string name="required">Required*</string>
+    <string name="card_number">Card Number</string>
+    <string name="cvv">CVV</string>
+    <string name="month_year">Month/Year</string>
+    <string name="add_card">Add Card</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="account_no">Account No</string>
+    <string name="confirm_no">Confirm No</string>
+    <string name="ifcs_code">IFCS Code</string>
+    <string name="bank_code">Bank Code</string>
+    <string name="add_bank">Add Bank</string>
+    <string name="google_location">Google Location</string>
+    <string name="flat_villo_house_no">Flat/Villa/House No</string>
+    <string name="landmark1">Landmark1</string>
+    <string name="landmark2">Landmark2</string>
+    <string name="office">Office</string>
+    <string name="home">Home</string>
+    <string name="other">Other</string>
+    <string name="start_ordering">Start Ordering</string>
+    <string name="nutritional_info">Nutritional Info</string>
+    <string name="terms_condition">Terms &amp; Conditions</string>
+    <string name="how_its_work">How it\'s Work</string>
+    <string name="up_coming_meals">Upcoming Meals</string>
+    <string name="shipping_details">Shipping Details</string>
+    <string name="community">Community</string>
+    <string name="vill_no">Villa No</string>
+    <string name="landmark">Landmark</string>
+    <string name="payment_gateway">Payment gateway</string>
+    <string name="invoice">Invoice</string>
+    <string name="items">Items</string>
+    <string name="shipping">Shipping</string>
+    <string name="vat">VAT(5%)</string>
+    <string name="total_price">Total Price</string>
+    <string name="download_invoice">Download Invoice</string>
+    <string name="mail_invoice">Mail Invoice</string>
+    <string name="rate_of_order">Rate the Order</string>
+    <string name="rate_us_here">Rate us here</string>
+    <string name="submit">submit</string>
+    <string name="completed">Completed</string>
+    <string name="running">Running</string>
+    <string name="a_la_cart">A la Carte</string>
+    <string name="meal_plans">Meal Plans</string>
+    <string name="veg">Veg</string>
+    <string name="select_delivery_date"> Select Delivery Date</string>
 
 
 
 
 
-<!--
-    <string-array name="countryCode_array">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>-->
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+        <string-array name="countryCode_array">
+            <item>January</item>
+            <item>February</item>
+            <item>March</item>
+            <item>April</item>
+            <item>May</item>
+            <item>June</item>
+            <item>July</item>
+            <item>August</item>
+            <item>September</item>
+            <item>October</item>
+            <item>November</item>
+            <item>December</item>
+        </string-array>-->
 
 
     <string-array name="countryCode_array" >

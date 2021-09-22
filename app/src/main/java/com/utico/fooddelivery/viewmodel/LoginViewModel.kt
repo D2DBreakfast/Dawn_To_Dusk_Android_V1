@@ -1,15 +1,10 @@
 package com.utico.fooddelivery.viewmodel
 
-import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.utico.fooddelivery.`interface`.LoginListener
-import com.utico.fooddelivery.repositories.userRepository
+import com.utico.fooddelivery.repositories.LoginRepository
 
 class LoginViewModel : ViewModel() {
 
@@ -25,7 +20,7 @@ var loginListener:LoginListener? = null
       }else if (mobile_number!!.length < 10 || mobile_number!!.length > 13){
           errorResultData.value ="Please Provide the Valid Phone Number"
       } else{
-          val logiResponse = userRepository().userLogin("Sampath123@gmail.com","91",mobile_number!!)
+          val logiResponse = LoginRepository().userLogin("Sampath123@gmail.com","91",mobile_number!!)
           loginListener?.logIn(logiResponse)
       }
 

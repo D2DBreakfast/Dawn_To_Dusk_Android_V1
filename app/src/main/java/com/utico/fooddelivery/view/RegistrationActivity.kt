@@ -17,6 +17,7 @@ import com.utico.fooddelivery.viewmodel.RegistrationViewModel
 
 class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
       private lateinit var binding: ActivityRegistrationBinding
+      var mobileNumber:String? = null
       lateinit var viewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,25 +37,26 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
         })
 
 
-        var fullname = binding.editname
+        var fullname = binding.fullNameTextInputEdt
              fullname.doOnTextChanged { text, start, before, count ->
                  if (text!!.isEmpty()){
                    fullname.error = "Full Name is Required"
                  }
              }
 
-        var email = binding.editemail
+        var email = binding.emailTextInputEdt
             email.doOnTextChanged { text, start, before, count ->
                 if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(text!!).matches())){
                     email.error = "Pleas Provide The Valid Email ID"
                 }
             }
 
-        var phoneNumber = binding.editmobilenumber
+        var phoneNumber = binding.mobileNoTextInputEdt
             phoneNumber.doOnTextChanged { text, start, before, count ->
                 if (text!!.length < 10){
                     phoneNumber.error ="Please Provide The Valid Phone Number"
                 }
+                mobileNumber = text!!.toString()
             }
 
 
@@ -75,7 +77,8 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
     override fun registration(registerResponse: LiveData<String>) {
         registerResponse.observe(this,Observer{
             toast(it)
-            val intent = Intent(this,DashBoardActivity::class.java)
+            val intent = Intent(this,OTPVerficationActivity::class.java)
+            intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
             startActivity(intent)
 
         })
