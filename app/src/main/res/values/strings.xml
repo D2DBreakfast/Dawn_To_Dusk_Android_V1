@@ -88,6 +88,14 @@
     <string name="meal_plans">Meal Plans</string>
     <string name="veg">Veg</string>
     <string name="select_delivery_date"> Select Delivery Date</string>
+    <string name="select_the_community"> Select the Community</string>
+    <string name="coupon">Coupon</string>
+    <string name="enter_coupon_code">Enter Coupon Code</string>
+    <string name="apply">Apply</string>
+    <string name="terms_and_conditions">I am agree with above all the selection and delivery address which is mention above place</string>
+ <string name="check_out">Check Out</string>
+
+
 
 
 
@@ -123,6 +131,7 @@
 
     <string-array name="countryCode_array" >
         <item>971,UAE</item>
+        <item>91,IN</item>
         <item>501,BZ</item>
         <item>229,BJ</item>
         <item>975,BT</item>
@@ -202,7 +211,6 @@
         <item>504,HN</item>
         <item>852,HK</item>
         <item>36,HU</item>
-        <item>91,IN</item>
         <item>62,ID</item>
         <item>98,IR</item>
         <item>964,IQ</item>

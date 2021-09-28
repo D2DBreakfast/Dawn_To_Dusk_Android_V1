@@ -1,14 +1,14 @@
 package com.utico.fooddelivery.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +22,7 @@ import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
 import com.utico.fooddelivery.model.FoodShortDescList
 import com.utico.fooddelivery.model.FoodSubCategoryList
+import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
 
@@ -34,6 +35,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
     var searchtext:String? = null
     private lateinit var btnAalCart:Button
     private lateinit var btnMealPlan:Button
+    private lateinit var  btnLogout:ImageView
 
 /*
     private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
@@ -48,6 +50,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
         binding.homeViewModel = viewModel
         btnAalCart = binding.btnAAlCart
         btnMealPlan = binding.btnMealPlan
+        btnLogout = binding.logoutImageview
         /*setHasOptionsMenu(true)*/
         val view: View = binding.root
 
@@ -72,6 +75,12 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
              intent.putExtra("FragmentName","MealPlanFragment")
              startActivity(intent)
         }*/
+
+           btnLogout.setOnClickListener {
+               val intent = Intent(context,LoginActivity::class.java)
+                   startActivity(intent)
+                   (activity as AppCompatActivity).finish()
+           }
 
         initView()
         initViewModel()

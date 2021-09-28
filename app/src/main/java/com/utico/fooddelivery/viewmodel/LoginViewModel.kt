@@ -8,19 +8,25 @@ import com.utico.fooddelivery.repositories.LoginRepository
 
 class LoginViewModel : ViewModel() {
 
-var loginListener:LoginListener? = null
+    var loginListener:LoginListener? = null
     var mobile_number:String? = null
+    var country_code:String? = null
     var resulData = MutableLiveData<String>()
     var errorResultData = MutableLiveData<String>()
 
     fun onLoginButtonClick(view: View){
-      if (mobile_number.equals("") || mobile_number.equals(null))  {
+        if(country_code.equals("") || country_code.equals(null)){
+            errorResultData.value ="Please Provide the Country Code"
+        }
+        else if  (mobile_number.equals("") || mobile_number.equals(null))  {
             errorResultData.value ="Please Provide Phone Number"
 
-      }else if (mobile_number!!.length < 10 || mobile_number!!.length > 13){
+      }
+        else if (mobile_number!!.length < 10 || mobile_number!!.length > 13){
           errorResultData.value ="Please Provide the Valid Phone Number"
-      } else{
-          val logiResponse = LoginRepository().userLogin("Sampath123@gmail.com","91",mobile_number!!)
+      }
+        else{
+          val logiResponse = LoginRepository().userLogin("sampath123@gmail.com",country_code!!,mobile_number!!)
           loginListener?.logIn(logiResponse)
       }
 
@@ -33,6 +39,7 @@ var loginListener:LoginListener? = null
     fun newRegistrationButtonClick(view: View){
         loginListener?.regiStration()
     }
+
 
 
 }

@@ -2,27 +2,25 @@ package com.utico.fooddelivery.view.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.utico.fooddelivery.adapter.AdapterGlobalSearch
-import com.utico.fooddelivery.databinding.FragmentSearchBinding
+import com.utico.fooddelivery.adapter.AdapterCart
+import com.utico.fooddelivery.databinding.FragmentCartBinding
 import com.utico.fooddelivery.model.FoodList
 import com.utico.fooddelivery.viewmodel.SearchViewModel
 
-class SearchFragment : Fragment() {
+class CartFragment : Fragment() {
 
     private lateinit var viewModel: SearchViewModel
-    private var _binding: FragmentSearchBinding? = null
+    private var _binding: FragmentCartBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var adapterGlobalSearch: AdapterGlobalSearch
+    lateinit var adapterGlobalSearch: AdapterCart
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +28,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentCartBinding.inflate(inflater, container, false)
 
         val root: View = binding.root
 
@@ -53,9 +51,9 @@ class SearchFragment : Fragment() {
     fun setupAdapter(){
        val globalSearchRecyclerView = binding.globleSearchRecyclerview
            globalSearchRecyclerView.layoutManager = LinearLayoutManager(activity)
-        val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
-        globalSearchRecyclerView.addItemDecoration(decoration)
-        adapterGlobalSearch = AdapterGlobalSearch()
+        /*val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
+        globalSearchRecyclerView.addItemDecoration(decoration)*/
+        adapterGlobalSearch = AdapterCart()
         globalSearchRecyclerView.adapter = adapterGlobalSearch
     }
 

@@ -19,16 +19,25 @@ interface ApiService {
 
 
     /*Registration ApiService Call*/
-    @Headers("Content-Type:application/json")
+    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
-    @POST("userRegister")
+    @POST("register")
     fun userRegistration(
-            @Field("fullName") name: String,
+            @Field("fullname") name: String,
             @Field("email") email: String,
             @Field("countryCode") country_code:String,
-            @Field("mobileNo") mobilenumber: String
+            @Field("mobile") mobilenumber: String
         ): Call<ResponseBody>
 
+    /*OTPVerify Method*/
+    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+    @FormUrlEncoded
+    @POST("varifyOtp")
+       fun otpVerfication(
+        @Field("code") otp:String,
+        @Field("mobile") mobilenumber: String,
+        @Field("countryCode") countryCode: String
+       ): Call<ResponseBody>
 
          /*Home Screen Food Short Description List*/
          @GET("users?page=2")

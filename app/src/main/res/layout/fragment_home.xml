@@ -42,8 +42,7 @@
                     android:id="@+id/lnr_location_cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/light_grey"
-                    >
+                    android:background="@color/light_grey">
 
                     <ImageView
                         android:id="@+id/location_imageview"
@@ -59,16 +58,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:textColor="@color/grey"
-                        android:text="150,1,Infantry Rd,Opp Commissioner office,Shivaji Nagar,Bengaluru,Karnatak 560001" />
+                        android:text="150,1,Infantry Rd,Opp Commissioner office,Shivaji Nagar,Bengaluru,Karnatak 560001"
+                        android:textColor="@color/grey" />
 
-                   <!-- <ImageView
-                        android:id="@+id/imageView15"
+                    <ImageView
+                        android:id="@+id/logout_imageview"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="0.1"
-                        app:srcCompat="@drawable/ic_green_shopping_cart" />-->
+                        app:srcCompat="@drawable/ic_baseline_logout_24" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,6 +142,7 @@
             android:layout_marginEnd="16dp"
             app:checkedButton="@id/btn_a_al_cart"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/button_bg"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"

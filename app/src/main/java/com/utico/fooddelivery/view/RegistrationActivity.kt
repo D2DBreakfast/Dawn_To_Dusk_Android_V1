@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
@@ -77,7 +76,7 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
     override fun registration(registerResponse: LiveData<String>) {
         registerResponse.observe(this,Observer{
             toast(it)
-            val intent = Intent(this,OTPVerficationActivity::class.java)
+            val intent = Intent(this,OtpVerficationActivity::class.java)
             intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
             startActivity(intent)
 

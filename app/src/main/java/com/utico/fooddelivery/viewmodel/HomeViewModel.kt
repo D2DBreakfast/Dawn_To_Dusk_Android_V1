@@ -8,6 +8,7 @@ import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 
 class HomeViewModel: ViewModel() {

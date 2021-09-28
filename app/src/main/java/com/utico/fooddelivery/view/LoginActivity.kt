@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(),LoginListener {
     override fun logIn(loginResponse: LiveData<String>) {
        loginResponse.observe(this, Observer {
            toast(it)
-           val intent = Intent(this,OTPVerficationActivity::class.java)
+           val intent = Intent(this,OtpVerficationActivity::class.java)
                intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
            startActivity(intent)
        })
