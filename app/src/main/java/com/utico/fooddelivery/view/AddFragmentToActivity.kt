@@ -74,6 +74,11 @@ class AddFragmentToActivity : AppCompatActivity() {
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,MealOrderPackageDetailsFragment(),"MealOrderPackageDetailsFragment")
                 .commit()
+
+        }else if (fragmentName.equals("ProfileEditFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,ProfileEditFragment(),"ProfileEditFragment")
+                .commit()
         }
 
 

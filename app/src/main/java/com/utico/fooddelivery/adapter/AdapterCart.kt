@@ -14,7 +14,7 @@ import com.utico.fooddelivery.model.Food
 class AdapterCart : RecyclerView.Adapter<AdapterCart.MyViewHolder>() {
     var foodlist = mutableListOf<Food>()
 
-    var addToCartItemCount =0
+    //var addToCartItemCount =0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
        val inflater = LayoutInflater.from(parent.context)
@@ -23,24 +23,24 @@ class AdapterCart : RecyclerView.Adapter<AdapterCart.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-       // holder.bind(foodlist[position],addToCartItemCount)
+        holder.bind(foodlist[position])
         val tvAddToCartCount = holder.binding.tvAddToCartCount
 
         holder.binding.minusImageview.setOnClickListener {
-            addToCartItemCount--
+           /* addToCartItemCount--
             if (addToCartItemCount > 0){
                 tvAddToCartCount.text = addToCartItemCount.toString()
-            }
+            }*/
            // holder.bind(foodlist[position],addToCartItemCount)
 
         }
 
         holder.binding.plusImageview.setOnClickListener {
-            addToCartItemCount++
+           /* addToCartItemCount++
            // holder.bind(foodlist[position],addToCartItemCount)\
             if (addToCartItemCount > 10){
                 tvAddToCartCount.text = addToCartItemCount.toString()
-            }
+            }*/
 
         }
 
@@ -54,24 +54,21 @@ class AdapterCart : RecyclerView.Adapter<AdapterCart.MyViewHolder>() {
     class MyViewHolder(val binding: ItemRowCartBinding): RecyclerView.ViewHolder(binding.root){
         val imageView = binding.minusImageview
         val tvAddToCartCount = binding.tvAddToCartCount
+        val tvName = binding.tvFoodTitle
+        val tvDescription = binding.tvFoodDesc
+        val tvSelectedDate = binding.tvSelectDate
 
-        fun bind(data : Food,addToCartCount:Int){
 
-            if(addToCartCount > 0){
-                tvAddToCartCount.text = addToCartCount.toString()
-            }
 
-            if (addToCartCount <= 10){
-                tvAddToCartCount.text = addToCartCount.toString()
+        fun bind(data : Food){
 
-            }
-            /*tvName.text = data.id.toString()
+            tvName.text = data.id.toString()
             tvDescription.text = data.email
-            tvPrice.text = data.first_name
+            tvSelectedDate.text = data.first_name
             val image_url = data.avatar
             Picasso.get()
                 .load(image_url)
-                .into(imageView)*/
+                .into(imageView)
         }
     }
 

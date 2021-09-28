@@ -30,14 +30,23 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         val view:View = binding.root
 
-        val btnHelpSupport = binding.btnwHelpSupport
+
+        val btnEditProfile = binding.profileCardView
+            btnEditProfile.setOnClickListener {
+                val intent = Intent(context,AddFragmentToActivity::class.java)
+                    intent.putExtra("FragmentName","ProfileEditFragment")
+                    startActivity(intent)
+            }
+
+
+        val btnHelpSupport = binding.lnrHelpSupport
             btnHelpSupport.setOnClickListener {
                 val intent = Intent(context,AddFragmentToActivity::class.java)
                 intent.putExtra("FragmentName","HelpSupportFragment")
                 startActivity(intent)
             }
 
-        val btnPaymentMode = binding.btnPaymentMode
+        val btnPaymentMode = binding.lnrPaymentMode
             btnPaymentMode.setOnClickListener {
                val intent = Intent(context,AddFragmentToActivity::class.java)
                    intent.putExtra("FragmentName","PaymentModeFragment")
@@ -45,7 +54,7 @@ class ProfileFragment : Fragment() {
             }
 
         /*Set Click event for Address Button*/
-        val btnAddress = binding.btnAddress
+        val btnAddress = binding.lnrAddress
             btnAddress.setOnClickListener {
                 val intent = Intent(context,AddFragmentToActivity::class.java)
                     intent.putExtra("FragmentName","AddressFragment")
@@ -53,7 +62,7 @@ class ProfileFragment : Fragment() {
             }
 
         /*Set Click event for the Order History*/
-        val btn_history = binding.btnOrderHistory
+        val btn_history = binding.lnrOrderHistory
             btn_history.setOnClickListener {
               val intent = Intent(context,AddFragmentToActivity::class.java)
                   intent.putExtra("FragmentName","OrderHistoryFragment")
@@ -61,7 +70,7 @@ class ProfileFragment : Fragment() {
             }
 
         /*Set Click event for the Order History*/
-        val btn_AppSettings = binding.btnAppSettings
+        val btn_AppSettings = binding.lnrAppSettings
         btn_AppSettings.setOnClickListener {
 
         }

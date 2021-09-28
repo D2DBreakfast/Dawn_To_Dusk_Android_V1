@@ -67,5 +67,8 @@ interface ApiService {
          @GET("users?page=2")
          fun getAllNotification(): Call<NotificationList>
 
+         /*Get Profile*/
+         @GET("users/2")
+         fun getProfile(): Call<ProfileFakeApi>
 
 }

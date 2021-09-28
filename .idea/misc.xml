@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/background_spherical_shape.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/backgroung_rectangle_grey.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/black_border_rectangle.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/border_rectangle.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigation_color_selector.xml" value="0.10185185185185185" />
@@ -19,6 +20,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_add.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_calendar.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_double_arrow.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_edit.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_green_search.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_red_delete_outline.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_white_shopping_cart.xml" value="0.19583333333333333" />
@@ -63,6 +65,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_details_fragment.xml" value="0.11409395973154363" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_fragment.xml" value="0.10190217391304347" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_history_fragment.xml" value="0.1" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/profile_edit_fragment.xml" value="0.16666666666666666" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/toggle_button_background.xml" value="0.11865942028985507" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/menu.xml" value="0.1" />
       </map>
