@@ -71,4 +71,13 @@ interface ApiService {
          @GET("users/2")
          fun getProfile(): Call<ProfileFakeApi>
 
+         /*Post Profile Data*/
+         @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+         @FormUrlEncoded
+         @POST("profile")
+         fun EditUserProfile(
+             @Field("name") name:String,
+             @Field("email") email:String
+         ): Call<EditProfileResponse>
+
 }

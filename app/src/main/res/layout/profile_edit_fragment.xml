@@ -6,7 +6,7 @@
     <data>
         <variable
             name="profileViewModel"
-            type="com.utico.fooddelivery.viewmodel.ProfileEditViewModel" />
+            type="com.utico.fooddelivery.viewmodel.ProfileViewModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/tv_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -125,6 +125,7 @@
                     android:id="@+id/country_code_dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:hint="hint" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,7 +143,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_textinputlayout_mobile"
-                    android:text="@={profileViewModel.mobileNumber}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -150,6 +150,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:onClick="@{profileViewModel::OnClickEditProfileButton}"
                 android:id="@+id/btn_profile_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

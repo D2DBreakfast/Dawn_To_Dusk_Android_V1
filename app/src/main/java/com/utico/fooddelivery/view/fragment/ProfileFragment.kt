@@ -6,9 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.databinding.FragmentProfileBinding
+import com.utico.fooddelivery.model.Data
+import com.utico.fooddelivery.model.ProfileFakeApi
+import com.utico.fooddelivery.model.profile
 import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.viewmodel.ProfileViewModel
 
@@ -25,7 +31,6 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       // val view = inflater.inflate(R.layout.fragment_profile, container, false)
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         val view:View = binding.root
@@ -75,7 +80,26 @@ class ProfileFragment : Fragment() {
 
         }
 
+         initUIData()
+
         return view
+    }
+
+    fun initUIData(){
+       viewModel.getProfileObserable().observe(viewLifecycleOwner, Observer<ProfileFakeApi> {
+           if (it == null){
+               Toast.makeText(context,"Data Not Found",Toast.LENGTH_LONG).show()
+           }else{
+               binding.tvName.setText(it.data.first_name)
+               binding.tvMobileNumber.setText("9535347309")
+               binding.tvEmail.setText(it.data.email)
+               binding.tvAddress.setText("Karnataka Bengaluru")
+               Picasso.get()
+                   .load(it.data.avatar)
+                   .into(binding.profileImageView)
+           }
+       })
+        viewModel.ApiCallProfile()
     }
 
 

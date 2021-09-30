@@ -1,16 +1,66 @@
 package com.utico.fooddelivery.viewmodel
 
-import androidx.lifecycle.LiveData
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.utico.fooddelivery.`interface`.ProfileListener
+import com.utico.fooddelivery.model.ProfileFakeApi
+import com.utico.fooddelivery.repositories.EditProfileRepository
+import com.utico.fooddelivery.retrofit.ApiService
+import com.utico.fooddelivery.retrofit.RetroInstance
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileViewModel : ViewModel() {
+    private var profileData: MutableLiveData<ProfileFakeApi>
+    var errorResult = MutableLiveData<String>()
+    var name:String? = null
+    var email:String? = null
+    var mobileNumber:String? = null
+    var profileListener:ProfileListener? = null
 
-   private  val _text =MutableLiveData<String>().apply {
-       value = "This is Profile Fragment"
-   }
 
-   val text: LiveData<String> = _text
+
+    init {
+        profileData = MutableLiveData()
+    }
+
+
+    fun getProfileObserable():MutableLiveData<ProfileFakeApi>{
+      return profileData
+    }
+
+    fun ApiCallProfile(){
+       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+       val call = retroInstance.getProfile()
+           call.enqueue(object : Callback<ProfileFakeApi>{
+               override fun onResponse(call: Call<ProfileFakeApi>, response: Response<ProfileFakeApi>) {
+                   if (response.isSuccessful){
+                       profileData.postValue(response.body())
+
+
+                   }
+               }
+
+               override fun onFailure(call: Call<ProfileFakeApi>, t: Throwable) {
+                   profileData.postValue(null)
+               }
+
+           })
+    }
+
+    fun OnClickEditProfileButton(view:View){
+       if (name.equals("") || name.equals(null)) {
+           errorResult.value = "Please Provide the Name"
+       }else if (email.equals("") || email.equals(null)){
+           errorResult.value = "Please Provide the email"
+
+       }else if(!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())){
+           errorResult.value = "Please Provide the Valid Email Address"
+       } else{
+           val editProfileResponse = EditProfileRepository().EditProfile(name!!,email!!)
+            profileListener?.editProfile(editProfileResponse)
+       }
+    }
 }
-
-

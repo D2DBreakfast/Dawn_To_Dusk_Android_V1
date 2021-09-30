@@ -1,5 +1,6 @@
 package com.utico.fooddelivery.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.adapter.AdapterCart
 import com.utico.fooddelivery.databinding.FragmentCartBinding
 import com.utico.fooddelivery.model.FoodList
+import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.viewmodel.SearchViewModel
 
 class CartFragment : Fragment() {
@@ -39,6 +41,7 @@ class CartFragment : Fragment() {
 
         setupAdapter()
         initViewModel()
+        setButtonClickEvent()
         return root
 
     }
@@ -63,5 +66,14 @@ class CartFragment : Fragment() {
            adapterGlobalSearch.notifyDataSetChanged()
        })
         viewModel.getFoodSearchList()
+    }
+
+    /*Theis function is used to set all the button click event here*/
+    fun setButtonClickEvent(){
+        binding.tvCoupons.setOnClickListener {
+          val intent = Intent(context,AddFragmentToActivity::class.java)
+              intent.putExtra("FragmentName","CouponsFragment")
+              startActivity(intent)
+        }
     }
 }
