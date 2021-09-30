@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layouttoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/green"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_black_arrow_back"
+            android:layout_weight="0.5"
+            />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@string/track_order" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/drop_shadow"
+        app:layout_constraintTop_toBottomOf="@+id/layouttoolbar" />
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:background="#99F2F2F2"
+    app:layout_constraintTop_toBottomOf="@+id/layouttoolbar"
+    app:layout_constraintBottom_toTopOf="@+id/viewDivider"/>
+
+
+    <TextView
+        android:id="@+id/tv_place_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/place_order"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_food_under_preparation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layouttoolbar" />
+
+    <TextView
+        android:id="@+id/tv_food_under_preparation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="15sp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_place_order"
+        app:layout_constraintTop_toBottomOf="@+id/layouttoolbar" />
+
+    <TextView
+        android:id="@+id/tv_place_order_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Order id #954575"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="69dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_place_order"
+        app:layout_constraintStart_toStartOf="@+id/tv_place_order"
+        app:layout_constraintTop_toBottomOf="@+id/tv_place_order"
+        />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Order id #954575"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/tv_food_under_preparation"
+        app:layout_constraintStart_toStartOf="@+id/tv_food_under_preparation"
+        app:layout_constraintTop_toBottomOf="@+id/tv_food_under_preparation"
+         />
+
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/tv_place_order"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

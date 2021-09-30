@@ -11,6 +11,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigation_round_shape.xml" value="0.10185185185185185" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/bottom_navigationbar_round_shape.xml" value="0.10185185185185185" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/button_bg.xml" value="0.19583333333333333" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/drop_shadow.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/grey_background_rectangle.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.19583333333333333" />
@@ -67,6 +68,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_details_fragment.xml" value="0.11409395973154363" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_fragment.xml" value="0.10190217391304347" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_history_fragment.xml" value="0.1" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_tracking_fragment.xml" value="0.16666666666666666" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/profile_edit_fragment.xml" value="0.16666666666666666" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/toggle_button_background.xml" value="0.11865942028985507" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/menu.xml" value="0.1" />

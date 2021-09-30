@@ -1,6 +1,7 @@
 package com.utico.fooddelivery.view.fragment
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,7 +37,6 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
     private lateinit var btnAalCart:Button
     private lateinit var btnMealPlan:Button
     private lateinit var  btnLogout:ImageView
-
 /*
     private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
 */

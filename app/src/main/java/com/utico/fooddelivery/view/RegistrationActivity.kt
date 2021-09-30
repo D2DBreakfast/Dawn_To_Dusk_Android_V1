@@ -1,6 +1,8 @@
 package com.utico.fooddelivery.view
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
@@ -18,6 +20,8 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
       private lateinit var binding: ActivityRegistrationBinding
       var mobileNumber:String? = null
       lateinit var viewModel: RegistrationViewModel
+      lateinit var sharedPreferences: SharedPreferences
+      lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,11 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
         viewModel = ViewModelProviders.of(this).get(RegistrationViewModel::class.java)
         viewModel.registrationInterface = this
         binding.registrationViewModel = viewModel
+
+        /*sharedPreferences  registration response data*/
+        sharedPreferences=getSharedPreferences(resources.getString(R.string.app_name), Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
         viewModel.getResultRegistration().observe(this, Observer {
             toast(it)
         })
@@ -36,21 +45,21 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
         })
 
 
-        var fullname = binding.fullNameTextInputEdt
+        var fullname = binding.tilFullName
              fullname.doOnTextChanged { text, start, before, count ->
                  if (text!!.isEmpty()){
                    fullname.error = "Full Name is Required"
                  }
              }
 
-        var email = binding.emailTextInputEdt
+        var email = binding.tilEmail
             email.doOnTextChanged { text, start, before, count ->
                 if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(text!!).matches())){
                     email.error = "Pleas Provide The Valid Email ID"
                 }
             }
 
-        var phoneNumber = binding.mobileNoTextInputEdt
+        var phoneNumber = binding.tilMobileNumber
             phoneNumber.doOnTextChanged { text, start, before, count ->
                 if (text!!.length < 10){
                     phoneNumber.error ="Please Provide The Valid Phone Number"
@@ -76,6 +85,10 @@ class RegistrationActivity : AppCompatActivity(), RegistrationInterface {
     override fun registration(registerResponse: LiveData<String>) {
         registerResponse.observe(this,Observer{
             toast(it)
+            editor.putString("name",binding.tilFullName.text.toString())
+            editor.putString("mobileNumber",binding.tilMobileNumber.text.toString())
+            editor.putString("til_email",binding.tilEmail.text.toString())
+            editor.commit()
             val intent = Intent(this,OtpVerficationActivity::class.java)
             intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
             startActivity(intent)

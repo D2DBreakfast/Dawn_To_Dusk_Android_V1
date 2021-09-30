@@ -194,9 +194,29 @@
             android:layout_alignParentRight="true"
             android:text="@string/cod"
             android:textColor="@color/black" />
+
     </RelativeLayout>
 
-    <RelativeLayout
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/flt_btn_order_tracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="580dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/orange"
+            android:clickable="true"
+            android:text="@string/track_order"
+            android:textAllCaps="false"
+            android:theme="@style/Theme.AppCompat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <RelativeLayout
         android:id="@+id/relativeLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -250,6 +270,7 @@
             android:backgroundTint="@color/green"
             android:text="@string/apply"
             android:textAllCaps="false" />
+
     </RelativeLayout>
 
     <TextView
@@ -422,5 +443,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lnr_terms_and_condition" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_green_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--Google material Extended Floating Action Button-->
+    <!--one needs to keep the margin of 16dp from the screen to button-->
+    <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Actions"
+        app:icon="@drawable/ic_white_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />-->
+
 </ScrollView>
 

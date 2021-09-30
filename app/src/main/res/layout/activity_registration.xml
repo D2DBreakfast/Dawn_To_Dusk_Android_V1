@@ -62,7 +62,7 @@
          app:layout_constraintTop_toBottomOf="@+id/tv_registration">
 
          <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/full_name_TextInputEdt"
+             android:id="@+id/til_full_name"
              android:text="@={registrationViewModel.name}"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
          app:layout_constraintTop_toBottomOf="@+id/full_name_textInputLayout">
 
          <com.google.android.material.textfield.TextInputEditText
-             android:id="@+id/email_TextInputEdt"
+             android:id="@+id/til_email"
              android:text="@={registrationViewModel.email}"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
 
          <com.google.android.material.textfield.TextInputEditText
              android:text="@={registrationViewModel.mobilenumber}"
-             android:id="@+id/mobile_no_TextInputEdt"
+             android:id="@+id/til_mobile_number"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:inputType="number"

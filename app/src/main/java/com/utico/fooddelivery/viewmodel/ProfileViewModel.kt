@@ -54,7 +54,7 @@ class ProfileViewModel : ViewModel() {
        if (name.equals("") || name.equals(null)) {
            errorResult.value = "Please Provide the Name"
        }else if (email.equals("") || email.equals(null)){
-           errorResult.value = "Please Provide the email"
+           errorResult.value = "Please Provide the til_email"
 
        }else if(!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())){
            errorResult.value = "Please Provide the Valid Email Address"

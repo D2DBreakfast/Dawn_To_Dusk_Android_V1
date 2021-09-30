@@ -84,6 +84,11 @@ class AddFragmentToActivity : AppCompatActivity() {
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,CouponsFragment(),"CouponsFragment")
                 .commit()
+
+        }else if(fragmentName.equals("OrderTrackingFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,OrderTrackingFragment(),"OrderTrackingFragment")
+                .commit()
         }
 
 

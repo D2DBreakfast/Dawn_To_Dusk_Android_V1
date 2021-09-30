@@ -1,16 +1,20 @@
 package com.utico.fooddelivery.view.fragment
 
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
+import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.FragmentProfileBinding
 import com.utico.fooddelivery.model.Data
 import com.utico.fooddelivery.model.ProfileFakeApi
@@ -27,12 +31,22 @@ class ProfileFragment : Fragment() {
     }
 
     private lateinit var viewModel: ProfileViewModel
+    private lateinit var sharedPreferences: SharedPreferences
+    private var name:String? = null
+    private var mobileNumber:String? = null
+    private var email:String? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
+        sharedPreferences = (activity as AppCompatActivity).getSharedPreferences(resources.getString(R.string.app_name),Context.MODE_PRIVATE)
+        name = sharedPreferences.getString("name","")
+        mobileNumber = sharedPreferences.getString("mobileNumber","")
+        email = sharedPreferences.getString("til_email","")
+
         val view:View = binding.root
 
 
@@ -90,9 +104,9 @@ class ProfileFragment : Fragment() {
            if (it == null){
                Toast.makeText(context,"Data Not Found",Toast.LENGTH_LONG).show()
            }else{
-               binding.tvName.setText(it.data.first_name)
-               binding.tvMobileNumber.setText("9535347309")
-               binding.tvEmail.setText(it.data.email)
+               binding.tvName.setText(name)
+               binding.tvMobileNumber.setText(mobileNumber)
+               binding.tvEmail.setText(email)
                binding.tvAddress.setText("Karnataka Bengaluru")
                Picasso.get()
                    .load(it.data.avatar)
@@ -104,5 +118,8 @@ class ProfileFragment : Fragment() {
 
 
 }
+/*
+https://stackoverflow.com/questions/52918895/retrieving-value-using-shared-preference-in-kotlin
+*/
 
 

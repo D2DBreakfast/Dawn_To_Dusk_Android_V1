@@ -95,7 +95,14 @@
     <string name="apply">Apply</string>
     <string name="terms_and_conditions">I am agree with above all the selection and delivery address which is mention above place</string>
     <string name="check_out">Check Out</string>
-    <string name="coupons">Coupons</string>>
+    <string name="coupons">Coupons</string>
+    <string name="track_order">Track Order</string>
+    <string name="place_order">Placed Order</string>
+    <string name="food_is_under_preparation">Coupons</string>
+    <string name="out_for_delivery">Track Order</string>
+    <string name="delivered_to_client">Delivered to Client</string>
+
+
 
 
 

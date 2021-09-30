@@ -75,5 +75,12 @@ class CartFragment : Fragment() {
               intent.putExtra("FragmentName","CouponsFragment")
               startActivity(intent)
         }
+
+        /*button click on order tracking */
+        binding.fltBtnOrderTracking.setOnClickListener {
+            val intent = Intent(context,AddFragmentToActivity::class.java)
+                 intent.putExtra("FragmentName","OrderTrackingFragment")
+                startActivity(intent)
+        }
     }
 }

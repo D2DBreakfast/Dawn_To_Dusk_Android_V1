@@ -12,7 +12,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("login")
     fun userLogin(
-        @Field("email") email: String,
+        @Field("til_email") email: String,
         @Field("countryCode") country_code:String,
         @Field("mobile") phone_number:String
     ) : Call<ResponseBody>
@@ -24,7 +24,7 @@ interface ApiService {
     @POST("register")
     fun userRegistration(
             @Field("fullname") name: String,
-            @Field("email") email: String,
+            @Field("til_email") email: String,
             @Field("countryCode") country_code:String,
             @Field("mobile") mobilenumber: String
         ): Call<ResponseBody>
@@ -77,7 +77,7 @@ interface ApiService {
          @POST("profile")
          fun EditUserProfile(
              @Field("name") name:String,
-             @Field("email") email:String
+             @Field("til_email") email:String
          ): Call<EditProfileResponse>
 
 }
