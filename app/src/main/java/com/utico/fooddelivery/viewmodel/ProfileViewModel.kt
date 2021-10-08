@@ -15,9 +15,9 @@ import retrofit2.Response
 class ProfileViewModel : ViewModel() {
     private var profileData: MutableLiveData<ProfileFakeApi>
     var errorResult = MutableLiveData<String>()
-    var name:String? = null
-    var email:String? = null
+    var fullname:String? = null
     var mobileNumber:String? = null
+    var email:String? = null
     var profileListener:ProfileListener? = null
 
 
@@ -51,7 +51,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun OnClickEditProfileButton(view:View){
-       if (name.equals("") || name.equals(null)) {
+       if (fullname.equals("") || fullname.equals(null)) {
            errorResult.value = "Please Provide the Name"
        }else if (email.equals("") || email.equals(null)){
            errorResult.value = "Please Provide the til_email"
@@ -59,7 +59,7 @@ class ProfileViewModel : ViewModel() {
        }else if(!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())){
            errorResult.value = "Please Provide the Valid Email Address"
        } else{
-           val editProfileResponse = EditProfileRepository().EditProfile(name!!,email!!)
+           val editProfileResponse = EditProfileRepository().EditProfile("9886230770",email!!,fullname!!)
             profileListener?.editProfile(editProfileResponse)
        }
     }

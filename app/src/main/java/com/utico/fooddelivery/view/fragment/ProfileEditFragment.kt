@@ -17,6 +17,7 @@ import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.ProfileListener
 import com.utico.fooddelivery.databinding.ProfileEditFragmentBinding
 import com.utico.fooddelivery.model.EditProfileResponse
+import com.utico.fooddelivery.model.EditProfileresponse
 import com.utico.fooddelivery.model.ProfileFakeApi
 import com.utico.fooddelivery.model.profile
 import com.utico.fooddelivery.viewmodel.ProfileViewModel

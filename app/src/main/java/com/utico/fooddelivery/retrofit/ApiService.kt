@@ -21,10 +21,10 @@ interface ApiService {
     /*Registration ApiService Call*/
     @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
-    @POST("register")
+    @POST("register/user")
     fun userRegistration(
             @Field("fullname") name: String,
-            @Field("til_email") email: String,
+            @Field("email") email: String,
             @Field("countryCode") country_code:String,
             @Field("mobile") mobilenumber: String
         ): Call<ResponseBody>
@@ -40,8 +40,9 @@ interface ApiService {
        ): Call<ResponseBody>
 
          /*Home Screen Food Short Description List*/
-         @GET("users?page=2")
-         fun getAllFoodShortDescDetailsList(): Call<FoodShortDescList>
+         @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+         @GET("menu/getmenu")
+         fun getAllFoodShortDescDetailsList(): Call<MenuResponse>
 
          /*Getting the Food Sub Category Data Method*/
          @GET("users?page=2")
@@ -74,10 +75,11 @@ interface ApiService {
          /*Post Profile Data*/
          @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
          @FormUrlEncoded
-         @POST("profile")
+         @POST("updateUserDetails")
          fun EditUserProfile(
-             @Field("name") name:String,
-             @Field("til_email") email:String
-         ): Call<EditProfileResponse>
+             @Field("mobile") mobileNumber: String,
+             @Field("fullname") fullName:String,
+             @Field("email") email:String
+         ): Call<ResponseBody>
 
 }

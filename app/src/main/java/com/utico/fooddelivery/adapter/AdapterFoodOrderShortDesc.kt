@@ -7,11 +7,12 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.databinding.ItemRowFoodOrderDescBinding
+import com.utico.fooddelivery.model.DataX
 import com.utico.fooddelivery.model.FoodShortDesc
 import com.utico.fooddelivery.view.AddFragmentToActivity
 
 class AdapterFoodOrderShortDesc : RecyclerView.Adapter<AdapterFoodOrderShortDesc.MyViewHolder>() {
-    var foodDescList = mutableListOf<FoodShortDesc>()
+    var foodDescList = mutableListOf<DataX>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterFoodOrderShortDesc.MyViewHolder {
         var inflater = LayoutInflater.from(parent.context)
         var binding = ItemRowFoodOrderDescBinding.inflate(inflater,parent,false)
@@ -43,14 +44,14 @@ class AdapterFoodOrderShortDesc : RecyclerView.Adapter<AdapterFoodOrderShortDesc
         val tvPrice = binding.tvPrice
         val imageview = binding.imageView
 
-        fun bind(data:FoodShortDesc){
-           tvName.text = data.first_name
-           tvDescription.text = data.email
+        fun bind(data:DataX){
+           tvName.text = data.categoryname
+           tvDescription.text = data.desc
            tvPrice.text = "AED"+" "+data.id.toString()+".00"
-           val imageUrl = data.avatar
+          /* val imageUrl = data.avatar
             Picasso.get()
                 .load(imageUrl)
-                .into(imageview)
+                .into(imageview)*/
         }
 
     }

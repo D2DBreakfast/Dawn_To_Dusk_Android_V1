@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.utico.fooddelivery.model.FoodShortDescList
 import com.utico.fooddelivery.model.FoodSubCategoryList
+import com.utico.fooddelivery.model.MenuResponse
 import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
@@ -13,7 +14,7 @@ import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
 
-    lateinit var recylerFoodShortDescData:MutableLiveData<FoodShortDescList>
+    lateinit var recylerFoodShortDescData:MutableLiveData<MenuResponse>
     lateinit var recyclerFoodSubCategoryData:MutableLiveData<FoodSubCategoryList>
     var foodCategoryName:String? = null
 
@@ -23,22 +24,22 @@ class HomeViewModel: ViewModel() {
     }
 
 
-    fun getyFoodShortDescListObserable() : MutableLiveData<FoodShortDescList>{
+    fun getyFoodShortDescListObserable() : MutableLiveData<MenuResponse>{
       return recylerFoodShortDescData
     }
 
     fun makeApiCallFoodDesc(){
       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
       val call = retroInstance.getAllFoodShortDescDetailsList()
-          call.enqueue(object : Callback<FoodShortDescList>{
+          call.enqueue(object : Callback<MenuResponse>{
               override fun onResponse(
-                  call: Call<FoodShortDescList>, response: Response<FoodShortDescList>) {
+                  call: Call<MenuResponse>, response: Response<MenuResponse>) {
                   if (response.isSuccessful){
                       recylerFoodShortDescData.postValue(response.body())
                   }
               }
 
-              override fun onFailure(call: Call<FoodShortDescList>, t: Throwable) {
+              override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
                   recylerFoodShortDescData.postValue(null)
               }
 
@@ -75,7 +76,7 @@ class HomeViewModel: ViewModel() {
         foodCategoryName = foodCategoryname
     }
 
-    fun getFoodSubCategoryWiseObservable() : MutableLiveData<FoodShortDescList>{
+    fun getFoodSubCategoryWiseObservable() : MutableLiveData<MenuResponse>{
         return recylerFoodShortDescData
     }
 
@@ -83,41 +84,41 @@ class HomeViewModel: ViewModel() {
 
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.getFoodSubCategoryWiseList(foodCategoryName!!)
-            call.enqueue(object : Callback<FoodShortDescList>{
-                override fun onResponse(call: Call<FoodShortDescList>, response: Response<FoodShortDescList>) {
+            /*call.enqueue(object : Callback<MenuResponse>{
+                override fun onResponse(call: Call<MenuResponse>, response: Response<MenuResponse>) {
                     if (response.isSuccessful) {
                         recylerFoodShortDescData.postValue(response.body())
                     }
                 }
 
-                override fun onFailure(call: Call<FoodShortDescList>, t: Throwable) {
+                override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
                     recylerFoodShortDescData.postValue(null)
                 }
 
-            })
+            })*/
     }
 
     /*Food Search*/
-    fun getFoodSearchObservable() : MutableLiveData<FoodShortDescList>{
+    fun getFoodSearchObservable() : MutableLiveData<MenuResponse>{
         return recylerFoodShortDescData
     }
 
     fun APICallSearchFood(searchText:String){
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.getHomeFoodSearchList(searchText)
-            call.enqueue(object : Callback<FoodShortDescList>{
-                override fun onResponse(call: Call<FoodShortDescList>, response: Response<FoodShortDescList>) {
+            /*call.enqueue(object : Callback<MenuResponse>{
+                override fun onResponse(call: Call<MenuResponse>, response: Response<MenuResponse>) {
                  if (response.isSuccessful) {
                     recylerFoodShortDescData.postValue(response.body())
                   }
                 }
 
-                override fun onFailure(call: Call<FoodShortDescList>, t: Throwable) {
+                override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
                     recylerFoodShortDescData.postValue(null)
 
                 }
 
-            })
+            })*/
     }
 
 

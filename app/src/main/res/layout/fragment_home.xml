@@ -12,7 +12,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:paddingBottom="100dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_constraintLayout"
@@ -137,12 +138,12 @@
             android:id="@+id/toggleGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_bg"
             app:checkedButton="@id/btn_a_al_cart"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/button_bg"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
@@ -154,11 +155,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/a_la_cart"
-                android:textColor="@color/white"
                 android:backgroundTint="@color/green"
+                android:text="@string/a_la_cart"
                 android:textAllCaps="false"
-                />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btn_meal_plan"
@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/meal_plans"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -189,9 +189,9 @@
             android:id="@+id/bannar_imageView"
             android:layout_width="match_parent"
             android:layout_height="116dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/bannarimage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.727"
@@ -214,14 +214,14 @@
             android:id="@+id/a_la_cart_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bannar_imageView"
-            tools:listitem="@layout/item_row_food_order_desc" />
+            tools:listitem="@layout/item_row_food_order_desc"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
@@ -236,7 +236,18 @@
             app:layout_constraintTop_toBottomOf="@+id/a_la_cart_recyclerview"
             tools:listitem="@layout/item_row_food_order_desc"/>
 
-
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/browse_menu"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannar_imageView">
+        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
    </ScrollView>

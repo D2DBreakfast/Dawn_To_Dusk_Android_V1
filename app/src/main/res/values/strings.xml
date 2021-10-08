@@ -101,25 +101,7 @@
     <string name="food_is_under_preparation">Coupons</string>
     <string name="out_for_delivery">Track Order</string>
     <string name="delivered_to_client">Delivered to Client</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="browse_menu">BROWSE MENU</string>
 
 
     <!--
@@ -139,7 +121,7 @@
         </string-array>-->
 
 
-    <string-array name="countryCode_array" >
+    <string-array name="countryCode_array">
         <item>971,UAE</item>
         <item>91,IN</item>
         <item>501,BZ</item>

@@ -35,11 +35,6 @@ class DashBoardActivity : AppCompatActivity() {
 
     }
 
-   /* fun replaceFragment(fragment: Fragment, tag: String){
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.dashBoardLayout,fragment,tag).addToBackStack("").commit()
-    }*/
-
 
 
 }

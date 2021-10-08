@@ -14,6 +14,5 @@
     <color name="card_background_light_green">#D0F0C0</color>
     <color name="light_green">#F7FAF7</color>
     <color name="orange">#FF7F50</color>
-
     <color name="app_theme_color"></color>
 </resources>

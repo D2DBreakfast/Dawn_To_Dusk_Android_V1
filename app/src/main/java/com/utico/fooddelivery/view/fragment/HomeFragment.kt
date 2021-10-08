@@ -23,6 +23,7 @@ import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
 import com.utico.fooddelivery.model.FoodShortDescList
 import com.utico.fooddelivery.model.FoodSubCategoryList
+import com.utico.fooddelivery.model.MenuResponse
 import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
@@ -84,9 +85,9 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
         initView()
         initViewModel()
-        searchFood()
+       /* searchFood()
         buttonAalCart()
-        buttonmealPlans()
+        buttonmealPlans()*/
         return view
     }
 
@@ -122,7 +123,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
   fun initViewModel(){
 
-      viewModel.getyFoodShortDescListObserable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
+      viewModel.getyFoodShortDescListObserable().observe(viewLifecycleOwner, Observer<MenuResponse> {
         adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
         adapterFoodOrderShortDesc.notifyDataSetChanged()
       })
@@ -140,7 +141,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
 
     override fun getFoodSubCategoryName(foodCategoryName: String) {
-        Toast.makeText(context,foodCategoryName,Toast.LENGTH_LONG).show()
+      /*  Toast.makeText(context,foodCategoryName,Toast.LENGTH_LONG).show()
         viewModel.getFoodCategoryName("1")
         viewModel.getFoodSubCategoryWiseObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
            adapterFoodOrderShortDesc.foodDescList.clear()
@@ -166,10 +167,10 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
                        initView()
 
                    }
-               }
+               }*/
        }
 
-    fun buttonmealPlans(){
+    /*fun buttonmealPlans(){
         val A_al_cart_recyclerview = binding.aLaCartRecyclerview
         val meal_plan_recyclerview = binding.mealPlansRecyclerview
         val vegSwitch = binding.vegSwitch
@@ -195,8 +196,8 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
             }
 
     }
-
-    fun buttonAalCart(){
+*/
+    /*fun buttonAalCart(){
         val A_al_cart_recyclerview = binding.aLaCartRecyclerview
         val meal_plan_recyclerview = binding.mealPlansRecyclerview
         val vegSwitch = binding.vegSwitch
@@ -220,7 +221,10 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
         }
 
-    }
+    }*/
+
+
+
 
 
 /*
