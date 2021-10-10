@@ -87,6 +87,8 @@
     <string name="running">Running</string>
     <string name="a_la_cart">A la Carte</string>
     <string name="meal_plans">Meal Plans</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="brunch">Brunch</string>
     <string name="veg">Veg</string>
     <string name="select_delivery_date"> Select Delivery Date</string>
     <string name="select_the_community"> Select the Community</string>
@@ -102,6 +104,7 @@
     <string name="out_for_delivery">Track Order</string>
     <string name="delivered_to_client">Delivered to Client</string>
     <string name="browse_menu">BROWSE MENU</string>
+    <string name="order_details_sharedPreferences">Order short description Details </string>
 
 
     <!--

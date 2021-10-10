@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:paddingBottom="100dp">
+        android:paddingBottom="70dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_constraintLayout"
@@ -142,7 +142,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_bg"
-            app:checkedButton="@id/btn_a_al_cart"
+            app:checkedButton="@id/btnBreakfast"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,43 +150,80 @@
             app:singleSelection="true">
 
             <Button
-                android:id="@+id/btn_a_al_cart"
+                android:id="@+id/btnBreakfast"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/green"
-                android:text="@string/a_la_cart"
+                android:text="@string/breakfast"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
             <Button
-                android:id="@+id/btn_meal_plan"
+                android:id="@+id/btnBrunch"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/meal_plans"
+                android:text="@string/brunch"
                 android:textAllCaps="false" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/veg_switch"
+            android:id="@+id/breakfastVegSwitch"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/veg"
             android:track="@color/green"
-            app:layout_constraintEnd_toStartOf="@+id/food_category_recyclerview"
+            app:layout_constraintEnd_toStartOf="@+id/breakfastSubCategoryRecyclerview"
             app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/breakfastSubCategoryRecyclerview"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            tools:listitem="@layout/item_row_breakfast_sub_category" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:visibility="gone"
+            android:id="@+id/brunchVegSwitch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/veg"
+            android:track="@color/green"
+            app:layout_constraintEnd_toStartOf="@+id/brunchSubCategoryRecyclerview"
+            app:layout_constraintHorizontal_bias="0.35"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/brunchSubCategoryRecyclerview"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="16dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            tools:listitem="@layout/item_row_brunch_sub_category" />
+
 
         <ImageView
-            android:id="@+id/bannar_imageView"
+            android:id="@+id/breakfastBannerImageView"
             android:layout_width="match_parent"
             android:layout_height="116dp"
             android:layout_marginStart="8dp"
@@ -196,22 +233,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.727"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/food_category_recyclerview"
+            app:layout_constraintTop_toBottomOf="@+id/breakfastSubCategoryRecyclerview"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/food_category_recyclerview"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="16dp"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
-            tools:listitem="@layout/item_row_food_category_name" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/a_la_cart_recyclerview"
+            android:id="@+id/breakfastRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -220,12 +247,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bannar_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView"
             tools:listitem="@layout/item_row_food_order_desc"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/brunchBannerImageView"
+            android:layout_width="match_parent"
+            android:layout_height="116dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bannarimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.727"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brunchSubCategoryRecyclerview"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
-            android:id="@+id/meal_plans_recyclerview"
+            android:id="@+id/brunchRecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -233,10 +275,12 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a_la_cart_recyclerview"
-            tools:listitem="@layout/item_row_food_order_desc"/>
+            app:layout_constraintTop_toBottomOf="@+id/brunchBannerImageView"
+            tools:listitem="@layout/item_row_cart"/>
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+
+
+       <!-- <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -246,8 +290,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bannar_imageView">
-        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+            app:layout_constraintTop_toBottomOf="@+id/breakfastBannarImageView">
+        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
    </ScrollView>

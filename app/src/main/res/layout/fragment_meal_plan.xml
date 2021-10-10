@@ -28,13 +28,13 @@
         android:backgroundTint="@color/LightCyan"
         android:text="Order"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/btn_meal_plan"
+        app:layout_constraintEnd_toStartOf="@+id/btnBrunch"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_meal_plan"
+        android:id="@+id/btnBrunch"
         android:layout_width="173dp"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_meal_plan" />
+        app:layout_constraintTop_toBottomOf="@+id/btnBrunch" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mealplanRecyclreview"

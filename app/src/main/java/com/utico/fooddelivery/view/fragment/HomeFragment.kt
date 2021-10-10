@@ -1,7 +1,6 @@
 package com.utico.fooddelivery.view.fragment
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,19 +9,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
-import com.utico.fooddelivery.adapter.AdapterFoodSubCategory
+import com.utico.fooddelivery.adapter.AdapterCart
+import com.utico.fooddelivery.adapter.AdapterBreakfastSubCategory
+import com.utico.fooddelivery.adapter.AdapterBrunchSubCategory
 import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
-import com.utico.fooddelivery.model.FoodShortDescList
-import com.utico.fooddelivery.model.FoodSubCategoryList
 import com.utico.fooddelivery.model.MenuResponse
 import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
@@ -33,10 +30,12 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
     lateinit var adapterFoodOrderShortDesc: AdapterFoodOrderShortDesc
-    lateinit var adapterFoodSubCategory: AdapterFoodSubCategory
+    lateinit var adapterBreakFastSubCategory: AdapterBreakfastSubCategory
+    lateinit var adapterBrunchSubCategory: AdapterBrunchSubCategory
+    lateinit var adapterCart: AdapterCart
     var searchtext:String? = null
-    private lateinit var btnAalCart:Button
-    private lateinit var btnMealPlan:Button
+    private lateinit var btnBreakfast:Button
+    private lateinit var btnBrunch:Button
     private lateinit var  btnLogout:ImageView
 /*
     private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
@@ -49,8 +48,8 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.homeViewModel = viewModel
-        btnAalCart = binding.btnAAlCart
-        btnMealPlan = binding.btnMealPlan
+        btnBreakfast = binding.btnBreakfast
+        btnBrunch = binding.btnBrunch
         btnLogout = binding.logoutImageview
         /*setHasOptionsMenu(true)*/
         val view: View = binding.root
@@ -64,7 +63,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
 
 
-      /*  val btnMeal = binding.btnMealPlan
+      /*  val btnMeal = binding.btnBrunch
         btnMeal.setOnClickListener {
             *//*val frag = MealPlanFragment.newInstance()
             (activity as DashBoardActivity).replaceFragment(frag,MealPlanFragment.TAG)*//*
@@ -83,16 +82,16 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
                    (activity as AppCompatActivity).finish()
            }
 
-        initView()
+        initAdapter()
         initViewModel()
-       /* searchFood()
-        buttonAalCart()
-        buttonmealPlans()*/
+       // searchFood()
+        buttonBreakfast()
+        buttonmBrunch()
         return view
     }
 
     companion object {
-        /*val TAG = HomeFragment::class.java.simpleName
+            /*val TAG = HomeFragment::class.java.simpleName
         @JvmStatic*/
         fun newInstance() = HomeFragment()
     }
@@ -105,37 +104,51 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
         _binding = null
     }
 
-  fun  initView() {
+  fun  initAdapter() {
 
-      val categoryNameRecyclerview = binding.foodCategoryRecyclerview
-           categoryNameRecyclerview.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-           adapterFoodSubCategory = AdapterFoodSubCategory(this)
-           categoryNameRecyclerview.adapter = adapterFoodSubCategory
+      val breakfastSubCategoryRecyclerview = binding.breakfastSubCategoryRecyclerview
+           breakfastSubCategoryRecyclerview.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+           adapterBreakFastSubCategory = AdapterBreakfastSubCategory(this)
+           breakfastSubCategoryRecyclerview.adapter = adapterBreakFastSubCategory
 
-      val A_al_cart_recyclerview = binding.aLaCartRecyclerview
-      A_al_cart_recyclerview.layoutManager = LinearLayoutManager(activity)
+      val brunchSubcategoryRecyclerView = binding.brunchSubCategoryRecyclerview
+          brunchSubcategoryRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+          adapterBrunchSubCategory = AdapterBrunchSubCategory()
+          brunchSubcategoryRecyclerView.adapter = adapterBrunchSubCategory
+
+      val breakfastRecyclerview = binding.breakfastRecyclerview
+      breakfastRecyclerview.layoutManager = LinearLayoutManager(activity)
          /* val decoration  = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
           foodShortxDescrecyclerview.addItemDecoration(decoration)*/
            adapterFoodOrderShortDesc = AdapterFoodOrderShortDesc()
-      A_al_cart_recyclerview.adapter = adapterFoodOrderShortDesc
+      breakfastRecyclerview.adapter = adapterFoodOrderShortDesc
+
+      val brunchRecyclerView = binding.brunchRecyclerview
+          brunchRecyclerView.layoutManager = LinearLayoutManager(activity)
+          adapterCart = AdapterCart()
+          brunchRecyclerView.adapter = adapterCart
 
   }
 
   fun initViewModel(){
 
       viewModel.getyFoodShortDescListObserable().observe(viewLifecycleOwner, Observer<MenuResponse> {
-        adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-        adapterFoodOrderShortDesc.notifyDataSetChanged()
+          if (it.data==null){
+            Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
+          }else {
+              adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
+              adapterFoodOrderShortDesc.notifyDataSetChanged()
+          }
       })
       viewModel.makeApiCallFoodDesc()
 
       /*call the viewModel for Food Sub Category*/
 
-      viewModel.getFoodSubCategoryObserable().observe(viewLifecycleOwner, Observer<FoodSubCategoryList> {
-        adapterFoodSubCategory.foodSubCategoryList = it.data.toMutableList()
-        adapterFoodSubCategory.notifyDataSetChanged()
+     /* viewModel.getFoodSubCategoryObserable().observe(viewLifecycleOwner, Observer<FoodSubCategoryList> {
+        adapterBreakFastSubCategory.foodSubCategoryList = it.data.toMutableList()
+        adapterBreakFastSubCategory.notifyDataSetChanged()
       })
-      viewModel.APICallFoodSubCategory()
+      viewModel.APICallFoodSubCategory()*/
   }
 
 
@@ -164,85 +177,86 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
                     viewModel.APICallSearchFood(searchtext.toString())
                    }
                    else if (text!!.length < 0){
-                       initView()
+                       initAdapter()
 
                    }
                }*/
        }
 
-    /*fun buttonmealPlans(){
-        val A_al_cart_recyclerview = binding.aLaCartRecyclerview
-        val meal_plan_recyclerview = binding.mealPlansRecyclerview
-        val vegSwitch = binding.vegSwitch
-        val foodCategoryRecyclerView = binding.foodCategoryRecyclerview
 
 
-        btnMealPlan.setOnClickListener {
-                A_al_cart_recyclerview.visibility = View.VISIBLE
-                meal_plan_recyclerview.visibility = View.VISIBLE
-                vegSwitch.visibility = View.GONE
-                foodCategoryRecyclerView.visibility = View.GONE
-                btnMealPlan.setBackgroundColor(resources.getColor(R.color.green))
-                btnMealPlan.setTextColor(resources.getColor(R.color.white))
-                btnAalCart.setBackgroundColor(resources.getColor(R.color.white))
-                btnAalCart.setTextColor(resources.getColor(R.color.black))
+    fun buttonBreakfast(){
+        val breakfastRecyclerview = binding.breakfastRecyclerview
+        val brunchRecyclerview = binding.brunchRecyclerview
+        val breakfastVegSwitch = binding.breakfastVegSwitch
+        val brunchVegSwitch = binding.brunchVegSwitch
+        val breakfastSubCategoryRecyclerView = binding.breakfastSubCategoryRecyclerview
+        val brunchSubCategoryRecyclerview = binding.brunchSubCategoryRecyclerview
+        val breakfastBannerImageView = binding.breakfastBannerImageView
+        val brunchBannerImageView = binding.brunchBannerImageView
 
-                viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
-                    adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-                    adapterFoodOrderShortDesc.notifyDataSetChanged()
-                })
-                viewModel.APICallSearchFood("1")
+        btnBreakfast.setOnClickListener {
+            breakfastRecyclerview.visibility = View.VISIBLE
+            brunchRecyclerview.visibility = View.GONE
+            breakfastVegSwitch.visibility = View.VISIBLE
+            brunchVegSwitch.visibility = View.GONE
+            breakfastSubCategoryRecyclerView.visibility = View.VISIBLE
+            brunchSubCategoryRecyclerview.visibility = View.GONE
+            breakfastBannerImageView.visibility = View.VISIBLE
+            brunchBannerImageView.visibility = View.GONE
 
-            }
+            btnBreakfast.setBackgroundColor(resources.getColor(R.color.green))
+            btnBreakfast.setTextColor(resources.getColor(R.color.white))
+            btnBrunch.setBackgroundColor(resources.getColor(R.color.white))
+            btnBrunch.setTextColor(resources.getColor(R.color.black))
 
-    }
-*/
-    /*fun buttonAalCart(){
-        val A_al_cart_recyclerview = binding.aLaCartRecyclerview
-        val meal_plan_recyclerview = binding.mealPlansRecyclerview
-        val vegSwitch = binding.vegSwitch
-        val foodCategoryRecyclerView = binding.foodCategoryRecyclerview
-
-        btnAalCart.setOnClickListener {
-            A_al_cart_recyclerview.visibility = View.VISIBLE
-            meal_plan_recyclerview.visibility =View.GONE
-            vegSwitch.visibility = View.VISIBLE
-            foodCategoryRecyclerView.visibility = View.VISIBLE
-            btnAalCart.setBackgroundColor(resources.getColor(R.color.green))
-            btnAalCart.setTextColor(resources.getColor(R.color.white))
-            btnMealPlan.setBackgroundColor(resources.getColor(R.color.white))
-            btnMealPlan.setTextColor(resources.getColor(R.color.black))
-
-            viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
+           /* viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
                 adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
                 adapterFoodOrderShortDesc.notifyDataSetChanged()
-            })
-            viewModel.APICallSearchFood("2")
+            })*/
+            //viewModel.APICallSearchFood("2")
 
         }
 
-    }*/
+    }
+    fun buttonmBrunch(){
+        val breakfastRecyclerview = binding.breakfastRecyclerview
+        val brunchRecyclerview = binding.brunchRecyclerview
+        val breakfastVegSwitch = binding.breakfastVegSwitch
+        val brunchVegSwitch = binding.brunchVegSwitch
+        val breakfastSubCategoryRecyclerView = binding.breakfastSubCategoryRecyclerview
+        val brunchSubCategoryRecyclerview = binding.brunchSubCategoryRecyclerview
+        val breakfastBannerImageView = binding.breakfastBannerImageView
+        val brunchBannerImageView = binding.brunchBannerImageView
 
 
 
+        btnBrunch.setOnClickListener {
+            breakfastRecyclerview.visibility = View.GONE
+            brunchRecyclerview.visibility = View.VISIBLE
+            breakfastVegSwitch.visibility = View.GONE
+            brunchVegSwitch.visibility = View.VISIBLE
+            breakfastSubCategoryRecyclerView.visibility = View.GONE
+            brunchSubCategoryRecyclerview.visibility = View.VISIBLE
+            breakfastBannerImageView.visibility = View.GONE
+            brunchBannerImageView.visibility =View.VISIBLE
 
+            btnBrunch.setBackgroundColor(resources.getColor(R.color.green))
+            btnBrunch.setTextColor(resources.getColor(R.color.white))
+            btnBreakfast.setBackgroundColor(resources.getColor(R.color.white))
+            btnBreakfast.setTextColor(resources.getColor(R.color.black))
 
-/*
-   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu,menu)
-        val searchItem = menu.findItem(R.id.app_bar_search)
-       *//* if (searchItem!=null){
-            //val searchView = searchItem.actionView as SearchView
-        }*//*
-        super.onCreateOptionsMenu(menu, inflater)
+            /* viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
+                 adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
+                 adapterFoodOrderShortDesc.notifyDataSetChanged()
+             })*/
+            viewModel.APICallSearchFood("1")
+
+        }
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.app_bar_search ->Toast.makeText(context,"Click On Search",Toast.LENGTH_LONG).show()
-        }
-        return super.onOptionsItemSelected(item)
-    }*/
+
 
 }
 

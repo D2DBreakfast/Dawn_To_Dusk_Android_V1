@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
     <TextView
-        android:id="@+id/tv_nutrional_info"
+        android:id="@+id/tvNutrionalInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nutrional_info" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNutrionalInfo" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"

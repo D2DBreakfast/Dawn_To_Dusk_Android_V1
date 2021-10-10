@@ -2,39 +2,61 @@ package com.utico.fooddelivery.view.fragment
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.databinding.CustomToolbarBinding
+import com.utico.fooddelivery.`interface`.PassFoodDescDataListener
+import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.OrderDetailsFragmentBinding
 import com.utico.fooddelivery.viewmodel.OrderDetailsViewModel
 import java.util.*
 
 class OrderDetailsFragment : Fragment() {
 
-  private lateinit var binding: OrderDetailsFragmentBinding
+
+    private val bundle = Bundle()
+    var foodName:String? = null
+    var foodDescription:String? = null
+    var foodPrice:String? = null
+    private lateinit var binding: OrderDetailsFragmentBinding
+    var sharedPreferences:SharedPreferences? = null
 
     companion object {
         fun newInstance() = OrderDetailsFragment()
     }
 
+
     private lateinit var viewModel: OrderDetailsViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
+       /*foodName = arguments?.getString("foodName","")
+       foodDescription = arguments?.getString("foodDescription","")
+       foodPrice = arguments?.getString("foodPrice","")*/
+      /* foodName = bundle.getString("foodName")
+        foodDescription = bundle.getString("foodDescription")
+        foodPrice = bundle.getString("foodPrice")*/
 /*
         val view = inflater.inflate(R.layout.order_details_fragment, container, false)
 */
-            binding = OrderDetailsFragmentBinding.inflate(inflater,container,false)
+        sharedPreferences=context?.getSharedPreferences(resources.getString(R.string.order_details_sharedPreferences), Context.MODE_PRIVATE)
+        foodName = sharedPreferences?.getString("foodName","")
+        foodDescription = sharedPreferences?.getString("foodDescription","")
+        foodPrice = sharedPreferences?.getString("foodPrice","")
+
+
+        binding = OrderDetailsFragmentBinding.inflate(inflater,container,false)
             val view:View = binding.root
 
            datePicker()
+           initView()
         return view
     }
 
@@ -59,5 +81,17 @@ class OrderDetailsFragment : Fragment() {
              }
     }
 
+ fun initView(){
+     binding.tvTitle.setText(foodName)
+     binding.tvDesc.setText(foodDescription)
+     binding.tvPrice.setText(foodPrice)
+     binding.tvnutrionalInfo.setText(foodDescription)
+ }
+
+
+
+
 
 }
+
+

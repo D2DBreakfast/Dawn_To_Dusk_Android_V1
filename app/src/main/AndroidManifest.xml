@@ -37,9 +37,9 @@
             android:exported="true" />
         <activity android:name=".view.RegistrationActivity" />
         <activity
-            android:name=".view.DashBoardActivity"
+            android:name=".view.LoginActivity"
             android:label="@string/title_activity_dash_board" />
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.DashBoardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

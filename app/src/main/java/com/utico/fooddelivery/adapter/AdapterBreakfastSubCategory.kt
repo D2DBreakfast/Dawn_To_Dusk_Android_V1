@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
-import com.utico.fooddelivery.databinding.ItemRowFoodCategoryNameBinding
+import com.utico.fooddelivery.databinding.ItemRowBreakfastSubCategoryBinding
 import com.utico.fooddelivery.model.FoodSubCategory
 
-class AdapterFoodSubCategory(val foodSubCategoryListener:FoodSubCategoryListener): RecyclerView.Adapter<AdapterFoodSubCategory.FoodCategoryViewHolder>() {
+class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryListener): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
   var foodSubCategoryList = mutableListOf<FoodSubCategory>()
   var context: Context? = null
   var foodCategoryName:String? = null
@@ -24,13 +24,13 @@ class AdapterFoodSubCategory(val foodSubCategoryListener:FoodSubCategoryListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodCategoryViewHolder {
       val inflater = LayoutInflater.from(parent.context)
         context = parent.context
-      val binding = ItemRowFoodCategoryNameBinding.inflate(inflater,parent,false)
+      val binding = ItemRowBreakfastSubCategoryBinding.inflate(inflater,parent,false)
         return FoodCategoryViewHolder(binding)
 
     }
 
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
-        holder.bind(foodSubCategoryList[position])
+        //holder.bind(foodSubCategoryList[position])
         holder.tv_name.setOnClickListener {
           //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
             foodCategoryName = holder.tv_name.text.toString()
@@ -43,10 +43,10 @@ class AdapterFoodSubCategory(val foodSubCategoryListener:FoodSubCategoryListener
     }
 
     override fun getItemCount(): Int {
-        return foodSubCategoryList.size
+        return 10
     }
 
-    class FoodCategoryViewHolder(val binding: ItemRowFoodCategoryNameBinding) : RecyclerView.ViewHolder(binding.root){
+    class FoodCategoryViewHolder(val binding: ItemRowBreakfastSubCategoryBinding) : RecyclerView.ViewHolder(binding.root){
       val tv_name = binding.tvCategoryName
       val cardView = binding.cardview
 

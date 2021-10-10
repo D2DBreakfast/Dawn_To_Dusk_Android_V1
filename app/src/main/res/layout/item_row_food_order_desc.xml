@@ -26,6 +26,7 @@
             android:padding="10dp">
 
             <ImageView
+                android:id="@+id/imageVegOrNonveg"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:background="@drawable/non_veg" />

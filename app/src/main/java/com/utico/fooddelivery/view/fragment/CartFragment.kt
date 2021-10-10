@@ -52,7 +52,7 @@ class CartFragment : Fragment() {
     }
 
     fun setupAdapter(){
-       val globalSearchRecyclerView = binding.globleSearchRecyclerview
+       val globalSearchRecyclerView = binding.cartRecyclerview
            globalSearchRecyclerView.layoutManager = LinearLayoutManager(activity)
         /*val decoration = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
         globalSearchRecyclerView.addItemDecoration(decoration)*/

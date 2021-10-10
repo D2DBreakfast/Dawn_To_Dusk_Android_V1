@@ -23,7 +23,7 @@ class AdapterCart : RecyclerView.Adapter<AdapterCart.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(foodlist[position])
+       // holder.bind(foodlist[position])
         val tvAddToCartCount = holder.binding.tvAddToCartCount
 
         holder.binding.minusImageview.setOnClickListener {
@@ -47,7 +47,7 @@ class AdapterCart : RecyclerView.Adapter<AdapterCart.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return foodlist.size
+        return 2
 
     }
 
