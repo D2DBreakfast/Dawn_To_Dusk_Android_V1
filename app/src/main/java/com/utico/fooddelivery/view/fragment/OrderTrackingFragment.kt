@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.utico.fooddelivery.R
+import com.utico.fooddelivery.viewmodel.OrderTrackingViewModel
 
 class OrderTrackingFragment : Fragment() {
 
@@ -26,7 +27,6 @@ class OrderTrackingFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(OrderTrackingViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }

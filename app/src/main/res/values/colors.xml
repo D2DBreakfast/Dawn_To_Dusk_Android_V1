@@ -15,4 +15,5 @@
     <color name="light_green">#F7FAF7</color>
     <color name="orange">#FF7F50</color>
     <color name="app_theme_color"></color>
+    <color name="grey_dark">#736D6D</color>
 </resources>

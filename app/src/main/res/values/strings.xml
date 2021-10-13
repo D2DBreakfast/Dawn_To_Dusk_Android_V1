@@ -105,6 +105,7 @@
     <string name="delivered_to_client">Delivered to Client</string>
     <string name="browse_menu">BROWSE MENU</string>
     <string name="order_details_sharedPreferences">Order short description Details </string>
+    <string name="order_tracking">Order Tracking</string>
 
 
     <!--

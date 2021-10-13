@@ -11,9 +11,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/dawntodusklogo"
+        android:icon="@drawable/dawntodusktemlogo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/dawntodusklogo"
+        android:roundIcon="@drawable/dawntodusktemlogo"
         android:supportsRtl="true"
         android:theme="@style/Theme.DawnToDusk"
         android:usesCleartextTraffic="true">

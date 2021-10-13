@@ -1,4 +1,4 @@
-package com.utico.fooddelivery.view.fragment
+package com.utico.fooddelivery.viewmodel
 
 import androidx.lifecycle.ViewModel
 

@@ -14,6 +14,7 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
   var context: Context? = null
   var foodCategoryName:String? = null
   val foodSubCategoryListener:FoodSubCategoryListener? = null
+  var isCheck:Boolean? = true
 
 
 
@@ -33,11 +34,22 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
         //holder.bind(foodSubCategoryList[position])
         holder.tv_name.setOnClickListener {
-          //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
+          if (isCheck == true){
+            //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
             foodCategoryName = holder.tv_name.text.toString()
             foodSubCategoryListener?.getFoodSubCategoryName(foodCategoryName!!)
             holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
             holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
+            isCheck = false
+          }else{
+            foodCategoryName = holder.tv_name.text.toString()
+            foodSubCategoryListener?.getFoodSubCategoryName(foodCategoryName!!)
+            holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
+            holder.tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
+            isCheck = true
+
+          }
+
 
         }
 
