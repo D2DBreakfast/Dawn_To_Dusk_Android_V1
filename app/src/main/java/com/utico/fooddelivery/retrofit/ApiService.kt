@@ -7,46 +7,54 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    /*Login ApiService Call*/
-    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
-    @FormUrlEncoded
-    @POST("login")
-    fun userLogin(
-        @Field("til_email") email: String,
-        @Field("countryCode") country_code:String,
-        @Field("mobile") phone_number:String
-    ) : Call<ResponseBody>
-
-
     /*Registration ApiService Call*/
-    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+    //@Headers("Content-Type:application/json")
     @FormUrlEncoded
-    @POST("register/user")
+    @POST("register")
     fun userRegistration(
-            @Field("fullname") name: String,
-            @Field("email") email: String,
-            @Field("countryCode") country_code:String,
-            @Field("mobile") mobilenumber: String
-        ): Call<ResponseBody>
+        @Field("countryCode") countryCode:String,
+        @Field("fullName") fullName: String,
+        @Field("mobileNo") mobileNumber: String,
+        @Field("email") email: String,
+        ): Call<UserRegistrationResponseModel>
 
     /*OTPVerify Method*/
-    @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+   // @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
-    @POST("varifyOtp")
+    @POST("verifyOtp")
        fun otpVerfication(
-        @Field("code") otp:String,
-        @Field("mobile") mobilenumber: String,
-        @Field("countryCode") countryCode: String
+        @Field("countryCode") countryCode: String,
+        @Field("mobileNo") mobileNumber: String,
+        @Field("mobileOtp") mobileOtp:String
        ): Call<ResponseBody>
 
-         /*Home Screen Food Short Description List*/
-         @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
-         @GET("menu/getmenu")
-         fun getAllFoodShortDescDetailsList(): Call<MenuResponse>
+    /*Login ApiService Call*/
+   // @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
+    @FormUrlEncoded
+    @POST("userLogin")
+    fun userLogin(
+        @Field("countryCode") countryCode:String,
+        @Field("mobileNo") mobileNumber: String
+    ) : Call<ResponseBody>
 
-         /*Getting the Food Sub Category Data Method*/
-         @GET("users?page=2")
-         fun getAllFoodSubCategoryList(): Call<FoodSubCategoryList>
+    /*Getting the Food Sub Category Data Method*/
+    @FormUrlEncoded
+    @POST("admin/fetchSubCategory")
+    fun getSubCategoryList(
+        @Field("mainCategoryId") mainCategoryId:String
+    ): Call<SubCategoryResponseModel>
+
+
+    /*Home Screen Food Short Description List*/
+         @FormUrlEncoded
+         @POST("fetchMenuDetails")
+         fun getMenuDetailsList(
+          @Field("itemMainCategoryName") itemMainCategoryName:String,
+          @Field("itemSubCategoryName")  itemSubCategoryName:String,
+          @Field("itemFoodType")         itemFoodType:String
+         ): Call<MenuDetailsResponseModel>
+
+
 
          /*Get Food Sub Category wise data*/
          @GET("users?")

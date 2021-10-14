@@ -26,7 +26,7 @@ class LoginViewModel : ViewModel() {
           errorResultData.value ="Please Provide the Valid Phone Number"
       }
         else{
-          val logiResponse = LoginRepository().userLogin("sampath123@gmail.com",country_code!!,mobile_number!!)
+          val logiResponse = LoginRepository().userLogin(country_code!!,mobile_number!!)
           loginListener?.logIn(logiResponse)
       }
 

@@ -8,22 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
 import com.utico.fooddelivery.databinding.ItemRowBreakfastSubCategoryBinding
-import com.utico.fooddelivery.model.FoodSubCategory
+import com.utico.fooddelivery.model.SubCategoryData
 
 class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryListener): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
-  var foodSubCategoryList = mutableListOf<FoodSubCategory>()
+  var subCategoryList = mutableListOf<SubCategoryData>()
   var context: Context? = null
   var foodCategoryName:String? = null
     var isCheck:Boolean? = true
-
-
-
-
-
-    fun setFoodSubCategoryName(foodSubCategoryName: List<FoodSubCategory>){
-       this.foodSubCategoryList = foodSubCategoryName.toMutableList()
+/*
+    fun setFoodSubCategoryName(foodSubCategoryName: List<SubCategoryResponseModel>){
+       this.subCategoryList = foodSubCategoryName.toMutableList()
         notifyDataSetChanged()
-    }
+    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodCategoryViewHolder {
       val inflater = LayoutInflater.from(parent.context)
@@ -34,7 +30,7 @@ class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryLis
     }
 
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
-        //holder.bind(foodSubCategoryList[position])
+           holder.bind(subCategoryList[position])
            holder.tv_name.setOnClickListener {
                if (isCheck == true){
                    //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
@@ -57,15 +53,15 @@ class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryLis
 
 
     override fun getItemCount(): Int {
-        return 10
+        return subCategoryList.size
     }
 
     class FoodCategoryViewHolder(val binding: ItemRowBreakfastSubCategoryBinding) : RecyclerView.ViewHolder(binding.root){
       val tv_name = binding.tvCategoryName
       val cardView = binding.cardview
 
-      fun bind(data:FoodSubCategory){
-        tv_name.text = data.first_name
+      fun bind(subCategoryData: SubCategoryData){
+        tv_name.text = subCategoryData.subCategoryName
 
       }
     }

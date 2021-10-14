@@ -10,11 +10,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class registrationRepository {
-    fun userRegistration(name:String,email:String,country_code:String,mobilenumber:String):LiveData<String>{
+   /* fun userRegistration(countryCode:String,fullName:String,mobileNumber:String,email:String):LiveData<String>{
       val registrationResponse = MutableLiveData<String>()
       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
 
-      val call = retroInstance.userRegistration(name,email,country_code,mobilenumber)
+      val call = retroInstance.userRegistration(countryCode,fullName,mobileNumber,email)
           call.enqueue(object : Callback<ResponseBody>{
               override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                   if (response.isSuccessful){
@@ -30,7 +30,7 @@ class registrationRepository {
               }
           })
         return registrationResponse
-    }
+    }*/
 
 
 }

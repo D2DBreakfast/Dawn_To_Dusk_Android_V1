@@ -2,9 +2,7 @@ package com.utico.fooddelivery.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utico.fooddelivery.model.FoodShortDescList
-import com.utico.fooddelivery.model.FoodSubCategoryList
-import com.utico.fooddelivery.model.MenuResponse
+import com.utico.fooddelivery.model.*
 import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
@@ -14,64 +12,68 @@ import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
 
-    lateinit var recylerFoodShortDescData:MutableLiveData<MenuResponse>
-    lateinit var recyclerFoodSubCategoryData:MutableLiveData<FoodSubCategoryList>
+    lateinit var recylerMenuDetailsData:MutableLiveData<MenuDetailsResponseModel>
+    lateinit var recyclerSubCategoryData:MutableLiveData<SubCategoryResponseModel>
     var foodCategoryName:String? = null
+    var mainCategoryId:String? = "1"
 
     init {
-      recylerFoodShortDescData = MutableLiveData()
-      recyclerFoodSubCategoryData = MutableLiveData()
+      recylerMenuDetailsData = MutableLiveData()
+      recyclerSubCategoryData = MutableLiveData()
     }
 
 
-    fun getyFoodShortDescListObserable() : MutableLiveData<MenuResponse>{
-      return recylerFoodShortDescData
+
+    fun getMenuDetailObservable() : MutableLiveData<MenuDetailsResponseModel>{
+      return recylerMenuDetailsData
     }
 
-    fun makeApiCallFoodDesc(){
+    fun ApiCallMenuDetails(itemMainCategoryName:String,itemSubCategoryName:String,itemFoodType:String){
       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-      val call = retroInstance.getAllFoodShortDescDetailsList()
-          call.enqueue(object : Callback<MenuResponse>{
+      val call = retroInstance.getMenuDetailsList(itemMainCategoryName,itemSubCategoryName,itemFoodType)
+          call.enqueue(object : Callback<MenuDetailsResponseModel>{
               override fun onResponse(
-                  call: Call<MenuResponse>, response: Response<MenuResponse>) {
+                  call: Call<MenuDetailsResponseModel>, response: Response<MenuDetailsResponseModel>) {
                   if (response.isSuccessful){
-                      recylerFoodShortDescData.postValue(response.body())
+                      recylerMenuDetailsData.postValue(response.body())
                   }
               }
 
-              override fun onFailure(call: Call<MenuResponse>, t: Throwable) {
-                  recylerFoodShortDescData.postValue(null)
+              override fun onFailure(call: Call<MenuDetailsResponseModel>, t: Throwable) {
+                  recylerMenuDetailsData.postValue(null)
               }
 
           })
     }
 
 
-    /*Get the food sub Category list function*/
-     fun getFoodSubCategoryObserable() : MutableLiveData<FoodSubCategoryList> {
-         return recyclerFoodSubCategoryData
-     }
 
+    /*Get the food sub Category list function*/
+     fun getSubCategoryObservable() : MutableLiveData<SubCategoryResponseModel> {
+         return recyclerSubCategoryData
+     }
     /* Make API Call for getting the food subcategory List of data*/
-    fun APICallFoodSubCategory(){
+    fun APICallSubCategory(){
        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-       val call = retroInstance.getAllFoodSubCategoryList()
-           call.enqueue(object : Callback<FoodSubCategoryList>{
-               override fun onResponse(call: Call<FoodSubCategoryList>, response: Response<FoodSubCategoryList>) {
+       val call = retroInstance.getSubCategoryList("1")
+           call.enqueue(object : Callback<SubCategoryResponseModel>{
+               override fun onResponse(call: Call<SubCategoryResponseModel>, response: Response<SubCategoryResponseModel>) {
                    if (response.isSuccessful){
-                       recyclerFoodSubCategoryData.postValue(response.body())
+                       recyclerSubCategoryData.postValue(response.body())
                    }
                }
 
-               override fun onFailure(call: Call<FoodSubCategoryList>, t: Throwable) {
-                   recyclerFoodSubCategoryData.postValue(null)
+               override fun onFailure(call: Call<SubCategoryResponseModel>, t: Throwable) {
+                   recyclerSubCategoryData.postValue(null)
                }
 
            })
     }
 
 
-    /*Make Api call for the Food Sub Category Wise Data*/
+
+
+   /* *//*Make Api call for the Food Sub Category Wise Data*//*
     fun getFoodCategoryName(foodCategoryname:String){
         foodCategoryName = foodCategoryname
     }
@@ -84,7 +86,7 @@ class HomeViewModel: ViewModel() {
 
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.getFoodSubCategoryWiseList(foodCategoryName!!)
-            /*call.enqueue(object : Callback<MenuResponse>{
+            *//*call.enqueue(object : Callback<MenuResponse>{
                 override fun onResponse(call: Call<MenuResponse>, response: Response<MenuResponse>) {
                     if (response.isSuccessful) {
                         recylerFoodShortDescData.postValue(response.body())
@@ -95,13 +97,15 @@ class HomeViewModel: ViewModel() {
                     recylerFoodShortDescData.postValue(null)
                 }
 
-            })*/
+            })*//*
     }
 
-    /*Food Search*/
+    *//*Food Search*//*
     fun getFoodSearchObservable() : MutableLiveData<MenuResponse>{
         return recylerFoodShortDescData
     }
+*/
+
 
     fun APICallSearchFood(searchText:String){
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)

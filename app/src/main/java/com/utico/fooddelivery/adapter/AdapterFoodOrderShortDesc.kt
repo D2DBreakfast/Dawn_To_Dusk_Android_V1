@@ -60,7 +60,7 @@ class AdapterFoodOrderShortDesc : RecyclerView.Adapter<AdapterFoodOrderShortDesc
     }
 
     class MyViewHolder(val binding: ItemRowFoodOrderDescBinding): RecyclerView.ViewHolder(binding.root){
-        private var vegnonveg: Boolean? = false
+        private var vegnonveg: String? = null
         val cardView = binding.cardview
         val tvName = binding.tvTitle
         val tvDescription = binding.tvDescription
@@ -69,15 +69,15 @@ class AdapterFoodOrderShortDesc : RecyclerView.Adapter<AdapterFoodOrderShortDesc
         val imageViewVegOrNonveg = binding.imageVegOrNonveg
 
         fun bind(data:DataX){
-            vegnonveg = data.vegnonveg
-            if (vegnonveg == true){
+            vegnonveg = data.itemFoodType
+            if (vegnonveg.equals("Veg")){
                 imageViewVegOrNonveg.setBackgroundResource(R.drawable.veg)
             }else{
                 imageViewVegOrNonveg.setBackgroundResource(R.drawable.non_veg)
             }
-           tvName.text = data.foodname
-           tvDescription.text = data.desc
-           tvPrice.text = "AED"+" "+data.price.toString()+".00"
+           tvName.text = data.itemName
+           tvDescription.text = data.itemDescription
+           tvPrice.text = "AED"+" "+data.itemPrice.toString()+".00"
           /* val imageUrl = data.avatar
             Picasso.get()
                 .load(imageUrl)

@@ -11,10 +11,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class OTPRepository {
-    fun otpVerfication(otp:String,mobileNumber:String,countryCode:String):LiveData<String>{
+    fun otpVerfication(countryCode:String,mobileNumber:String,mobileOtp:String):LiveData<String>{
       val otpResponse  = MutableLiveData<String>()
       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-      val call = retroInstance.otpVerfication(otp,mobileNumber,countryCode)
+      val call = retroInstance.otpVerfication(countryCode,mobileNumber,mobileOtp)
 
           call.enqueue(object : Callback<ResponseBody>{
               override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

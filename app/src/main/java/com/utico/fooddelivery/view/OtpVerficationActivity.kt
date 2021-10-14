@@ -2,7 +2,9 @@ package com.utico.fooddelivery.view
 
 import `in`.aabhasjindal.otptextview.OTPListener
 import `in`.aabhasjindal.otptextview.OtpTextView
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,10 +28,16 @@ class OtpVerficationActivity : AppCompatActivity(),OTPVerificationListener {
     private var mobileNumber:String? =null
     private lateinit var binding: ActivityOtpverficationBinding
     private lateinit var viewMode: OtpVerficationViewModel
+    lateinit var sharedPreferences: SharedPreferences
+    var mobile_number:String? = null
+    var countryCode:String? = null
     var counter = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_otpverfication)
+        sharedPreferences=getSharedPreferences(resources.getString(R.string.registration_details_sharedPreferences), Context.MODE_PRIVATE)
+        mobile_number = sharedPreferences.getString("mobileNumber","")
+        countryCode = sharedPreferences.getString("countryCode","")
         binding = DataBindingUtil.setContentView(this,R.layout.activity_otpverfication)
         viewMode = ViewModelProviders.of(this,).get(OtpVerficationViewModel::class.java)
         viewMode.otpListener = this
@@ -62,7 +70,7 @@ class OtpVerficationActivity : AppCompatActivity(),OTPVerificationListener {
             }
         }
 
-
+       viewMode.getRegistrationData(mobile_number!!,countryCode!!)
         viewMode.errorResult.observe(this, Observer {
             toast(it)
         })

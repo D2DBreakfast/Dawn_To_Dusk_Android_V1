@@ -11,7 +11,7 @@ class RetroInstance {
          //val baseUrl = "https://reqres.in/api/" //profile
         //val baseUrl ="http://10.12.15.81:3000/"
          //val baseUrl=  "http://10.12.12.178:5000/api/user/register"
-        val baseUrl ="https://d2dbackendmain.azurewebsites.net/api/"
+        val baseUrl ="https://d2dbackendmain.azurewebsites.net/"
        // val baseUrl="https://d2dbackendmain.azurewebsites.net/api/menu/getmenu"
 
         fun getRetroInstance(): Retrofit {

@@ -10,10 +10,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginRepository {
-    fun userLogin(email:String,country_code:String,mobile_number:String):LiveData<String> {
+    fun userLogin(countryCode:String,mobileNumber:String):LiveData<String> {
         val loginResponse = MutableLiveData<String>()
         val restInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-        val call = restInstance.userLogin(email,country_code,mobile_number)
+        val call = restInstance.userLogin(countryCode,mobileNumber)
           call.enqueue(object : Callback<ResponseBody>{
               override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                   if(response.isSuccessful) {

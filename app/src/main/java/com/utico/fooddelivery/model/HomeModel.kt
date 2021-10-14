@@ -7,3 +7,4 @@ data class FoodSubCategoryList(val data: List<FoodSubCategory>)
 data class FoodSubCategory(val first_name : String?)
 
 
+

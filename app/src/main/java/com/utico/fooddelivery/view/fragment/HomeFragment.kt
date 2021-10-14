@@ -20,7 +20,9 @@ import com.utico.fooddelivery.adapter.AdapterBreakfastSubCategory
 import com.utico.fooddelivery.adapter.AdapterBrunchSubCategory
 import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
+import com.utico.fooddelivery.model.MenuDetailsResponseModel
 import com.utico.fooddelivery.model.MenuResponse
+import com.utico.fooddelivery.model.SubCategoryResponseModel
 import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
@@ -37,6 +39,10 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
     private lateinit var btnBreakfast:Button
     private lateinit var btnBrunch:Button
     private lateinit var  btnLogout:ImageView
+
+    var itemMainCategoryName:String? = "Breakfast"
+    var itemSubCategoryName:String? = "All Day Breakfast"
+    var itemFoodType:String? = "Veg"
 /*
     private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
 */
@@ -87,6 +93,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
        // searchFood()
         buttonBreakfast()
         buttonmBrunch()
+        getSubCategoryData()
         return view
     }
 
@@ -132,23 +139,16 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
   fun initViewModel(){
 
-      viewModel.getyFoodShortDescListObserable().observe(viewLifecycleOwner, Observer<MenuResponse> {
-          if (it.data==null){
+      viewModel.getMenuDetailObservable().observe(viewLifecycleOwner, Observer<MenuDetailsResponseModel> {
+          if (it.menuData==null){
             Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
           }else {
-              adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
+              adapterFoodOrderShortDesc.foodDescList = it.menuData.data.toMutableList()
               adapterFoodOrderShortDesc.notifyDataSetChanged()
           }
       })
-      viewModel.makeApiCallFoodDesc()
+      viewModel.ApiCallMenuDetails(itemMainCategoryName!!,itemSubCategoryName!!,itemFoodType!!)
 
-      /*call the viewModel for Food Sub Category*/
-
-     /* viewModel.getFoodSubCategoryObserable().observe(viewLifecycleOwner, Observer<FoodSubCategoryList> {
-        adapterBreakFastSubCategory.foodSubCategoryList = it.data.toMutableList()
-        adapterBreakFastSubCategory.notifyDataSetChanged()
-      })
-      viewModel.APICallFoodSubCategory()*/
   }
 
 
@@ -210,11 +210,6 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
             btnBrunch.setBackgroundColor(resources.getColor(R.color.white))
             btnBrunch.setTextColor(resources.getColor(R.color.black))
 
-           /* viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
-                adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-                adapterFoodOrderShortDesc.notifyDataSetChanged()
-            })*/
-            //viewModel.APICallSearchFood("2")
 
         }
 
@@ -254,6 +249,14 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
         }
 
+    }
+
+    fun getSubCategoryData(){
+        viewModel.getSubCategoryObservable().observe(viewLifecycleOwner, Observer<SubCategoryResponseModel> {
+          adapterBreakFastSubCategory.subCategoryList = it.subCategoryData?.toMutableList()
+          adapterBreakFastSubCategory.notifyDataSetChanged()
+        })
+        viewModel.APICallSubCategory()
     }
 
 

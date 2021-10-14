@@ -43,9 +43,9 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         sharedPreferences = (activity as AppCompatActivity).getSharedPreferences(resources.getString(R.string.app_name),Context.MODE_PRIVATE)
-        name = sharedPreferences.getString("name","")
+        name = sharedPreferences.getString("fullName","")
         mobileNumber = sharedPreferences.getString("mobileNumber","")
-        email = sharedPreferences.getString("til_email","")
+        email = sharedPreferences.getString("email","")
 
         val view:View = binding.root
 
