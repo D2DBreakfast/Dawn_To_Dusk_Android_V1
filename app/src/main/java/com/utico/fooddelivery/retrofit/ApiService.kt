@@ -49,14 +49,59 @@ interface ApiService {
          @FormUrlEncoded
          @POST("fetchMenuDetails")
          fun getMenuDetailsList(
-          @Field("itemMainCategoryName") itemMainCategoryName:String,
-          @Field("itemSubCategoryName")  itemSubCategoryName:String,
-          @Field("itemFoodType")         itemFoodType:String
+          @Field("itemMainCategoryName") itemMainCategoryName:String
          ): Call<MenuDetailsResponseModel>
 
+    /*Fetch the subCategory Menu details*/
+     @FormUrlEncoded
+     @POST("fetchSubCategoryMenusDetails")
+     fun getSubCategoryMenusDetails(
+        @Field("itemMainCategoryName") itemMainCategoryName:String,
+        @Field("itemSubCategoryName") itemSubCategoryName:String,
+        @Field("itemFoodType") itemFoodType:String,
+        ): Call<SubCategoryMenuDetailsModel>
+
+     /*Post addToCart Items data*/
+       @FormUrlEncoded
+       @POST("myCart")
+       fun addToCart(
+         @Field("itemMainCategoryName") itemMainCategoryName:String,
+         @Field("itemSubCategoryName") itemSubCategoryName:String,
+         @Field("itemFoodType") itemFoodType:String,
+         @Field("itemName") itemName:String,
+         @Field("itemId") itemId:String,
+         @Field("itemQuantity") itemQuantity:String,
+         @Field("itemPrice") itemPrice:String,
+         @Field("userId") userId:String
+    ): Call<ResponseBody>
+
+    /*Fetch addToCart Items details*/
+    @FormUrlEncoded
+    @POST("fetchCartDetails")
+    fun getAddToCartDetails(
+        @Field("userId") userId:String
+    ): Call<AddToCartDetailsResponseModel>
 
 
-         /*Get Food Sub Category wise data*/
+    /*Place Order*/
+    @FormUrlEncoded
+    @POST("Placeorder")
+    fun placeOrder(
+        @Field("itemMainCategoryName") itemMainCategoryName:String,
+        @Field("itemSubCategoryName") itemSubCategoryName:String,
+        @Field("itemFoodType") itemFoodType:String,
+        @Field("itemName") itemName:String,
+        @Field("itemId") itemId:String,
+        @Field("itemQuantity") itemQuantity:String,
+        @Field("itemPrice") itemPrice:String,
+        @Field("userId") userId:String
+    ): Call<OrderPlacedResponse>
+
+
+
+
+
+    /*Get Food Sub Category wise data*/
          @GET("users?")
          fun getFoodSubCategoryWiseList(@Query("page")FoodSubCategoryName:String): Call<FoodShortDescList>
 

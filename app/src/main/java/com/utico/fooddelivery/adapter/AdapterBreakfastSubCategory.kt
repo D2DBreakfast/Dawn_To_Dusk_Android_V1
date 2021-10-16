@@ -7,13 +7,14 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
+import com.utico.fooddelivery.`interface`.PassSubCategoryMenuFields
 import com.utico.fooddelivery.databinding.ItemRowBreakfastSubCategoryBinding
 import com.utico.fooddelivery.model.SubCategoryData
 
-class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryListener): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
-  var subCategoryList = mutableListOf<SubCategoryData>()
+class AdapterBreakfastSubCategory(val passSubCategoryMenuFields:PassSubCategoryMenuFields): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
+  var breakfastCategoryList = mutableListOf<SubCategoryData>()
   var context: Context? = null
-  var foodCategoryName:String? = null
+  var breakfastSubCategoryName:String? = null
     var isCheck:Boolean? = true
 /*
     fun setFoodSubCategoryName(foodSubCategoryName: List<SubCategoryResponseModel>){
@@ -30,19 +31,19 @@ class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryLis
     }
 
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
-           holder.bind(subCategoryList[position])
+           holder.bind(breakfastCategoryList[position])
            holder.tv_name.setOnClickListener {
                if (isCheck == true){
                    //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
-                   foodCategoryName = holder.tv_name.text.toString()
-                   foodSubCategoryListener.getFoodSubCategoryName(foodCategoryName!!)
+                   breakfastSubCategoryName = holder.tv_name.text.toString()
+                   passSubCategoryMenuFields.passOnclickSubCategoryMenuFields(breakfastSubCategoryName!!)
                    holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
                    holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
                    Toast.makeText(context,isCheck.toString(), Toast.LENGTH_SHORT).show()
                    isCheck = false
                }else{
-                   foodCategoryName = holder.tv_name.text.toString()
-                   foodSubCategoryListener.getFoodSubCategoryName(foodCategoryName!!)
+                   breakfastSubCategoryName = holder.tv_name.text.toString()
+                   passSubCategoryMenuFields.passOnclickSubCategoryMenuFields(breakfastSubCategoryName!!)
                    holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
                    holder.tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
                    Toast.makeText(context,isCheck.toString(), Toast.LENGTH_SHORT).show()
@@ -53,7 +54,7 @@ class AdapterBreakfastSubCategory(val foodSubCategoryListener:FoodSubCategoryLis
 
 
     override fun getItemCount(): Int {
-        return subCategoryList.size
+        return breakfastCategoryList.size
     }
 
     class FoodCategoryViewHolder(val binding: ItemRowBreakfastSubCategoryBinding) : RecyclerView.ViewHolder(binding.root){

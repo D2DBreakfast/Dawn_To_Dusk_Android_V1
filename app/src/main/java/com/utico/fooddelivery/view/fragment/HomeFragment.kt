@@ -15,36 +15,36 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
-import com.utico.fooddelivery.adapter.AdapterCart
-import com.utico.fooddelivery.adapter.AdapterBreakfastSubCategory
-import com.utico.fooddelivery.adapter.AdapterBrunchSubCategory
-import com.utico.fooddelivery.adapter.AdapterFoodOrderShortDesc
+import com.utico.fooddelivery.`interface`.PassSubCategoryMenuFields
+import com.utico.fooddelivery.adapter.*
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
 import com.utico.fooddelivery.model.MenuDetailsResponseModel
-import com.utico.fooddelivery.model.MenuResponse
+import com.utico.fooddelivery.model.SubCategoryMenuDetailsModel
 import com.utico.fooddelivery.model.SubCategoryResponseModel
 import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
 
-class HomeFragment : Fragment(),FoodSubCategoryListener{
+class HomeFragment : Fragment(),FoodSubCategoryListener,PassSubCategoryMenuFields{
 
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-    lateinit var adapterFoodOrderShortDesc: AdapterFoodOrderShortDesc
+    lateinit var adapterBreakfastDescription: AdapterBreakfastDescription
+    lateinit var adapterBrunchDescription: AdapterBrunchDescription
     lateinit var adapterBreakFastSubCategory: AdapterBreakfastSubCategory
     lateinit var adapterBrunchSubCategory: AdapterBrunchSubCategory
-    lateinit var adapterCart: AdapterCart
     var searchtext:String? = null
     private lateinit var btnBreakfast:Button
     private lateinit var btnBrunch:Button
     private lateinit var  btnLogout:ImageView
+    private var mainCategoryId:String? = "1"
 
-    var itemMainCategoryName:String? = "Breakfast"
+    var breakfastItemMainCategoryName:String? = "Breakfast"
+    var brunchItemMainCategoryName:String? = "Brunch"
     var itemSubCategoryName:String? = "All Day Breakfast"
     var itemFoodType:String? = "Veg"
 /*
-    private lateinit var AdapterFoodOrderShortDesc : AdapterFoodOrderShortDesc()
+    private lateinit var AdapterBreakfastDescription : AdapterBreakfastDescription()
 */
 
     private val binding get() = _binding!!
@@ -89,11 +89,11 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
            }
 
         initAdapter()
-        initViewModel()
+        getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
        // searchFood()
         buttonBreakfast()
         buttonmBrunch()
-        getSubCategoryData()
+        getBreakfastSubCategoryData()
         return view
     }
 
@@ -127,27 +127,13 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
       breakfastRecyclerview.layoutManager = LinearLayoutManager(activity)
          /* val decoration  = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
           foodShortxDescrecyclerview.addItemDecoration(decoration)*/
-           adapterFoodOrderShortDesc = AdapterFoodOrderShortDesc()
-      breakfastRecyclerview.adapter = adapterFoodOrderShortDesc
+           adapterBreakfastDescription = AdapterBreakfastDescription()
+      breakfastRecyclerview.adapter = adapterBreakfastDescription
 
       val brunchRecyclerView = binding.brunchRecyclerview
           brunchRecyclerView.layoutManager = LinearLayoutManager(activity)
-          adapterCart = AdapterCart()
-          brunchRecyclerView.adapter = adapterCart
-
-  }
-
-  fun initViewModel(){
-
-      viewModel.getMenuDetailObservable().observe(viewLifecycleOwner, Observer<MenuDetailsResponseModel> {
-          if (it.menuData==null){
-            Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
-          }else {
-              adapterFoodOrderShortDesc.foodDescList = it.menuData.data.toMutableList()
-              adapterFoodOrderShortDesc.notifyDataSetChanged()
-          }
-      })
-      viewModel.ApiCallMenuDetails(itemMainCategoryName!!,itemSubCategoryName!!,itemFoodType!!)
+          adapterBrunchDescription = AdapterBrunchDescription()
+          brunchRecyclerView.adapter = adapterBrunchDescription
 
   }
 
@@ -157,9 +143,9 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
       /*  Toast.makeText(context,foodCategoryName,Toast.LENGTH_LONG).show()
         viewModel.getFoodCategoryName("1")
         viewModel.getFoodSubCategoryWiseObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
-           adapterFoodOrderShortDesc.foodDescList.clear()
-           adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-           adapterFoodOrderShortDesc.notifyDataSetChanged()
+           adapterBreakfastDescription.foodDescList.clear()
+           adapterBreakfastDescription.foodDescList = it.data.toMutableList()
+           adapterBreakfastDescription.notifyDataSetChanged()
         })
         viewModel.MakeApiCallFoodSubCategoryWiseData()
     }
@@ -171,8 +157,8 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
 
                    if (text!!.length > 1){
                     viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
-                    adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-                    adapterFoodOrderShortDesc.notifyDataSetChanged()
+                    adapterBreakfastDescription.foodDescList = it.data.toMutableList()
+                    adapterBreakfastDescription.notifyDataSetChanged()
                     })
                     viewModel.APICallSearchFood(searchtext.toString())
                    }
@@ -196,6 +182,8 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
         val brunchBannerImageView = binding.brunchBannerImageView
 
         btnBreakfast.setOnClickListener {
+            mainCategoryId ="1"
+            getBreakfastSubCategoryData()
             breakfastRecyclerview.visibility = View.VISIBLE
             brunchRecyclerview.visibility = View.GONE
             breakfastVegSwitch.visibility = View.VISIBLE
@@ -210,10 +198,13 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
             btnBrunch.setBackgroundColor(resources.getColor(R.color.white))
             btnBrunch.setTextColor(resources.getColor(R.color.black))
 
+            getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
+
 
         }
 
     }
+
     fun buttonmBrunch(){
         val breakfastRecyclerview = binding.breakfastRecyclerview
         val brunchRecyclerview = binding.brunchRecyclerview
@@ -223,6 +214,7 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
         val brunchSubCategoryRecyclerview = binding.brunchSubCategoryRecyclerview
         val breakfastBannerImageView = binding.breakfastBannerImageView
         val brunchBannerImageView = binding.brunchBannerImageView
+
 
 
 
@@ -241,24 +233,66 @@ class HomeFragment : Fragment(),FoodSubCategoryListener{
             btnBreakfast.setBackgroundColor(resources.getColor(R.color.white))
             btnBreakfast.setTextColor(resources.getColor(R.color.black))
 
-            /* viewModel.getFoodSearchObservable().observe(viewLifecycleOwner, Observer<FoodShortDescList> {
-                 adapterFoodOrderShortDesc.foodDescList = it.data.toMutableList()
-                 adapterFoodOrderShortDesc.notifyDataSetChanged()
-             })*/
-            viewModel.APICallSearchFood("1")
-
+             /*set the subcategory data*/
+            getBrunchMenuDetails(brunchItemMainCategoryName!!)
         }
 
+
     }
 
-    fun getSubCategoryData(){
+    /*This method is used to get the */
+    fun getBreakfastMenuDetails(itemMainCategoryName:String){
+        viewModel.getMenuDetailObservable().observe(viewLifecycleOwner, Observer<MenuDetailsResponseModel> {
+            if (it.menuData==null){
+                Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
+            }else {
+                adapterBreakfastDescription.breakfastDescList = it.menuData.data.toMutableList()
+                adapterBreakfastDescription.notifyDataSetChanged()
+            }
+        })
+        viewModel.ApiCallMenuDetails(itemMainCategoryName!!)
+    }
+
+    /*This method is used to get the Brunch related data */
+    fun getBrunchMenuDetails(itemMainCategoryName:String){
+        /*get the brunch Menu details list*/
+        viewModel.getMenuDetailObservable().observe(viewLifecycleOwner, Observer<MenuDetailsResponseModel> {
+            if (it.menuData==null){
+                Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
+            }else {
+                adapterBrunchDescription.brunchDescList = it.menuData.data.toMutableList()
+                adapterBrunchDescription.notifyDataSetChanged()
+            }
+        })
+        viewModel.ApiCallMenuDetails(itemMainCategoryName!!)
+
+        /*get the brunch Category list*/
         viewModel.getSubCategoryObservable().observe(viewLifecycleOwner, Observer<SubCategoryResponseModel> {
-          adapterBreakFastSubCategory.subCategoryList = it.subCategoryData?.toMutableList()
+            adapterBrunchSubCategory.brunchSubCategoryList = it.subCategoryData?.toMutableList()
+            adapterBrunchSubCategory.notifyDataSetChanged()
+        })
+        viewModel.APICallSubCategory(mainCategoryId!!)
+
+
+    }
+
+
+    fun getBreakfastSubCategoryData(){
+        viewModel.getSubCategoryObservable().observe(viewLifecycleOwner, Observer<SubCategoryResponseModel> {
+            adapterBreakFastSubCategory.breakfastCategoryList = it.subCategoryData?.toMutableList()
           adapterBreakFastSubCategory.notifyDataSetChanged()
         })
-        viewModel.APICallSubCategory()
+        viewModel.APICallSubCategory(mainCategoryId!!)
     }
 
+
+    override fun passOnclickSubCategoryMenuFields(itemSubCategoryName: String) {
+        viewModel.subCategoryMenuDetailsObservable().observe(viewLifecycleOwner, Observer<SubCategoryMenuDetailsModel> {
+            adapterBreakfastDescription.breakfastDescList = it.subCategoryMenuData.data.toMutableList()
+            adapterBreakfastDescription.notifyDataSetChanged()
+        })
+        viewModel.apiCallSubCategoryMenuDetails(breakfastItemMainCategoryName!!,itemSubCategoryName!!,"Veg")
+    }
 
 
 }

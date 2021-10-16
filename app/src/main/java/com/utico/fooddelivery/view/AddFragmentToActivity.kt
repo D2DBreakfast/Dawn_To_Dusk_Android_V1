@@ -2,11 +2,8 @@ package com.utico.fooddelivery.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.LoginListener
 import com.utico.fooddelivery.`interface`.PassFoodDescDataListener
-import com.utico.fooddelivery.util.toast
 import com.utico.fooddelivery.view.fragment.*
 
 class AddFragmentToActivity : AppCompatActivity() {
@@ -15,7 +12,7 @@ class AddFragmentToActivity : AppCompatActivity() {
     var foodDescription:String? = null
     var foodPrice:String? = null
     val bundleOderDetails = Bundle()
-    val orderDetailsFragment =OrderDetailsFragment()
+    val orderDetailsFragment =ItemDescriptionFragment()
     val passFoodDescDataListener:PassFoodDescDataListener? = null
 
 
@@ -26,7 +23,7 @@ class AddFragmentToActivity : AppCompatActivity() {
 
 
 
-        if (fragmentName.equals("OrderDetailsFragment")) {
+        if (fragmentName.equals("ItemDescriptionFragment")) {
             foodName = intent.getStringExtra("foodName")
             foodDescription =intent.getStringExtra("foodDescription")
             foodPrice = intent.getStringExtra("foodPrice")
@@ -36,7 +33,7 @@ class AddFragmentToActivity : AppCompatActivity() {
             orderDetailsFragment.arguments = bundleOderDetails*/
             passFoodDescDataListener?.getFoodShortDesc(foodName!!,foodDescription!!,foodPrice!!)
             supportFragmentManager!!.beginTransaction()
-                .add(R.id.fragmentContainer, OrderDetailsFragment(), "OrderDetailsFragment")
+                .add(R.id.fragmentContainer, ItemDescriptionFragment(), "ItemDescriptionFragment")
                 .commit()
 
         } else if (fragmentName.equals("NotificationDetailsFragment")) {

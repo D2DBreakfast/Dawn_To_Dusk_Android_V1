@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
 import com.utico.fooddelivery.databinding.ItemRowBrunchSubCategoryBinding
-import com.utico.fooddelivery.model.FoodSubCategory
+import com.utico.fooddelivery.model.SubCategoryData
 
 class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.FoodCategoryViewHolder>() {
-  var foodSubCategoryList = mutableListOf<FoodSubCategory>()
+  var brunchSubCategoryList = mutableListOf<SubCategoryData>()
   var context: Context? = null
   var foodCategoryName:String? = null
   val foodSubCategoryListener:FoodSubCategoryListener? = null
@@ -18,8 +18,8 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
 
 
 
-  fun setFoodSubCategoryName(foodSubCategoryName: List<FoodSubCategory>){
-       this.foodSubCategoryList = foodSubCategoryName.toMutableList()
+  fun setFoodSubCategoryName(foodSubCategoryName: List<SubCategoryData>){
+       this.brunchSubCategoryList = foodSubCategoryName.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -32,7 +32,7 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
     }
 
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
-        //holder.bind(foodSubCategoryList[position])
+        holder.bind(brunchSubCategoryList[position])
         holder.tv_name.setOnClickListener {
           if (isCheck == true){
             //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
@@ -56,15 +56,15 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return brunchSubCategoryList.size
     }
 
     class FoodCategoryViewHolder(val binding: ItemRowBrunchSubCategoryBinding) : RecyclerView.ViewHolder(binding.root){
       val tv_name = binding.tvCategoryName
       val cardView = binding.cardview
 
-      fun bind(data:FoodSubCategory){
-        tv_name.text = data.first_name
+      fun bind(subCategoryData: SubCategoryData){
+        tv_name.text = subCategoryData.subCategoryName
 
       }
     }

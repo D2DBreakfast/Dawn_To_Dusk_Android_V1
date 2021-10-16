@@ -276,7 +276,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/brunchBannerImageView"
-            tools:listitem="@layout/item_row_cart"/>
+            tools:listitem="@layout/item_row_brunch_description"/>
 
 
 
