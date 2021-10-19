@@ -9,6 +9,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Field
 
 class CartViewModel : ViewModel() {
    private var cartResponseData:MutableLiveData<AddToCartDetailsResponseModel>

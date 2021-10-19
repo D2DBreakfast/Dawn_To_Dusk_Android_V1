@@ -100,6 +100,7 @@ class RegistrationActivity : AppCompatActivity(){
 
     fun clickSubmitButton(){
        binding.btnRegistration.setOnClickListener {
+           toast("Click the Registration btnAddToCart")
            viewModel.getRegistrationObservable().observe(this, Observer<UserRegistrationResponseModel> {
                if (it.statusCode == 200){
                    toast(it.message)

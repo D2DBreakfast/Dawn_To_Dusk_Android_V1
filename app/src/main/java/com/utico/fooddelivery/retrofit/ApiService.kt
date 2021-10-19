@@ -57,9 +57,17 @@ interface ApiService {
      @POST("fetchSubCategoryMenusDetails")
      fun getSubCategoryMenusDetails(
         @Field("itemMainCategoryName") itemMainCategoryName:String,
-        @Field("itemSubCategoryName") itemSubCategoryName:String,
-        @Field("itemFoodType") itemFoodType:String,
+        @Field("itemSubCategoryName") itemSubCategoryName:String
         ): Call<SubCategoryMenuDetailsModel>
+
+     /*Fetch the Veg related data*/
+     @FormUrlEncoded
+     @POST("fetchVegMenusDetails")
+      fun getVegMenuDetails(
+         @Field("itemMainCategoryName") itemMainCategoryName:String,
+         @Field("itemSubCategoryName") itemSubCategoryName:String,
+         @Field("itemFoodType") itemFoodType:String
+      ) : Call<SubCategoryMenuDetailsModel>
 
      /*Post addToCart Items data*/
        @FormUrlEncoded

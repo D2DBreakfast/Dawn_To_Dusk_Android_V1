@@ -1,6 +1,8 @@
 package com.utico.fooddelivery.view.fragment
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,31 +13,31 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.adapter.AdapterBrunchDescription
+import com.utico.fooddelivery.`interface`.CallbackAddToCartDetails
 import com.utico.fooddelivery.adapter.AdapterCart
 import com.utico.fooddelivery.databinding.FragmentCartBinding
 import com.utico.fooddelivery.model.AddToCartDetailsResponseModel
-import com.utico.fooddelivery.model.FoodList
 import com.utico.fooddelivery.model.OrderPlacedResponse
 import com.utico.fooddelivery.view.AddFragmentToActivity
+import com.utico.fooddelivery.view.DashBoardActivity
 import com.utico.fooddelivery.viewmodel.CartViewModel
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(),CallbackAddToCartDetails {
     private lateinit var viewModel: CartViewModel
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
     lateinit var adapterCart: AdapterCart
     private var sharedPreferences:SharedPreferences? = null
     private var cartDetailsSharedPreferences:SharedPreferences? = null
-    private var userId:String? = null
-    private var itemMainCategoryName:String? = null
-    private var itemSubCategoryName:String? = null
-    private var itemFoodType:String? = null
-    private var itemName:String? = null
-    private var itemId:String? = null
-    private var itemQuantity:String? = null
+    private var mainCategoryName:String? = null
+    private var subCategoryName:String? = null
+    private var foodType:String = "Veg"
+    private var foodName:String? = null
+    private var foodId:String? = null
+    private var foodQuantity:String? = null
     private var description:String? = null
-    private var itemUserId:String? = null
+    private var userId:String? = null
+    private var foodPrice:String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -43,8 +45,8 @@ class CartFragment : Fragment() {
         _binding = FragmentCartBinding.inflate(inflater, container, false)
         sharedPreferences = context?.getSharedPreferences(resources.getString(R.string.registration_details_sharedPreferences),Context.MODE_PRIVATE)
         userId = sharedPreferences?.getString("userId","")
-        cartDetailsSharedPreferences = context?.getSharedPreferences(context?.resources?.getString(R.string.cart_details_sharedPreferences),Context.MODE_PRIVATE)
 
+       /* cartDetailsSharedPreferences = context?.getSharedPreferences(context?.resources?.getString(R.string.cart_details_sharedPreferences),Context.MODE_PRIVATE)
         itemMainCategoryName = cartDetailsSharedPreferences?.getString("itemMainCategoryName","")
         itemSubCategoryName = cartDetailsSharedPreferences?.getString("itemSubCategoryName","")
         itemFoodType = cartDetailsSharedPreferences?.getString("itemFoodType","")
@@ -52,7 +54,8 @@ class CartFragment : Fragment() {
         itemId = cartDetailsSharedPreferences?.getString("itemId","")
         itemQuantity = cartDetailsSharedPreferences?.getString("itemQuantity","")
         description = cartDetailsSharedPreferences?.getString("itemPrice","")
-        itemUserId = cartDetailsSharedPreferences?.getString("userId","")
+        itemUserId = cartDetailsSharedPreferences?.getString("userId","")*/
+
         val root: View = binding.root
         setButtonClickEvent()
         initAdapter()
@@ -69,13 +72,13 @@ class CartFragment : Fragment() {
    fun initAdapter(){
       val cartRecyclerView = binding.cartRecyclerview
        cartRecyclerView.layoutManager = LinearLayoutManager(activity)
-       adapterCart = AdapterCart()
+       adapterCart = AdapterCart(this)
        cartRecyclerView.adapter = adapterCart
     }
 
 
 
-    /*Theis function is used to set all the button click event here*/
+    /*Theis function is used to set all the btnAddToCart click event here*/
     fun setButtonClickEvent(){
         binding.tvCoupons.setOnClickListener {
           val intent = Intent(context,AddFragmentToActivity::class.java)
@@ -83,7 +86,7 @@ class CartFragment : Fragment() {
               startActivity(intent)
         }
 
-        /*button click on order tracking */
+        /*btnAddToCart click on order tracking */
         binding.fltBtnOrderTracking.setOnClickListener {
             val intent = Intent(context,AddFragmentToActivity::class.java)
                  intent.putExtra("FragmentName","OrderTrackingFragment")
@@ -104,11 +107,47 @@ class CartFragment : Fragment() {
         binding.btnCheckOut.setOnClickListener {
             viewModel.placeObservable().observe(viewLifecycleOwner, Observer<OrderPlacedResponse> {
                  Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+                 if (it.message.equals("Successfully Added the Order Details")){
+                     val intent = Intent(context,DashBoardActivity::class.java)
+                     startActivity(intent)
+                 }
+
             })
-            viewModel.apiCallPlaceOrder(itemMainCategoryName!!,itemSubCategoryName!!,itemFoodType!!,itemName!!,itemId!!,itemQuantity!!,description!!,itemUserId!!)
+            viewModel.apiCallPlaceOrder(mainCategoryName!!,subCategoryName!!,foodType!!,foodName!!,foodId!!,foodQuantity!!,foodPrice!!,userId!!)
+
         }
     }
 
+
+    override fun passAddToCartDetails(itemMainCategoryName: String, itemSubCategoryName: String, itemName: String, itemId: String, itemQuantity: String, itemPrice: String) {
+                   mainCategoryName=itemMainCategoryName
+                   subCategoryName = itemSubCategoryName
+                   foodName =itemName
+                   foodId = itemId
+                   foodQuantity=itemQuantity
+                   foodPrice = itemPrice
+
+      /*  binding.btnCheckOut.setOnClickListener {
+            viewModel.placeObservable().observe(viewLifecycleOwner, Observer<OrderPlacedResponse> {
+                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+            })
+            viewModel.apiCallPlaceOrder(itemMainCategoryName!!,itemSubCategoryName!!,"Veg",itemName!!,itemId!!,itemQuantity!!,"ggdg"!!,"4"!!)
+        }*/
+
+    }
+
+
+    fun alertDialog(message: String) {
+        val dialogBuilder = AlertDialog.Builder(activity)
+            dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+
+                        dialog, id ->activity?.finish()
+                })
+
+
+    }
 
 
 }

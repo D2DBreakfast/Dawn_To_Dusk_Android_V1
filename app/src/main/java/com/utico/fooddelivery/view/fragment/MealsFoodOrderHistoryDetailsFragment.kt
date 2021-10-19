@@ -34,7 +34,7 @@ class MealsFoodOrderHistoryDetailsFragment : Fragment() {
 
 /*1.Skip option is not required
 * 2.change the name like package
-* 3.change the toggle button name is veg
+* 3.change the toggle btnAddToCart name is veg
 * 4.food category default is All
 * 5.multiple selection in category selection
 * 6.All option search is not required

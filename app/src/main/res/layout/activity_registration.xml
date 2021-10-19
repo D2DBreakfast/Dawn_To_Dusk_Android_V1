@@ -15,20 +15,59 @@
  <androidx.constraintlayout.widget.ConstraintLayout
      android:layout_width="match_parent"
      android:layout_height="match_parent"
-     android:background="@drawable/background_">
+     android:background="@color/card_background_light_green">
 
-     <ImageView
+     <RelativeLayout
          android:id="@+id/imageView6"
-         android:layout_width="wrap_content"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_marginStart="16dp"
-         android:layout_marginTop="76dp"
-         android:layout_marginEnd="16dp"
-         android:background="@drawable/profile"
+         android:background="@drawable/login_shape"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.497"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent" />
+         app:layout_constraintTop_toTopOf="parent" >
+
+         <ImageView
+             android:id="@+id/edit_profile_imageview"
+             android:layout_width="200dp"
+             android:layout_height="200dp"
+             android:layout_centerHorizontal="true"
+             android:background="@drawable/dawntodusklogo" />
+         <LinearLayout
+             android:id="@+id/lnrTextRow"
+             android:layout_below="@+id/edit_profile_imageview"
+             android:layout_width="match_parent"
+             android:layout_marginTop="70dp"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+             <TextView
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:textSize="18sp"
+                 android:textColor="@color/white"
+                 android:layout_marginLeft="70dp"
+                 android:text="Login"
+                 android:textStyle="bold"
+                 />
+
+             <View
+                 android:layout_width="0dp"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1" />
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textSize="18sp"
+                 android:textColor="@color/white"
+                 android:layout_marginRight="70dp"
+                 android:textStyle="bold"
+                 android:text="Sign-up"/>
+         </LinearLayout>
+
+     </RelativeLayout>
+
 
      <TextView
          android:id="@+id/tv_registration"
@@ -144,14 +183,14 @@
 
      <Button
          android:id="@+id/btn_registration"
-         android:layout_width="wrap_content"
+         android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginStart="16dp"
          android:layout_marginTop="120dp"
          android:layout_marginEnd="16dp"
-         android:background="@drawable/border_rectangle"
+         android:backgroundTint="@color/green"
          android:text="@string/tv_label_registration"
-         app:backgroundTint="@color/white"
+         android:textColor="@color/white"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="1.0"
          app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +203,6 @@
          android:layout_marginStart="16dp"
          android:layout_marginTop="8dp"
          android:layout_marginEnd="16dp"
-         android:text="@string/new_here_register_login"
          android:textColor="@color/white"
          android:textStyle="bold"
          app:layout_constraintEnd_toEndOf="parent"

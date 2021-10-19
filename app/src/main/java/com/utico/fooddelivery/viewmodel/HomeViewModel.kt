@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class HomeViewModel: ViewModel() {
 
-    lateinit var recylerMenuDetailsData:MutableLiveData<MenuDetailsResponseModel>
+    lateinit var menuDetailsResponseData:MutableLiveData<MenuDetailsResponseModel>
     lateinit var recyclerSubCategoryData:MutableLiveData<SubCategoryResponseModel>
     lateinit var subCategoruMenudetailsResponse:MutableLiveData<SubCategoryMenuDetailsModel>
 
@@ -21,7 +21,7 @@ class HomeViewModel: ViewModel() {
     var mainCategoryId:String? = "1"
 
     init {
-      recylerMenuDetailsData = MutableLiveData()
+        menuDetailsResponseData = MutableLiveData()
       recyclerSubCategoryData = MutableLiveData()
       subCategoruMenudetailsResponse = MutableLiveData()
     }
@@ -29,7 +29,7 @@ class HomeViewModel: ViewModel() {
 
 
     fun getMenuDetailObservable() : MutableLiveData<MenuDetailsResponseModel>{
-      return recylerMenuDetailsData
+      return menuDetailsResponseData
     }
 
     fun ApiCallMenuDetails(itemMainCategoryName:String){
@@ -39,17 +39,38 @@ class HomeViewModel: ViewModel() {
               override fun onResponse(
                   call: Call<MenuDetailsResponseModel>, response: Response<MenuDetailsResponseModel>) {
                   if (response.isSuccessful){
-                      recylerMenuDetailsData.postValue(response.body())
+                      menuDetailsResponseData.postValue(response.body())
                   }
               }
 
               override fun onFailure(call: Call<MenuDetailsResponseModel>, t: Throwable) {
-                  recylerMenuDetailsData.postValue(null)
+                  menuDetailsResponseData.postValue(null)
               }
 
           })
     }
 
+     /*This method is Used to get the Veg Related Menu Data*/
+    fun getVegMenuDetailsObservable():MutableLiveData<SubCategoryMenuDetailsModel>{
+        return subCategoruMenudetailsResponse
+    }
+
+    fun apiCallVegDetails(itemMainCategoryName:String,itemSubCategoryName:String,itemFoodType:String){
+        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+        val call = retroInstance.getVegMenuDetails(itemMainCategoryName,itemSubCategoryName,itemFoodType)
+             call.enqueue(object :Callback<SubCategoryMenuDetailsModel>{
+                 override fun onResponse(call: Call<SubCategoryMenuDetailsModel>, response: Response<SubCategoryMenuDetailsModel>) {
+                     if (response.isSuccessful){
+                         subCategoruMenudetailsResponse.postValue(response.body())
+                     }
+                 }
+
+                 override fun onFailure(call: Call<SubCategoryMenuDetailsModel>, t: Throwable) {
+                     subCategoruMenudetailsResponse.postValue(null)
+                 }
+
+             })
+    }
 
 
     /*Get the food sub Category list function*/
@@ -135,9 +156,9 @@ class HomeViewModel: ViewModel() {
         return subCategoruMenudetailsResponse
     }
 
-    fun apiCallSubCategoryMenuDetails(itemMainCategoryName:String,itemSubCategoryName:String,itemFoodType:String){
+    fun apiCallSubCategoryMenuDetails(itemMainCategoryName:String,itemSubCategoryName:String){
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-        val call = retroInstance.getSubCategoryMenusDetails(itemMainCategoryName,itemSubCategoryName,itemFoodType)
+        val call = retroInstance.getSubCategoryMenusDetails(itemMainCategoryName,itemSubCategoryName)
             call.enqueue(object : Callback<SubCategoryMenuDetailsModel>{
                 override fun onResponse(call: Call<SubCategoryMenuDetailsModel>, response: Response<SubCategoryMenuDetailsModel>) {
                     if (response.isSuccessful){

@@ -2,6 +2,7 @@ package com.utico.fooddelivery.view.fragment
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -13,6 +14,8 @@ import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ItemDescriptionFragmentBinding
+import com.utico.fooddelivery.view.AddFragmentToActivity
+import com.utico.fooddelivery.view.DashBoardActivity
 import com.utico.fooddelivery.viewmodel.ItemDescriptionViewModel
 import retrofit2.http.Field
 import java.util.*
@@ -99,6 +102,8 @@ class ItemDescriptionFragment : Fragment() {
      binding.addToCart.setOnClickListener {
         viewModel.postCartObservable().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
           Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+            val intent = Intent(context,DashBoardActivity::class.java)
+            context?.startActivity(intent)
         })
          viewModel.apiCall(itemMainCategoryName!!,itemSubCategoryName!!,itemFoodType!!,itemName!!,itemId!!,itemQuantity!!,itemPrice!!,userId!!)
      }

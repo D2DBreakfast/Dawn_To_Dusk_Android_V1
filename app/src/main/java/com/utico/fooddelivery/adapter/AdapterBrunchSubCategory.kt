@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
+import com.utico.fooddelivery.`interface`.BrunchSubCategoryMenuDetailsListener
 import com.utico.fooddelivery.databinding.ItemRowBrunchSubCategoryBinding
 import com.utico.fooddelivery.model.SubCategoryData
 
-class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.FoodCategoryViewHolder>() {
+class AdapterBrunchSubCategory(val brunchSubCategoryMenuDetailsListener: BrunchSubCategoryMenuDetailsListener): RecyclerView.Adapter<AdapterBrunchSubCategory.FoodCategoryViewHolder>() {
   var brunchSubCategoryList = mutableListOf<SubCategoryData>()
   var context: Context? = null
   var foodCategoryName:String? = null
-  val foodSubCategoryListener:FoodSubCategoryListener? = null
   var isCheck:Boolean? = true
 
 
@@ -37,13 +36,13 @@ class AdapterBrunchSubCategory: RecyclerView.Adapter<AdapterBrunchSubCategory.Fo
           if (isCheck == true){
             //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
             foodCategoryName = holder.tv_name.text.toString()
-            foodSubCategoryListener?.getFoodSubCategoryName(foodCategoryName!!)
+            brunchSubCategoryMenuDetailsListener.getBrunchSubCategoryRelatedMenuDetails(foodCategoryName!!,isCheck!!)
             holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
             holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
             isCheck = false
           }else{
             foodCategoryName = holder.tv_name.text.toString()
-            foodSubCategoryListener?.getFoodSubCategoryName(foodCategoryName!!)
+            brunchSubCategoryMenuDetailsListener.getBrunchSubCategoryRelatedMenuDetails(foodCategoryName!!,isCheck!!)
             holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
             holder.tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             isCheck = true

@@ -76,7 +76,7 @@ class ProfileEditFragment : Fragment(),ProfileListener {
 
     }
 
-    /*Edit button click event*/
+    /*Edit btnAddToCart click event*/
     fun editButtonenable(){
 
     }
