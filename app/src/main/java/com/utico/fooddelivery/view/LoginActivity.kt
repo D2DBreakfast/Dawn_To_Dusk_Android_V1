@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity(),LoginListener {
 
         val editText_mobile_no = binding.textinputeditMobileNo
             editText_mobile_no.doOnTextChanged { text, start, before, count ->
-                if (text!!.length < 10){
+                if (text!!.length < 9){
                     editText_mobile_no.error = "Please Provide the Valid Phone Number"
                 }
                 mobileNumber = text!!.toString()

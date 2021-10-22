@@ -22,7 +22,7 @@ class LoginViewModel : ViewModel() {
             errorResultData.value ="Please Provide Phone Number"
 
       }
-        else if (mobile_number!!.length < 10 || mobile_number!!.length > 13){
+        else if (mobile_number!!.length < 9 || mobile_number!!.length > 13){
           errorResultData.value ="Please Provide the Valid Phone Number"
       }
         else{

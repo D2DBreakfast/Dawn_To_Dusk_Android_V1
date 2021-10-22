@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
+import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ItemDescriptionFragmentBinding
 import com.utico.fooddelivery.view.AddFragmentToActivity
@@ -35,6 +36,7 @@ class ItemDescriptionFragment : Fragment() {
     private lateinit var binding: ItemDescriptionFragmentBinding
     private var sharedPreferences:SharedPreferences? = null
     private var registrationSharedPreferences:SharedPreferences? = null
+    private var itemImageUrl:String? = null
 
 
     companion object {
@@ -70,6 +72,8 @@ class ItemDescriptionFragment : Fragment() {
         itemPrice = sharedPreferences?.getString("itemPrice","")
         itemDescription = sharedPreferences?.getString("itemDescription","")
         itemId = sharedPreferences?.getString("itemId","")
+        itemImageUrl = sharedPreferences?.getString("itemImageUrl","")
+
             val view:View = binding.root
 
            datePicker()
@@ -99,9 +103,12 @@ class ItemDescriptionFragment : Fragment() {
      binding.tvDesc.setText(itemDescription)
      binding.tvPrice.setText(itemPrice)
      binding.tvnutrionalInfo.setText(itemDescription)
+     Picasso.get()
+         .load(itemImageUrl)
+         .into(binding.descImageview)
      binding.addToCart.setOnClickListener {
         viewModel.postCartObservable().observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-          Toast.makeText(context,it,Toast.LENGTH_SHORT).show()
+          Toast.makeText(context,"This Item Add to Cart Successful and go and check the Car Page!!",Toast.LENGTH_SHORT).show()
             val intent = Intent(context,DashBoardActivity::class.java)
             context?.startActivity(intent)
         })

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ItemRowBrunchDescriptionBinding
 import com.utico.fooddelivery.databinding.ItemRowFoodOrderDescBinding
@@ -22,6 +23,7 @@ class AdapterBrunchDescription : RecyclerView.Adapter<AdapterBrunchDescription.M
     var price:String? = null
     var context:Context? = null
     var userId:String? = null
+    var imageUrl:String?= null
 
 
 
@@ -57,6 +59,7 @@ class AdapterBrunchDescription : RecyclerView.Adapter<AdapterBrunchDescription.M
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
                  editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
+                 editor?.putString("itemImageUrl",holder.tvImageUrl.text.toString())
                  editor?.commit()
                  context?.startActivity(intent)
              }
@@ -82,6 +85,7 @@ class AdapterBrunchDescription : RecyclerView.Adapter<AdapterBrunchDescription.M
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
                  editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
+                 editor?.putString("itemImageUrl",holder.tvImageUrl.text.toString())
                  editor?.commit()
                  context?.startActivity(intent)
              }
@@ -103,6 +107,7 @@ class AdapterBrunchDescription : RecyclerView.Adapter<AdapterBrunchDescription.M
         val tvName = binding.tvTitle
         val tvDescription = binding.tvDescription
         val tvPrice = binding.tvPrice
+        val tvImageUrl = binding.tvImageURL
 
         val tvMainCategory = binding.tvMainCategoryName
         val tvSubCategoryName = binding.tvSubCategoryName
@@ -123,18 +128,19 @@ class AdapterBrunchDescription : RecyclerView.Adapter<AdapterBrunchDescription.M
             }
            tvName.text = data.itemName
            tvDescription.text = data.itemDescription
-           tvPrice.text = "AED"+" "+data.itemPrice.toString()+".00"
+           tvPrice.text =data.itemPrice
 
-          /* val imageUrl = data.avatar
+           val imageUrl = data.itemImageUrl
             Picasso.get()
                 .load(imageUrl)
-                .into(imageview)*/
+                .into(imageview)
 
             tvMainCategory.text = data.itemMainCategoryName
             tvSubCategoryName.text = data.itemSubCategoryName
             tvFoodType.text = data.itemFoodType
             tvQuantity.text = data.itemQuantity
             tvItemId.text = data.itemId
+            tvImageUrl.text = data.itemImageUrl
         }
 
     }

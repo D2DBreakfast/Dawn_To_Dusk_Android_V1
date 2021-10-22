@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ItemRowFoodOrderDescBinding
 import com.utico.fooddelivery.model.DataX
@@ -55,6 +56,7 @@ class AdapterBreakfastDescription() : RecyclerView.Adapter<AdapterBreakfastDescr
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
                  editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
+                 editor?.putString("itemImageUrl",holder.tvImageURL.text.toString())
                  editor?.commit()
                  context?.startActivity(intent)
              }
@@ -81,6 +83,7 @@ class AdapterBreakfastDescription() : RecyclerView.Adapter<AdapterBreakfastDescr
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
                  editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
+                 editor?.putString("itemImageUrl",holder.tvImageURL.text.toString())
                  editor?.commit()
                  context?.startActivity(intent)
              }
@@ -113,6 +116,7 @@ class AdapterBreakfastDescription() : RecyclerView.Adapter<AdapterBreakfastDescr
         val tvFoodType = binding.tvFoodType
         val tvQuantity = binding.tvQuantity
         val tvItemId = binding.tvItemId
+        val tvImageURL = binding.tvImageURL
 
         fun bind(data:DataX){
             vegnonveg = data.itemFoodType
@@ -124,14 +128,15 @@ class AdapterBreakfastDescription() : RecyclerView.Adapter<AdapterBreakfastDescr
            tvName.text = data.itemName
            tvDescription.text = data.itemDescription
            tvPrice.text = data.itemPrice
+            tvImageURL.text = data.itemImageUrl
 /*
             tvPrice.text = "AED"+" "+data.itemPrice.toString()+".00"
 */
 
-            /* val imageUrl = data.avatar
+             val imageUrl = data.itemImageUrl
               Picasso.get()
                   .load(imageUrl)
-                  .into(imageview)*/
+                  .into(imageview)
 
             tvMainCategory.text = data.itemMainCategoryName
             tvSubCategoryName.text = data.itemSubCategoryName

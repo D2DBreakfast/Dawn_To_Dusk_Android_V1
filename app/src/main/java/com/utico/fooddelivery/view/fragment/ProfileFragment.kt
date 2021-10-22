@@ -20,6 +20,7 @@ import com.utico.fooddelivery.model.Data
 import com.utico.fooddelivery.model.ProfileFakeApi
 import com.utico.fooddelivery.model.profile
 import com.utico.fooddelivery.view.AddFragmentToActivity
+import com.utico.fooddelivery.view.RegistrationActivity
 import com.utico.fooddelivery.viewmodel.ProfileViewModel
 
 
@@ -32,9 +33,10 @@ class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var sharedPreferences: SharedPreferences
-    private var name:String? = null
+    private var fullName:String? = null
     private var mobileNumber:String? = null
     private var email:String? = null
+    private var userId :String?= null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -42,14 +44,13 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        sharedPreferences = (activity as AppCompatActivity).getSharedPreferences(resources.getString(R.string.app_name),Context.MODE_PRIVATE)
-        name = sharedPreferences.getString("fullName","")
+        sharedPreferences = (activity as AppCompatActivity).getSharedPreferences(resources.getString(R.string.registration_details_sharedPreferences),Context.MODE_PRIVATE)
+        fullName = sharedPreferences.getString("fullName","")
         mobileNumber = sharedPreferences.getString("mobileNumber","")
         email = sharedPreferences.getString("email","")
-
+        userId = sharedPreferences.getString("userId","")
+        initUIData()
         val view:View = binding.root
-
-
         val btnEditProfile = binding.profileCardView
             btnEditProfile.setOnClickListener {
                 val intent = Intent(context,AddFragmentToActivity::class.java)
@@ -94,8 +95,8 @@ class ProfileFragment : Fragment() {
 
         }
 
-         initUIData()
 
+        toCheckUserRegisterOrNot(userId)
         return view
     }
 
@@ -104,7 +105,7 @@ class ProfileFragment : Fragment() {
            if (it == null){
                Toast.makeText(context,"Data Not Found",Toast.LENGTH_LONG).show()
            }else{
-               binding.tvName.setText(name)
+               binding.tvName.setText(fullName)
                binding.tvMobileNumber.setText(mobileNumber)
                binding.tvEmail.setText(email)
                binding.tvAddress.setText("Karnataka Bengaluru")
@@ -114,9 +115,22 @@ class ProfileFragment : Fragment() {
            }
        })
         viewModel.ApiCallProfile()
+        binding.tvName.setText(fullName)
+        binding.tvMobileNumber.setText(mobileNumber)
+        binding.tvEmail.setText(email)
+        binding.tvAddress.setText("Karnataka Bengaluru")
+       /* Picasso.get()
+            .load(it.data.avatar)
+            .into(binding.profileImageView)*/
     }
 
-
+    fun toCheckUserRegisterOrNot(userID: String?) {
+        if (userID.equals("")||userID.equals(null)) {
+            Toast.makeText(context,"Before Add to Cart Please Register!!",Toast.LENGTH_LONG).show()
+            val intent = Intent(context, RegistrationActivity::class.java)
+            context?.startActivity(intent)
+        }
+    }
 }
 /*
 https://stackoverflow.com/questions/52918895/retrieving-value-using-shared-preference-in-kotlin

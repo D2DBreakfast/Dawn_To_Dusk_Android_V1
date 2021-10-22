@@ -11,11 +11,14 @@ data class CartData(
     val itemId: String,
     val itemMainCategoryName: String,
     val itemName: String,
-    val itemPrice: String,
-    val itemQuantity: String,
+    var itemPrice: String,
+    var itemQuantity: String,
     val itemSubCategoryName: String,
     val orderDate: String,
     val orderId: String,
     val orderStatus: String,
-    val userId: String
-)
+    val userId: String){
+    fun setitemQuantity(itemquantity:String) {
+        itemQuantity = itemquantity
+    }
+}

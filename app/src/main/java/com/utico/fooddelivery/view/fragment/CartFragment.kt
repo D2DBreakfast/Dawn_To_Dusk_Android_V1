@@ -17,9 +17,11 @@ import com.utico.fooddelivery.`interface`.CallbackAddToCartDetails
 import com.utico.fooddelivery.adapter.AdapterCart
 import com.utico.fooddelivery.databinding.FragmentCartBinding
 import com.utico.fooddelivery.model.AddToCartDetailsResponseModel
+import com.utico.fooddelivery.model.CartData
 import com.utico.fooddelivery.model.OrderPlacedResponse
 import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.view.DashBoardActivity
+import com.utico.fooddelivery.view.RegistrationActivity
 import com.utico.fooddelivery.viewmodel.CartViewModel
 
 class CartFragment : Fragment(),CallbackAddToCartDetails {
@@ -46,6 +48,7 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
         sharedPreferences = context?.getSharedPreferences(resources.getString(R.string.registration_details_sharedPreferences),Context.MODE_PRIVATE)
         userId = sharedPreferences?.getString("userId","")
 
+
        /* cartDetailsSharedPreferences = context?.getSharedPreferences(context?.resources?.getString(R.string.cart_details_sharedPreferences),Context.MODE_PRIVATE)
         itemMainCategoryName = cartDetailsSharedPreferences?.getString("itemMainCategoryName","")
         itemSubCategoryName = cartDetailsSharedPreferences?.getString("itemSubCategoryName","")
@@ -57,6 +60,7 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
         itemUserId = cartDetailsSharedPreferences?.getString("userId","")*/
 
         val root: View = binding.root
+        toCheckUserRegisterOrNot(userId)
         setButtonClickEvent()
         initAdapter()
         setUpCartData()
@@ -97,8 +101,12 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
 
     fun setUpCartData(){
        viewModel.getCartDetailsObservable().observe(viewLifecycleOwner, Observer<AddToCartDetailsResponseModel> {
-         adapterCart.addToCartDetailsList = it.cartData.toMutableList()
-         adapterCart.notifyDataSetChanged()
+           if (it.cartData == null){
+               Toast.makeText(context,it.message,Toast.LENGTH_LONG).show()
+           }else {
+               adapterCart.addToCartList = it.cartData.toMutableList()
+               adapterCart.notifyDataSetChanged()
+           }
        })
         viewModel.apiCall(userId!!)
     }
@@ -136,6 +144,11 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
 
     }
 
+    override fun passAddToCartList(cartData: MutableList<CartData>) {
+       // viewModel.apiCallPlaceOrder(cartData!!)
+
+    }
+
 
     fun alertDialog(message: String) {
         val dialogBuilder = AlertDialog.Builder(activity)
@@ -148,6 +161,12 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
 
 
     }
-
+ fun toCheckUserRegisterOrNot(userID: String?) {
+      if (userID.equals("")||userID.equals(null)) {
+          Toast.makeText(context,"Before Add to Cart Please Register!!",Toast.LENGTH_LONG).show()
+          val intent = Intent(context,RegistrationActivity::class.java)
+              context?.startActivity(intent)
+      }
+ }
 
 }

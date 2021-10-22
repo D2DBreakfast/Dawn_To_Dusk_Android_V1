@@ -46,7 +46,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
     private var itemFoodType:String? = "Veg"
     private var breakfastMainCategoryId:String?="40"
     private var brunchMainCategoryId:String?="41"
-    private var breakfastSubCategoryName:String? ="Cereals"
+    private var breakfastSubCategoryName:String? ="All Day"
     private var brunchSubCategoryName:String? ="Starters"
     private var registrationSharedPreferences:SharedPreferences? = null
     private var userId:String? = null
@@ -178,7 +178,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
             btnBreakfast.setTextColor(resources.getColor(R.color.white))
             btnBrunch.setBackgroundColor(resources.getColor(R.color.white))
             btnBrunch.setTextColor(resources.getColor(R.color.black))
-            getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
+           getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
 
         }
 

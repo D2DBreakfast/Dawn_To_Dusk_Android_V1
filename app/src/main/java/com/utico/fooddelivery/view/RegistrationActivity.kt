@@ -62,7 +62,7 @@ class RegistrationActivity : AppCompatActivity(){
 
         var phoneNumber = binding.tilMobileNumber
             phoneNumber.doOnTextChanged { text, start, before, count ->
-                if (text!!.length < 10){
+                if (text!!.length < 9){
                     phoneNumber.error ="Please Provide The Valid Phone Number"
                 }
                 mobileNumber = text!!.toString()
@@ -100,7 +100,6 @@ class RegistrationActivity : AppCompatActivity(){
 
     fun clickSubmitButton(){
        binding.btnRegistration.setOnClickListener {
-           toast("Click the Registration btnAddToCart")
            viewModel.getRegistrationObservable().observe(this, Observer<UserRegistrationResponseModel> {
                if (it.statusCode == 200){
                    toast(it.message)

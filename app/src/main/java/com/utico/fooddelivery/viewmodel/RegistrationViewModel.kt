@@ -43,7 +43,7 @@ class RegistrationViewModel : ViewModel() {
             validationResultData.value = "Please Provide Email"
         }else if (mobilenumber.equals("") || mobilenumber.equals(null)){
             validationResultData.value = "Please Provide Mobile Number"
-        } else if(mobilenumber!!.length < 10){
+        } else if(mobilenumber!!.length < 9){
             validationResultData.value = "Please Provide Valid Mobile Number"
         }else if (!(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()))
             validationResultData.value = "Please Provide Valid Email Id"
