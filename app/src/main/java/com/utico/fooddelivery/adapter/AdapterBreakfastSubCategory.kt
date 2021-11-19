@@ -6,22 +6,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.BreakfastSubcategoryMenuDetailsListener
+import com.utico.fooddelivery.`interface`.CallbackBreakfastSubCategoryName
 import com.utico.fooddelivery.databinding.ItemRowBreakfastSubCategoryBinding
 import com.utico.fooddelivery.model.SubCategoryData
 
-class AdapterBreakfastSubCategory(val breakfastSubcategoryMenuDetailsListener: BreakfastSubcategoryMenuDetailsListener ): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
-    var breakfastCategoryList = mutableListOf<SubCategoryData>()
+class AdapterBreakfastSubCategory(val callbackBreakfastSubCategoryName: CallbackBreakfastSubCategoryName ): RecyclerView.Adapter<AdapterBreakfastSubCategory.FoodCategoryViewHolder>() {
+    var breakfastSubCategoryList = mutableListOf<SubCategoryData>()
     var context: Context? = null
     var breakfastSubCategoryName:String? = null
     var isCheck:Boolean? = true
     var adapterFirstPosition: Int? = 0
-    var adapterBackgroundSetPosition:Int?=0
-/*
-    fun setFoodSubCategoryName(foodSubCategoryName: List<SubCategoryResponseModel>){
-       this.subCategoryList = foodSubCategoryName.toMutableList()
-        notifyDataSetChanged()
-    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodCategoryViewHolder {
       val inflater = LayoutInflater.from(parent.context)
@@ -33,38 +27,35 @@ class AdapterBreakfastSubCategory(val breakfastSubcategoryMenuDetailsListener: B
 
     override fun onBindViewHolder(holder: FoodCategoryViewHolder, position: Int) {
         adapterFirstPosition = holder?.adapterPosition
-        holder.bind(breakfastCategoryList[position],context!!,adapterFirstPosition!!)
+        holder.bind(breakfastSubCategoryList[position],context!!,adapterFirstPosition!!)
            holder.tv_name.setOnClickListener {
-               if (isCheck == true){
+               if (breakfastSubCategoryList[position].isSelected.equals("false")){
                    //Toast.makeText(context,holder.tv_name.text, Toast.LENGTH_SHORT).show()
-                   breakfastSubCategoryName = holder.tv_name.text.toString()
-                   breakfastSubcategoryMenuDetailsListener.getBreakfastSubCategoryRelatedMenuDetails(breakfastSubCategoryName!!,isCheck!!)
+                  /* breakfastSubCategoryName = holder.tv_name.text.toString()
+                   callbackBreakfastSubCategoryName.getBreakfastSubCategoryRelatedMenuDetails(breakfastSubCategoryName!!,isCheck!!)
                    holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
                    holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
-                   Toast.makeText(context,isCheck.toString(), Toast.LENGTH_SHORT).show()
-                   isCheck = false
+                   Toast.makeText(context,isCheck.toString(), Toast.LENGTH_SHORT).show()*/
+                   val sunCategoryName = breakfastSubCategoryList[position].subCategoryName
+                        callbackBreakfastSubCategoryName.getBreakfastSubCategoryName(sunCategoryName,isCheck!!)
+                        breakfastSubCategoryList[position].isSelected ="true"
+                        holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
+                        holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
+                        notifyItemChanged(position)
                }else{
-                   breakfastSubCategoryName = holder.tv_name.text.toString()
-                   breakfastSubcategoryMenuDetailsListener.getBreakfastSubCategoryRelatedMenuDetails(breakfastSubCategoryName!!,isCheck!!)
+                  /* val sunCategoryName = breakfastSubCategoryList[position].subCategoryName
+                   callbackBreakfastSubCategoryName.getBreakfastSubCategoryName(sunCategoryName,isCheck!!)
                    holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
                    holder.tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
                    Toast.makeText(context,isCheck.toString(), Toast.LENGTH_SHORT).show()
-                   isCheck = true
+                   isCheck = true*/
                }
-              /* val itemPosition= breakfastCategoryList[position]._id.toInt()
-               if (itemPosition==adapterFirstPosition){
-                   holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
-                   holder.tv_name.setTextColor(context!!.resources.getColor(R.color.white))
-               }else{
-                   holder.cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
-                   holder.tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-               }*/
            }
     }
 
 
     override fun getItemCount(): Int {
-        return breakfastCategoryList.size
+        return breakfastSubCategoryList.size
     }
 
     class FoodCategoryViewHolder(val binding: ItemRowBreakfastSubCategoryBinding) : RecyclerView.ViewHolder(binding.root){
@@ -76,6 +67,10 @@ class AdapterBreakfastSubCategory(val breakfastSubcategoryMenuDetailsListener: B
           if (holderPosition == 0) {
               cardView.setBackgroundColor(context!!.resources.getColor(R.color.green))
               tv_name.setTextColor(context!!.resources.getColor(R.color.white))
+          }
+          if (subCategoryData.isSelected.equals("true")){
+              cardView.setBackgroundColor(context!!.resources.getColor(R.color.white))
+              tv_name.setTextColor(context!!.resources.getColor(R.color.grey_dark))
           }
       }
     }

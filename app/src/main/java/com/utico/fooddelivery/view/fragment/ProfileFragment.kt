@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
         mobileNumber = sharedPreferences.getString("mobileNumber","")
         email = sharedPreferences.getString("email","")
         userId = sharedPreferences.getString("userId","")
-        initUIData()
+        setDataToUI()
         val view:View = binding.root
         val btnEditProfile = binding.profileCardView
             btnEditProfile.setOnClickListener {
@@ -100,28 +100,10 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    fun initUIData(){
-       viewModel.getProfileObserable().observe(viewLifecycleOwner, Observer<ProfileFakeApi> {
-           if (it == null){
-               Toast.makeText(context,"Data Not Found",Toast.LENGTH_LONG).show()
-           }else{
-               binding.tvName.setText(fullName)
-               binding.tvMobileNumber.setText(mobileNumber)
-               binding.tvEmail.setText(email)
-               binding.tvAddress.setText("Karnataka Bengaluru")
-               Picasso.get()
-                   .load(it.data.avatar)
-                   .into(binding.profileImageView)
-           }
-       })
-        viewModel.ApiCallProfile()
+    fun setDataToUI(){
         binding.tvName.setText(fullName)
         binding.tvMobileNumber.setText(mobileNumber)
         binding.tvEmail.setText(email)
-        binding.tvAddress.setText("Karnataka Bengaluru")
-       /* Picasso.get()
-            .load(it.data.avatar)
-            .into(binding.profileImageView)*/
     }
 
     fun toCheckUserRegisterOrNot(userID: String?) {

@@ -2,24 +2,26 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <data>
         <variable
             name="homeViewModel"
             type="com.utico.fooddelivery.viewmodel.HomeViewModel" />
     </data>
 
-    <ScrollView
+   <!-- <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:paddingBottom="70dp">
+        android:paddingBottom="70dp">-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/order_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".view.fragment.HomeFragment">
+        tools:context=".view.fragment.HomeFragment"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/home_custom_toolbar"
@@ -54,7 +56,7 @@
                         app:srcCompat="@drawable/ic_location_green" />
 
                     <TextView
-                        android:id="@+id/tv_location_descrption"
+                        android:id="@+id/tvCurrentLocation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -81,12 +83,12 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/search_here"
+                        android:id="@+id/edtSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/title_search"
                         android:background="@null"
-                        android:drawableLeft="@drawable/ic_green_search"
+                        android:drawableRight="@drawable/ic_green_search"
                         />
                 </LinearLayout>
             </RelativeLayout>
@@ -134,8 +136,66 @@
                 android:text="@string/button_name_meals" />
         </FrameLayout>-->
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
+        <RelativeLayout
             android:id="@+id/toggleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar">
+
+            <TextView
+                android:id="@+id/tvBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/breakfast"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+
+            <View
+                android:id="@+id/viewLineBreakfast"
+                android:layout_width="60dp"
+                android:layout_height="3dp"
+                android:layout_below="@+id/tvBreakfast"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="4dp"
+                android:background="@color/green" />
+
+            <TextView
+                android:id="@+id/tvBrunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tvBreakfast"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/brunch"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/viewLineBrunch"
+                android:layout_width="45dp"
+                android:layout_height="3dp"
+                android:layout_below="@+id/tvBrunch"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/tvBreakfast"
+                android:background="@color/green"
+                android:visibility="gone"
+                />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -172,6 +232,7 @@
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:visibility="gone"
             android:id="@+id/breakfastVegSwitch"
             android:layout_width="0dp"
             android:layout_height="40dp"
@@ -185,6 +246,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/breakfastSubCategoryRecyclerview"
             android:layout_width="260dp"
             android:layout_height="50dp"
@@ -226,9 +288,9 @@
             android:id="@+id/breakfastBannerImageView"
             android:layout_width="match_parent"
             android:layout_height="116dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/bannarimage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.727"
@@ -236,19 +298,31 @@
             app:layout_constraintTop_toBottomOf="@+id/breakfastSubCategoryRecyclerview"
             tools:srcCompat="@tools:sample/avatars" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/breakfastRecyclerview"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/subCategoryCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView"
-            tools:listitem="@layout/item_row_food_order_desc"/>
+            app:strokeColor="@color/gold"
+            app:strokeWidth="0.5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subCategoryRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                tools:listitem="@layout/item_row_sub_category"
+                android:clipToPadding="false"
+                android:layout_marginBottom="350dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
 
         <ImageView
             android:visibility="gone"
@@ -294,7 +368,7 @@
         </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-   </ScrollView>
+  <!-- </ScrollView>-->
 
 </layout>
 

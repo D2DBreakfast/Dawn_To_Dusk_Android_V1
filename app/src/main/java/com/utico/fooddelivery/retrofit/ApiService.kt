@@ -7,7 +7,11 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    /*Registration ApiService Call*/
+/*dbName : "Food_Delicious",
+        dbName : "UTICO",
+    MongoClient.connect(properties.db.azureUri,{ useNewUrlParser: true }, function (err, client) {*/
+
+        /*Registration ApiService Call*/
     //@Headers("Content-Type:application/json")
     @FormUrlEncoded
     @POST("register")
@@ -17,6 +21,15 @@ interface ApiService {
         @Field("mobileNo") mobileNumber: String,
         @Field("email") email: String,
         ): Call<UserRegistrationResponseModel>
+
+    /*Edit User Profile*/
+    @FormUrlEncoded
+    @POST("updateUserDetails")
+    fun userprofileUpdate(
+        @Field("fullName") fullName:String,
+        @Field("email")  email:String,
+        @Field("userId") userId:String
+    ): Call<ProfileEditResponseModel>
 
     /*OTPVerify Method*/
    // @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
@@ -44,6 +57,13 @@ interface ApiService {
         @Field("mainCategoryId") mainCategoryId:String
     ): Call<SubCategoryResponseModel>
 
+     /*get The sub category related data*/
+    @FormUrlEncoded
+    @POST("fetchSubCategoryMenusDetails")
+    fun getSubCategoryRelatedDetails(
+         @Field("mainCategoryId") mainCategoryId:String,
+         @Field("subCategoryId") subCategoryId:String
+    ): Call<SubCategoryMenuDetailsModel>
 
     /*Home Screen Food Short Description List*/
          @FormUrlEncoded
@@ -92,18 +112,14 @@ interface ApiService {
 
 
     /*Place Order*/
-    @FormUrlEncoded
     @POST("Placeorder")
     fun placeOrder(
-        @Field("itemMainCategoryName") itemMainCategoryName:String,
-        @Field("itemSubCategoryName") itemSubCategoryName:String,
-        @Field("itemFoodType") itemFoodType:String,
-        @Field("itemName") itemName:String,
-        @Field("itemId") itemId:String,
-        @Field("itemQuantity") itemQuantity:String,
-        @Field("itemPrice") itemPrice:String,
-        @Field("userId") userId:String
+    @Body placeOrderSendDataModel: PlaceOrderSendDataModel
     ): Call<OrderPlacedResponse>
+
+
+
+
 
 
 
@@ -128,19 +144,5 @@ interface ApiService {
          /*Get Notifications*/
          @GET("users?page=2")
          fun getAllNotification(): Call<NotificationList>
-
-         /*Get Profile*/
-         @GET("users/2")
-         fun getProfile(): Call<ProfileFakeApi>
-
-         /*Post Profile Data*/
-         @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
-         @FormUrlEncoded
-         @POST("updateUserDetails")
-         fun EditUserProfile(
-             @Field("mobile") mobileNumber: String,
-             @Field("fullname") fullName:String,
-             @Field("email") email:String
-         ): Call<ResponseBody>
 
 }

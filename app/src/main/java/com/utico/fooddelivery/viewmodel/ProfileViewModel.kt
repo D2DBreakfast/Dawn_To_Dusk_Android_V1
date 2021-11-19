@@ -1,11 +1,8 @@
 package com.utico.fooddelivery.viewmodel
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utico.fooddelivery.`interface`.ProfileListener
-import com.utico.fooddelivery.model.ProfileFakeApi
-import com.utico.fooddelivery.repositories.EditProfileRepository
+import com.utico.fooddelivery.model.ProfileEditResponseModel
 import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
@@ -13,44 +10,44 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileViewModel : ViewModel() {
-    private var profileData: MutableLiveData<ProfileFakeApi>
+    private var profileUpdateResponseData: MutableLiveData<ProfileEditResponseModel>
     var errorResult = MutableLiveData<String>()
     var fullname:String? = null
     var mobileNumber:String? = null
     var email:String? = null
-    var profileListener:ProfileListener? = null
+    var userId:String? = null
+
 
 
 
     init {
-        profileData = MutableLiveData()
+        profileUpdateResponseData = MutableLiveData()
     }
 
 
-    fun getProfileObserable():MutableLiveData<ProfileFakeApi>{
-      return profileData
+    fun editProfileObservable():MutableLiveData<ProfileEditResponseModel>{
+      return profileUpdateResponseData
     }
 
-    fun ApiCallProfile(){
+    fun ApiCallEditProfile(){
        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-       val call = retroInstance.getProfile()
-           call.enqueue(object : Callback<ProfileFakeApi>{
-               override fun onResponse(call: Call<ProfileFakeApi>, response: Response<ProfileFakeApi>) {
+       val call = retroInstance.userprofileUpdate(fullname!!,email!!,userId!!)
+           call.enqueue(object : Callback<ProfileEditResponseModel>{
+               override fun onResponse(call: Call<ProfileEditResponseModel>, response: Response<ProfileEditResponseModel>) {
                    if (response.isSuccessful){
-                       profileData.postValue(response.body())
-
+                       profileUpdateResponseData.postValue(response.body())
 
                    }
                }
 
-               override fun onFailure(call: Call<ProfileFakeApi>, t: Throwable) {
-                   profileData.postValue(null)
+               override fun onFailure(call: Call<ProfileEditResponseModel>, t: Throwable) {
+                   profileUpdateResponseData.postValue(null)
                }
 
            })
     }
 
-    fun OnClickEditProfileButton(view:View){
+   /* fun OnClickEditProfileButton(view:View){
        if (fullname.equals("") || fullname.equals(null)) {
            errorResult.value = "Please Provide the Name"
        }else if (email.equals("") || email.equals(null)){
@@ -62,5 +59,5 @@ class ProfileViewModel : ViewModel() {
            val editProfileResponse = EditProfileRepository().EditProfile("9886230770",email!!,fullname!!)
             profileListener?.editProfile(editProfileResponse)
        }
-    }
+    }*/
 }

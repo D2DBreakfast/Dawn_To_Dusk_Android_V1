@@ -1,8 +1,6 @@
 package com.utico.fooddelivery.view.fragment
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -12,19 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.annotations.SerializedName
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.CallbackAddToCartDetails
+import com.utico.fooddelivery.`interface`.CallbackPlaceOrder
 import com.utico.fooddelivery.adapter.AdapterCart
 import com.utico.fooddelivery.databinding.FragmentCartBinding
-import com.utico.fooddelivery.model.AddToCartDetailsResponseModel
-import com.utico.fooddelivery.model.CartData
-import com.utico.fooddelivery.model.OrderPlacedResponse
+import com.utico.fooddelivery.model.*
 import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.view.DashBoardActivity
 import com.utico.fooddelivery.view.RegistrationActivity
 import com.utico.fooddelivery.viewmodel.CartViewModel
+import java.nio.file.Files.list
+import java.text.FieldPosition
 
-class CartFragment : Fragment(),CallbackAddToCartDetails {
+class CartFragment : Fragment(),CallbackPlaceOrder {
     private lateinit var viewModel: CartViewModel
     private var _binding: FragmentCartBinding? = null
     private val binding get() = _binding!!
@@ -40,6 +39,10 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
     private var description:String? = null
     private var userId:String? = null
     private var foodPrice:String? = null
+    private var placeOrderSetData = mutableListOf<PlaceOrderArray>()
+    private lateinit var placeOrderArray: PlaceOrderArray
+    private lateinit var placeOrderSendDataModel: PlaceOrderSendDataModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -121,7 +124,7 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
                  }
 
             })
-            viewModel.apiCallPlaceOrder(mainCategoryName!!,subCategoryName!!,foodType!!,foodName!!,foodId!!,foodQuantity!!,foodPrice!!,userId!!)
+            viewModel.apiCallPlaceOrder(placeOrderSendDataModel)
 
         }
     }
@@ -135,38 +138,34 @@ class CartFragment : Fragment(),CallbackAddToCartDetails {
                    foodQuantity=itemQuantity
                    foodPrice = itemPrice
 
-      /*  binding.btnCheckOut.setOnClickListener {
-            viewModel.placeObservable().observe(viewLifecycleOwner, Observer<OrderPlacedResponse> {
-                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
-            })
-            viewModel.apiCallPlaceOrder(itemMainCategoryName!!,itemSubCategoryName!!,"Veg",itemName!!,itemId!!,itemQuantity!!,"ggdg"!!,"4"!!)
-        }*/
+    }
+
+    override fun passPlaceOrderList(data: MutableList<CartData>,position:Int) {
+        for (item in data){
+           // getData(item)
+            placeOrderArray = PlaceOrderArray("CART-3","Veg", item.itemId, item.itemMainCategoryName,
+                item.itemName, item.itemPrice, item.itemQuantity, item.itemSubCategoryName, item.orderStatus)
+            placeOrderSetData.addAll(listOf(placeOrderArray))
+            placeOrderSendDataModel= PlaceOrderSendDataModel("#Vijaynagar Bengaluru",placeOrderSetData,"Vij560040","3000","2")
+        }
 
     }
 
-    override fun passAddToCartList(cartData: MutableList<CartData>) {
-       // viewModel.apiCallPlaceOrder(cartData!!)
 
-    }
-
-
-    fun alertDialog(message: String) {
-        val dialogBuilder = AlertDialog.Builder(activity)
-            dialogBuilder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-
-                        dialog, id ->activity?.finish()
-                })
-
-
-    }
- fun toCheckUserRegisterOrNot(userID: String?) {
+    fun toCheckUserRegisterOrNot(userID: String?) {
       if (userID.equals("")||userID.equals(null)) {
           Toast.makeText(context,"Before Add to Cart Please Register!!",Toast.LENGTH_LONG).show()
           val intent = Intent(context,RegistrationActivity::class.java)
               context?.startActivity(intent)
       }
  }
+
+    fun getData(data: CartData){
+       /* placeOrderArray = PlaceOrderArray("CART-3","Veg", data.itemId, data.itemMainCategoryName,
+            data.itemName, data.itemPrice, data.itemQuantity, data.itemSubCategoryName, data.orderStatus)
+        placeOrderSetData.addAll(listOf(placeOrderArray))
+        placeOrderSendDataModel= PlaceOrderSendDataModel("#Vijaynagar Bengaluru",placeOrderSetData,"Vij560040","3000","2")
+*/
+    }
 
 }

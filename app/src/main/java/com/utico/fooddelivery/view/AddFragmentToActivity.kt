@@ -108,8 +108,11 @@ class AddFragmentToActivity : AppCompatActivity() {
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,OrderTrackingFragment(),"OrderTrackingFragment")
                 .commit()
+        }else if(fragmentName.equals("SubCategoryDescriptionFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,SubCategoryDescriptionFragment(),"SubCategoryDescriptionFragment")
+                .commit()
         }
-
 
 
     }

@@ -3,6 +3,7 @@ package com.utico.fooddelivery.view.fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,48 +12,52 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.BreakfastSubcategoryMenuDetailsListener
+import com.utico.fooddelivery.`interface`.CallbackBreakfastSubCategoryName
 import com.utico.fooddelivery.`interface`.BrunchSubCategoryMenuDetailsListener
-import com.utico.fooddelivery.`interface`.FoodSubCategoryListener
 import com.utico.fooddelivery.adapter.*
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
+import com.utico.fooddelivery.model.DataX
 import com.utico.fooddelivery.model.MenuDetailsResponseModel
 import com.utico.fooddelivery.model.SubCategoryMenuDetailsModel
 import com.utico.fooddelivery.model.SubCategoryResponseModel
 import com.utico.fooddelivery.view.LoginActivity
 import com.utico.fooddelivery.view.RegistrationActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
+import java.util.*
 
 
-class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSubCategoryMenuDetailsListener{
+class HomeFragment : Fragment(),CallbackBreakfastSubCategoryName,BrunchSubCategoryMenuDetailsListener{
 
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
-    lateinit var adapterBreakfastDescription: AdapterBreakfastDescription
+    lateinit var adapterSubCategory: AdapterSubCategory
     lateinit var adapterBrunchDescription: AdapterBrunchDescription
     lateinit var adapterBreakFastSubCategory: AdapterBreakfastSubCategory
     lateinit var adapterBrunchSubCategory: AdapterBrunchSubCategory
-    private var searchtext:String? = null
     private lateinit var btnBreakfast:Button
     private lateinit var btnBrunch:Button
     private lateinit var  btnLogout:ImageView
     private var breakfastItemMainCategoryName:String? = "Breakfast"
     private var brunchItemMainCategoryName:String? = "Brunch"
-    private var itemFoodType:String? = "Veg"
-    private var breakfastMainCategoryId:String?="40"
-    private var brunchMainCategoryId:String?="41"
+    private var itemFoodType:String? = "veg"
+    private var breakfastMainCategoryId:String?="1"
+    private var brunchMainCategoryId:String?="2"
     private var breakfastSubCategoryName:String? ="All Day"
     private var brunchSubCategoryName:String? ="Starters"
     private var registrationSharedPreferences:SharedPreferences? = null
     private var userId:String? = null
+    private var searchFilterMenuList = mutableListOf<DataX>()
+    private var mainCategoryName:String?="Breakfast"
 
 /*
-    private lateinit var AdapterBreakfastDescription : AdapterBreakfastDescription()
+    private lateinit var AdapterSubCategory : AdapterSubCategory()
 */
 
     private val binding get() = _binding!!
@@ -61,6 +66,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
     ): View? {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         binding.homeViewModel = viewModel
         btnBreakfast = binding.btnBreakfast
         btnBrunch = binding.btnBrunch
@@ -73,24 +79,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
         val toolbar = binding.homeCustomToolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
-        /* (activity as AppCompatActivity?)!!.supportActionBar!!.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM)
-         (activity as AppCompatActivity?)!!.supportActionBar!!.setCustomView(R.layout.)*/
 
-
-
-
-      /*  val btnMeal = binding.btnBrunch
-        btnMeal.setOnClickListener {
-            *//*val frag = MealPlanFragment.newInstance()
-            (activity as DashBoardActivity).replaceFragment(frag,MealPlanFragment.TAG)*//*
-            *//*val activity = context as AppCompatActivity
-            val mealPlanFragment = MealPlanFragment()
-            activity.supportFragmentManager.beginTransaction().replace(R.id.dashBoardLayout,mealPlanFragment).addToBackStack(null).commit()
-            *//*
-            val intent = Intent (context, AddFragmentToActivity::class.java)
-             intent.putExtra("FragmentName","MealPlanFragment")
-             startActivity(intent)
-        }*/
 
            btnLogout.setOnClickListener {
                if (userId.equals("")||userId.equals(null)){
@@ -104,15 +93,43 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
                }
            }
 
+        binding.edtSearch.doOnTextChanged { text, start, before, count ->
+            val searchText = text.toString().toLowerCase(Locale.getDefault())
+                filterWithSearchText(searchText,mainCategoryName!!)
+        }
+
+       binding.breakfastVegSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+           if (isChecked){
+               filterWithSearchText(itemFoodType!!,mainCategoryName!!)
+           }else{
+               getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
+
+           }
+       }
+
+
+        binding.brunchVegSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked){
+                filterWithSearchText(itemFoodType!!,mainCategoryName!!)
+            }else{
+                getBrunchMenuDetails(brunchItemMainCategoryName!!)
+
+            }
+        }
+
         initAdapter()
-        getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
+        //getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
        // searchFood()
-        buttonBreakfast()
-        buttonmBrunch()
-        getBreakfastSubCategoryData()
-        vegOrNonVegSwitch()
+       // buttonBreakfast()
+       // buttonmBrunch()
+       // getBreakfastSubCategoryData()
+        setClickEvents()
+       // vegOrNonVegSwitch()
         return view
     }
+
+
+
 
     companion object {
             /*val TAG = HomeFragment::class.java.simpleName
@@ -130,6 +147,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
 
   fun  initAdapter() {
 
+
       val breakfastSubCategoryRecyclerview = binding.breakfastSubCategoryRecyclerview
            breakfastSubCategoryRecyclerview.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
            adapterBreakFastSubCategory = AdapterBreakfastSubCategory(this)
@@ -140,12 +158,17 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
           adapterBrunchSubCategory = AdapterBrunchSubCategory(this)
           brunchSubcategoryRecyclerView.adapter = adapterBrunchSubCategory
 
-      val breakfastRecyclerview = binding.breakfastRecyclerview
-      breakfastRecyclerview.layoutManager = LinearLayoutManager(activity)
+
+
+
+      val subCategoryRecyclerView = binding.subCategoryRecyclerView
+          subCategoryRecyclerView.layoutManager = GridLayoutManager(activity,2)
          /* val decoration  = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
           foodShortxDescrecyclerview.addItemDecoration(decoration)*/
-           adapterBreakfastDescription = AdapterBreakfastDescription()
-      breakfastRecyclerview.adapter = adapterBreakfastDescription
+           adapterSubCategory = AdapterSubCategory()
+           subCategoryRecyclerView.adapter = adapterSubCategory
+
+
 
       val brunchRecyclerView = binding.brunchRecyclerview
           brunchRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -154,8 +177,9 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
 
   }
 
+
     fun buttonBreakfast(){
-        val breakfastRecyclerview = binding.breakfastRecyclerview
+        val breakfastRecyclerview = binding.subCategoryRecyclerView
         val brunchRecyclerview = binding.brunchRecyclerview
         val breakfastVegSwitch = binding.breakfastVegSwitch
         val brunchVegSwitch = binding.brunchVegSwitch
@@ -178,6 +202,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
             btnBreakfast.setTextColor(resources.getColor(R.color.white))
             btnBrunch.setBackgroundColor(resources.getColor(R.color.white))
             btnBrunch.setTextColor(resources.getColor(R.color.black))
+            mainCategoryName ="Breakfast"//This is used to search filter for the Breakfast Menu details
            getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
 
         }
@@ -187,7 +212,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
 
 
     fun buttonmBrunch(){
-        val breakfastRecyclerview = binding.breakfastRecyclerview
+        val breakfastRecyclerview = binding.subCategoryRecyclerView
         val brunchRecyclerview = binding.brunchRecyclerview
         val breakfastVegSwitch = binding.breakfastVegSwitch
         val brunchVegSwitch = binding.brunchVegSwitch
@@ -210,11 +235,12 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
             btnBrunch.setTextColor(resources.getColor(R.color.white))
             btnBreakfast.setBackgroundColor(resources.getColor(R.color.white))
             btnBreakfast.setTextColor(resources.getColor(R.color.black))
-
+            mainCategoryName ="Brunch"//this is used to search filter for Brunch
              /*set the subcategory data*/
             getBrunchMenuDetails(brunchItemMainCategoryName!!)
         }
     }
+
 
     /*This method is used to get the */
     fun getBreakfastMenuDetails(itemMainCategoryName:String){
@@ -222,12 +248,34 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
             if (it.menuData==null){
                 Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
             }else {
-                adapterBreakfastDescription.breakfastDescList = it.menuData.data.toMutableList()
-                adapterBreakfastDescription.notifyDataSetChanged()
+               /* adapterSubCategory.subCategoryList = it.menuData.data.toMutableList()
+                adapterSubCategory.notifyDataSetChanged()
+                searchFilterMenuList = it.menuData.data.toMutableList()*/
             }
         })
         viewModel.ApiCallMenuDetails(itemMainCategoryName!!)
     }
+
+   /*Search Filter*/
+    private fun filterWithSearchText(searchText: String,mainCategoryName:String) {
+        //https://developersbreach.com/search-recyclerview-with-query-voice-android/
+        val filteredList = mutableListOf<DataX>()
+       for (menuTitle in searchFilterMenuList){
+           if (menuTitle.itemName.toLowerCase(Locale.getDefault()).contains(searchText)||menuTitle.itemFoodType.toLowerCase(Locale.getDefault()).contains(searchText)||
+                   menuTitle.itemDescription.toLowerCase(Locale.getDefault()).contains(searchText)){
+              filteredList.add(menuTitle)
+           }
+       }
+        if (mainCategoryName.equals("Breakfast")) {
+           /* adapterSubCategory.subCategoryList = filteredList
+            adapterSubCategory.notifyDataSetChanged()*/
+        }else{
+            adapterBrunchDescription.brunchDescList = filteredList
+            adapterBrunchDescription.notifyDataSetChanged()
+        }
+    }
+
+
 
     /*This method is used to get the Brunch related data */
     fun getBrunchMenuDetails(itemMainCategoryName:String){
@@ -237,6 +285,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
                 Toast.makeText(context,"Data not found"+ " "+it.toString(),Toast.LENGTH_SHORT).show()
             }else {
                 adapterBrunchDescription.brunchDescList = it.menuData.data.toMutableList()
+                searchFilterMenuList = it.menuData.data.toMutableList()
                 adapterBrunchDescription.notifyDataSetChanged()
             }
         })
@@ -262,7 +311,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
            if (it.subCategoryData==null){
                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
            }else{
-               adapterBreakFastSubCategory.breakfastCategoryList = it.subCategoryData?.toMutableList()
+               adapterBreakFastSubCategory.breakfastSubCategoryList = it.subCategoryData?.toMutableList()
                adapterBreakFastSubCategory.notifyDataSetChanged()
            }
         })
@@ -270,7 +319,7 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
     }
 
 
-    override fun getBreakfastSubCategoryRelatedMenuDetails(itemSubCategoryName: String, isCheck: Boolean) {
+    override fun getBreakfastSubCategoryName(itemSubCategoryName: String, isCheck: Boolean) {
         if (isCheck==true) {
             breakfastSubCategoryName = itemSubCategoryName
             viewModel.subCategoryMenuDetailsObservable()
@@ -278,9 +327,9 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
                     if (it.subCategoryMenuData == null) {
                         Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                     } else {
-                        adapterBreakfastDescription.breakfastDescList =
+                       /* adapterSubCategory.subCategoryList =
                             it.subCategoryMenuData.data.toMutableList()
-                        adapterBreakfastDescription.notifyDataSetChanged()
+                        adapterSubCategory.notifyDataSetChanged()*/
                     }
 
                 })
@@ -313,51 +362,49 @@ class HomeFragment : Fragment(),BreakfastSubcategoryMenuDetailsListener,BrunchSu
         }
 
 
-    fun vegOrNonVegSwitch(){
-        val breakfastVegSwitch = binding.breakfastVegSwitch
-        breakfastVegSwitch.setOnCheckedChangeListener({ _ ,isChecked ->
-            if (isChecked){
-                viewModel.getVegMenuDetailsObservable().observe(viewLifecycleOwner, Observer<SubCategoryMenuDetailsModel> {
-                        if (it.subCategoryMenuData == null) {
-                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                        } else {
-                            adapterBreakfastDescription.breakfastDescList =
-                                it.subCategoryMenuData.data.toMutableList()
-                            adapterBreakfastDescription.notifyDataSetChanged()
-                        }
 
-                    })
-                viewModel.apiCallVegDetails(breakfastItemMainCategoryName!!,breakfastSubCategoryName!!,itemFoodType!!)
+       private fun setClickEvents(){
+           val tvBreakfast = binding.tvBreakfast
+           val tvBrunch = binding.tvBrunch
+           val viewLineBreakfast = binding.viewLineBreakfast
+           val viewLineBrunch = binding.viewLineBrunch
+                getSubCategory(breakfastMainCategoryId!!)
+
+            tvBreakfast.setOnClickListener {
+            viewLineBrunch.visibility = View.GONE
+            viewLineBreakfast.visibility = View.VISIBLE
+            tvBreakfast.setTypeface(null, Typeface.BOLD)
+            tvBrunch.setTypeface(null,Typeface.NORMAL)
+                getSubCategory(breakfastMainCategoryId!!)
+           }//This is the click event for the Breakfast
+
+
+           tvBrunch.setOnClickListener {
+             viewLineBrunch.visibility = View.VISIBLE
+             viewLineBreakfast.visibility = View.GONE
+             tvBrunch.setTypeface(null,Typeface.BOLD)
+             tvBreakfast.setTypeface(null,Typeface.NORMAL)
+               getSubCategory(brunchMainCategoryId!!)
+           }//Click event for the Brunch
+       }
+
+
+    private fun getSubCategory(mainCategoryId:String){
+        viewModel.getSubCategoryObservable().observe(viewLifecycleOwner, Observer<SubCategoryResponseModel> {
+            if (it.subCategoryData==null){
+                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
             }else{
-                getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
+                adapterSubCategory.subCategoryList = it.subCategoryData?.toMutableList()
+                adapterSubCategory.notifyDataSetChanged()
             }
         })
+        viewModel.APICallSubCategory(mainCategoryId!!)
+    }//This Method is used to get the Breakfast Category name
 
-       val brunchVegSwitch =binding.brunchVegSwitch
-           brunchVegSwitch.setOnCheckedChangeListener({ _ ,isChecked ->
-               if (isChecked){
-                   viewModel.getVegMenuDetailsObservable().observe(viewLifecycleOwner, Observer<SubCategoryMenuDetailsModel> {
-                       if (it.subCategoryMenuData == null) {
-                           Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                       } else {
-                           adapterBrunchDescription.brunchDescList = it.subCategoryMenuData.data.toMutableList()
-                           adapterBrunchDescription.notifyDataSetChanged()
-                       }
-
-                   })
-                   viewModel.apiCallVegDetails(brunchItemMainCategoryName!!,brunchSubCategoryName!!,itemFoodType!!)
-               }else{
-                   getBrunchMenuDetails(brunchItemMainCategoryName!!)
-               }
-           })
-
-    }
 }
 
 
-/*
-https://abhiandroid.com/ui/calendarview
-*/
+
 
 
 

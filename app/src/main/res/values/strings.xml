@@ -4,6 +4,7 @@
     <string name="mobile_number">Mobile No</string>
     <string name="country_code">Country Code</string>
     <string name="email">Email</string>
+    <string name="userId">userId</string>
     <string name="new_here_register_login">New Here? Register Login </string>
     <string name="tv_label_registration">Registration</string>
     <string name="tv_label_verify_otp">OTP Verify</string>
@@ -103,11 +104,12 @@
     <string name="food_is_under_preparation">Coupons</string>
     <string name="out_for_delivery">Track Order</string>
     <string name="delivered_to_client">Delivered to Client</string>
-    <string name="browse_menu">BROWSE MENU</string>
+    <string name="menu">MENU</string>
     <string name="order_details_sharedPreferences">Order short description Details </string>
     <string name="registration_details_sharedPreferences">Registration Details </string>
     <string name="cart_details_sharedPreferences">Order short description Details </string>
     <string name="order_tracking">Order Tracking</string>
+    <string name="subCategory_sharedPreference_data">sub Category SharedPreference Data</string>
 
 
     <string-array name="countryCode_array">

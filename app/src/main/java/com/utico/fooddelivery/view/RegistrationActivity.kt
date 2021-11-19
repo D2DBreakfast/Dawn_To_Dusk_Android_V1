@@ -100,6 +100,17 @@ class RegistrationActivity : AppCompatActivity(){
 
     fun clickSubmitButton(){
        binding.btnRegistration.setOnClickListener {
+           //start temp
+           editor.putString("fullName","Shivanad Patil")
+           editor.putString("mobileNumber","9535347309")
+           editor.putString("email","patil123@gmail.com")
+           editor.putString("countryCode","patil123@gmail.com")
+           editor.putString("userId","2")
+           editor.commit()
+           val intent = Intent(this,OtpVerficationActivity::class.java)
+           intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
+           startActivity(intent)//temp Remove later
+
            viewModel.getRegistrationObservable().observe(this, Observer<UserRegistrationResponseModel> {
                if (it.statusCode == 200){
                    toast(it.message)

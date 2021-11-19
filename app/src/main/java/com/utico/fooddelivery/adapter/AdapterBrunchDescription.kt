@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ItemRowBrunchDescriptionBinding
-import com.utico.fooddelivery.databinding.ItemRowFoodOrderDescBinding
 import com.utico.fooddelivery.model.DataX
 import com.utico.fooddelivery.view.AddFragmentToActivity
 import com.utico.fooddelivery.view.RegistrationActivity
