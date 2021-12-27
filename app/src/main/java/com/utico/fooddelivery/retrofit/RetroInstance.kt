@@ -7,11 +7,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetroInstance {
     companion object {
         //val baseUrl = "https://reqres.in/api/"
-
 /*
         val baseUrl ="https://d2dbackendmain.azurewebsites.net/"
 */
-        val baseUrl="http://10.12.13.123:5000/"
+        val baseUrl="http://10.12.15.32:3000/"
         fun getRetroInstance(): Retrofit {
             val logging = HttpLoggingInterceptor()
             logging.level = (HttpLoggingInterceptor.Level.BODY)

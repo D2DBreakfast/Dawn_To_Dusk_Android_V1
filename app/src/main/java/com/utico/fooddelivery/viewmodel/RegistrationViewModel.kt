@@ -25,10 +25,13 @@ class RegistrationViewModel : ViewModel() {
     var resultData  = MutableLiveData<String>()
     var validationResultData = MutableLiveData<String>()
     lateinit var registrationResponseData:MutableLiveData<UserRegistrationResponseModel>
+    lateinit var errorResponse:MutableLiveData<String>
+
 
 
     init {
         registrationResponseData = MutableLiveData()
+        errorResponse = MutableLiveData()
     }
 
     fun getRegistrationObservable():MutableLiveData<UserRegistrationResponseModel>{
@@ -63,6 +66,7 @@ class RegistrationViewModel : ViewModel() {
 
                 override fun onFailure(call: Call<UserRegistrationResponseModel>, t: Throwable) {
                     registrationResponseData.postValue(null)
+                    errorResponse.postValue(t.toString())
                 }
             })
         }

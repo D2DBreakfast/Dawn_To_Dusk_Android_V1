@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/order_history_cardview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardMaxElevation="10dp"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
+    android:background="@color/light_grey"
+    >
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="2dp"
+        android:text="@string/yourOrders"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        />
+ <TextView
+     android:id="@+id/tvOrderDate"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text="@string/yourOrders"
+     android:fontFamily="@font/roboto_regular"
+     android:layout_below="@+id/tvStatus"
+     android:layout_marginTop="5dp"
+     />
+    <TextView
+        android:id="@+id/tvOrderNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourOrders"
+        android:fontFamily="@font/roboto_bold"
+        android:layout_below="@+id/tvOrderDate"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvQuantityWithItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrderNumber"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/yourOrders" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvQuantityWithItemName"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto"
+        android:text="AED 25.00"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_below="@+id/tvPrice"
+       >
+      <androidx.constraintlayout.utils.widget.MotionButton
+          android:id="@+id/btnCancel"
+          android:layout_width="wrap_content"
+          android:layout_height="40dp"
+          android:textColor="@color/white"
+          android:text="@string/cancel"
+          android:textAllCaps="false"
+          android:backgroundTint="@color/green"
+          />
+       <!--<TextView
+           android:id="@+id/tvCancelReason"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/cancel_reason"
+           android:layout_gravity="right"
+           android:layout_weight="1"
+           android:gravity="right"
+           android:layout_marginTop="20dp"
+           />-->
+   </LinearLayout>
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

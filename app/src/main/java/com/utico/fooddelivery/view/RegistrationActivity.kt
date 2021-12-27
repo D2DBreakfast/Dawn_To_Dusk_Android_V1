@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
@@ -43,6 +44,10 @@ class RegistrationActivity : AppCompatActivity(){
 
         viewModel.validationResultData.observe(this, Observer {
            toast(it)
+        })
+
+        viewModel.errorResponse.observe(this, Observer {
+            toast(it)
         })
 
 
@@ -101,7 +106,7 @@ class RegistrationActivity : AppCompatActivity(){
     fun clickSubmitButton(){
        binding.btnRegistration.setOnClickListener {
            //start temp
-           editor.putString("fullName","Shivanad Patil")
+          /* editor.putString("fullName","Shivanad Patil")
            editor.putString("mobileNumber","9535347309")
            editor.putString("email","patil123@gmail.com")
            editor.putString("countryCode","patil123@gmail.com")
@@ -109,7 +114,7 @@ class RegistrationActivity : AppCompatActivity(){
            editor.commit()
            val intent = Intent(this,OtpVerficationActivity::class.java)
            intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
-           startActivity(intent)//temp Remove later
+           startActivity(intent)//temp Remove later*/
 
            viewModel.getRegistrationObservable().observe(this, Observer<UserRegistrationResponseModel> {
                if (it.statusCode == 200){

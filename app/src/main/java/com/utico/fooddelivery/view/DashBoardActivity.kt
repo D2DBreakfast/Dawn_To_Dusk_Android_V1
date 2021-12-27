@@ -35,8 +35,6 @@ class DashBoardActivity : AppCompatActivity() {
 
     }
 
-
-
 }
 
 

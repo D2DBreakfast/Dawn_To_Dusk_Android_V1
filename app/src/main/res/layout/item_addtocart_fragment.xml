@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="16dp"
+          android:layout_marginRight="16dp"
+          >
+
+          <ImageView
+              android:id="@+id/imageView"
+              android:layout_width="match_parent"
+              android:layout_height="300dp"
+              android:background="@drawable/subcategory" />
+          <LinearLayout
+              android:id="@id/lnrHeader"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_below="@+id/imageView"
+              >
+              <ImageView
+                  android:id="@+id/vegOrNonVegImageView"
+                  android:layout_width="15dp"
+                  android:layout_height="15dp"
+                  android:background="@drawable/veg"
+                  android:layout_marginTop="5dp"
+                  />
+
+          <TextView
+              android:id="@+id/tvItemName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/imageView"
+              android:fontFamily="@font/roboto_regular"
+              android:text="English All day Temptation 2PAX 4PAX"
+              android:textColor="@color/black"
+              android:textSize="16sp"
+              android:textStyle="bold"
+              android:layout_marginLeft="5dp"
+              />
+          </LinearLayout>
+
+          <TextView
+              android:id="@+id/tvDescription"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/lnrHeader"
+              android:layout_marginTop="5dp"
+              android:fontFamily="@font/roboto_regular"
+              android:text="Protein rich antioxidant mouthwatering dish with beef sausage, bacon, baked beans, sautéed button mushroom with 2 eggs to cook to your choice of poached/fried/scrambles accompanied by toast(GF)" />
+
+          <TextView
+              android:id="@+id/tvAllergyTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/tvDescription"
+              android:layout_marginTop="20dp"
+              android:fontFamily="@font/roboto_regular"
+              android:text="@string/allergy_info"
+              android:textColor="@color/black"
+              android:textSize="16sp"
+              android:textStyle="bold" />
+
+          <TextView
+              android:id="@+id/tvAllergyInfo"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_below="@+id/tvAllergyTitle"
+              android:layout_marginTop="5dp"
+              android:fontFamily="@font/roboto_regular"
+              android:text="GF - Gluten free / D - Contains diary / N - Contains Nuts / SS -sea same seed / SO- soya / V - vegetarian / S spicy" />
+
+          <LinearLayout
+              android:visibility="gone"
+              android:id="@+id/lnrCalendar"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_below="@+id/tvAllergyInfo"
+              android:layout_marginTop="20dp"
+              android:background="@drawable/green_border_rectangle"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
+
+              <TextView
+                  android:id="@+id/tv_date"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="16dp"
+                  android:layout_weight="1"
+                  android:fontFamily="@font/roboto_regular"
+                  android:text="@string/select_delivery_date"
+                  android:textColor="@color/green"
+                  android:textStyle="bold"
+                  />
+
+              <ImageView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="16dp"
+                  android:layout_weight="0.1"
+                  android:background="@drawable/ic_green_calendar" />
+          </LinearLayout>
+
+          <LinearLayout
+              android:padding="4dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_below="@+id/lnrCalendar"
+              android:layout_marginTop="20dp"
+              >
+
+
+              <TextView
+                  android:id="@+id/tvPrice"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="7.00"
+                  android:fontFamily="@font/roboto_regular"
+                  android:textColor="@color/black"
+                  android:textSize="16dp"
+                  android:textStyle="bold"
+                  />
+
+              <Button
+                  android:id="@+id/buttonAddToCart"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0.2"
+                  android:backgroundTint="@color/green"
+                  android:text="@string/add"
+                  android:fontFamily="@font/roboto_regular"
+                  android:drawableRight="@drawable/ic_white_add"
+                  android:textAllCaps="false" />
+          </LinearLayout>
+      </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

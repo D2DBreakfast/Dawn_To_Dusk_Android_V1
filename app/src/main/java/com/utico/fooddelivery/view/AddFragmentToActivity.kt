@@ -12,7 +12,7 @@ class AddFragmentToActivity : AppCompatActivity() {
     var foodDescription:String? = null
     var foodPrice:String? = null
     val bundleOderDetails = Bundle()
-    val orderDetailsFragment =ItemDescriptionFragment()
+    val orderDetailsFragment =ItemAddToCartFragment()
     val passFoodDescDataListener:PassFoodDescDataListener? = null
 
 
@@ -23,7 +23,7 @@ class AddFragmentToActivity : AppCompatActivity() {
 
 
 
-        if (fragmentName.equals("ItemDescriptionFragment")) {
+        if (fragmentName.equals("ItemAddToCartFragment")) {
             foodName = intent.getStringExtra("foodName")
             foodDescription =intent.getStringExtra("foodDescription")
             foodPrice = intent.getStringExtra("foodPrice")
@@ -33,7 +33,7 @@ class AddFragmentToActivity : AppCompatActivity() {
             orderDetailsFragment.arguments = bundleOderDetails*/
             passFoodDescDataListener?.getFoodShortDesc(foodName!!,foodDescription!!,foodPrice!!)
             supportFragmentManager!!.beginTransaction()
-                .add(R.id.fragmentContainer, ItemDescriptionFragment(), "ItemDescriptionFragment")
+                .add(R.id.fragmentContainer, ItemAddToCartFragment(), "ItemAddToCartFragment")
                 .commit()
 
         } else if (fragmentName.equals("NotificationDetailsFragment")) {
@@ -46,10 +46,6 @@ class AddFragmentToActivity : AppCompatActivity() {
                 .add(R.id.fragmentContainer, MealsPlanDetailsFragment(), "MealsPlanDetailsFragment")
                 .commit()
 
-        }else if (fragmentName.equals("MealPlanFragment")){
-            supportFragmentManager!!.beginTransaction()
-                .add(R.id.fragmentContainer, MealPlanFragment(), "MealPlanFragment")
-                .commit()
         }else if (fragmentName.equals("HelpSupportFragment")){
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,HelpSupportFragment(),"HelpSupportFragment")
@@ -112,9 +108,11 @@ class AddFragmentToActivity : AppCompatActivity() {
             supportFragmentManager!!.beginTransaction()
                 .add(R.id.fragmentContainer,SubCategoryDescriptionFragment(),"SubCategoryDescriptionFragment")
                 .commit()
+        }else if(fragmentName.equals("SubscriptionDetailsFragment")){
+            supportFragmentManager!!.beginTransaction()
+                .add(R.id.fragmentContainer,SubscriptionDetailsFragment(),"SubscriptionDetailsFragment")
+                .commit()
         }
-
-
     }
 
 }

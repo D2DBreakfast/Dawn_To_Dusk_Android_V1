@@ -16,7 +16,6 @@ import androidx.lifecycle.Observer
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.databinding.ProfileEditFragmentBinding
 import com.utico.fooddelivery.model.ProfileEditResponseModel
-import com.utico.fooddelivery.model.profile
 import com.utico.fooddelivery.viewmodel.ProfileViewModel
 
 class ProfileEditFragment : Fragment(){
@@ -27,8 +26,6 @@ class ProfileEditFragment : Fragment(){
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: ProfileEditFragmentBinding
-    private lateinit var profile: profile
-    var profildata = mutableListOf<profile>()
     private lateinit var sharedPreferences:SharedPreferences
     private var fullName:String? = null
     private var mobileNumber:String? = null

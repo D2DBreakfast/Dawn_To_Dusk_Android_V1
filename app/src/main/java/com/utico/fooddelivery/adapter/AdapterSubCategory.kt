@@ -42,14 +42,14 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
                  val editor = sharedPreferences?.edit()
                  // Toast.makeText(context,foodName + description+price,Toast.LENGTH_LONG).show()
                  val intent = Intent(context, AddFragmentToActivity::class.java)
-                 intent.putExtra("FragmentName", "ItemDescriptionFragment")
+                 intent.putExtra("FragmentName", "ItemAddToCartFragment")
                 *//* editor?.putString("itemName", holder.tvName.text.toString())
                  editor?.putString("itemDescription", holder.tvDescription.text.toString())
                  editor?.putString("itemPrice", holder.tvPrice.text.toString())
                  editor?.putString("itemMainCategoryName", holder.tvMainCategory.text.toString())
                  editor?.putString("itemSubCategoryName", holder.tvSubCategoryName.text.toString())
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
-                 editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
+                 editor?.putString("itemBaseQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
                  editor?.putString("itemImageUrl",holder.tvImageURL.text.toString())*//*
                  editor?.commit()
@@ -69,14 +69,14 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
                  val editor = sharedPreferences?.edit()
                  // Toast.makeText(context,foodName + description+price,Toast.LENGTH_LONG).show()
                  val intent = Intent(context, AddFragmentToActivity::class.java)
-                 intent.putExtra("FragmentName", "ItemDescriptionFragment")
+                 intent.putExtra("FragmentName", "ItemAddToCartFragment")
                 *//* editor?.putString("itemName", holder.tvName.text.toString())
                  editor?.putString("itemDescription", holder.tvDescription.text.toString())
                  editor?.putString("itemPrice", holder.tvPrice.text.toString())
                  editor?.putString("itemMainCategoryName", holder.tvMainCategory.text.toString())
                  editor?.putString("itemSubCategoryName", holder.tvSubCategoryName.text.toString())
                  editor?.putString("itemFoodType", holder.tvFoodType.text.toString())
-                 editor?.putString("itemQuantity", holder.tvQuantity.text.toString())
+                 editor?.putString("itemBaseQuantity", holder.tvQuantity.text.toString())
                  editor?.putString("itemId", holder.tvItemId.text.toString())
                  editor?.putString("itemImageUrl",holder.tvImageURL.text.toString())*//*
                  editor?.commit()
@@ -87,10 +87,11 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
        holder.binding.subcategoryLinearLayout.setOnClickListener {
            val subCategorysharedPreferences = context?.getSharedPreferences(context?.resources?.getString(R.string.subCategory_sharedPreference_data),MODE_PRIVATE)
            val editor =subCategorysharedPreferences?.edit()
-          val intent = Intent(context,AddFragmentToActivity::class.java)
+           val intent = Intent(context,AddFragmentToActivity::class.java)
               intent.putExtra("FragmentName","SubCategoryDescriptionFragment")
               editor?.putString("mainCategoryId",subCategoryList[position].mainCategoryId)
               editor?.putString("subCategoryId",subCategoryList[position].subCategoryId)
+              editor?.putString("subCategoryName",subCategoryList[position].subCategoryName)
               editor?.commit()
            context?.startActivity(intent)
        }
@@ -109,7 +110,7 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
         private var vegnonveg: String? = null
       /*  val cardView = binding.cardview*/
         val tvPrice = binding.tvPrice
-        /*val tvName = binding.tvTitle
+        /*val tvName = binding.tvItemName
         val tvDescription = binding.tvDescription
         val imageview = binding.imageView
         val imageViewVegOrNonveg = binding.imageVegOrNonveg
@@ -124,7 +125,8 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
 
         fun bind(data:SubCategoryData){
             tvPrice.text = data.subCategoryName
-
+/* here we will create anothr list with id and image url  */
+            /* incoming list request is compared with above created list */
           /*  if (vegnonveg.equals("Veg")){
                 imageViewVegOrNonveg.setBackgroundResource(R.drawable.veg)
             }else{
@@ -147,7 +149,7 @@ class AdapterSubCategory() : RecyclerView.Adapter<AdapterSubCategory.MyViewHolde
             tvMainCategory.text = data.itemMainCategoryName
             tvSubCategoryName.text = data.itemSubCategoryName
             tvFoodType.text = data.itemFoodType
-            tvQuantity.text = data.itemQuantity
+            tvQuantity.text = data.itemBaseQuantity
             tvItemId.text = data.itemId*/
         }
 

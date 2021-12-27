@@ -11,7 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
+        <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/yourOrderDetails"
+            android:textColor="@color/green"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerview"
         android:layout_width="match_parent"
@@ -22,7 +34,7 @@
         android:paddingLeft="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader"
         tools:listitem="@layout/item_row_cart"
          />
 <!--
@@ -30,7 +42,6 @@
 -->
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +69,6 @@
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +97,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/community" />
+                    android:text="@string/community"
+                    android:fontFamily="@font/roboto_regular"
+                    />
 
                 <Spinner
                     android:id="@+id/spinner"
@@ -111,10 +123,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/vill_no" />
+                    android:text="@string/vill_no"
+                    android:fontFamily="@font/roboto_regular"
+                    />
 
                 <EditText
-                    android:id="@+id/textView54"
+                    android:id="@+id/edtVillaNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -133,9 +147,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/landmark" />
+                    android:text="@string/landmark"
+                    android:fontFamily="@font/roboto_regular"
+                    />
 
                 <EditText
+                    android:id="@+id/edtLandMark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -162,18 +179,21 @@
             android:layout_height="wrap_content"
             android:text="@string/payment_mode"
             android:textColor="@color/purple_700"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            />
 
         <TextView
             android:id="@+id/textView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/ic_green_double_arrow" />
+            android:drawableRight="@drawable/ic_green_double_arrow"
+            android:fontFamily="@font/roboto_regular"
+            />
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/relativeLayout5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -182,15 +202,19 @@
         android:layout_marginEnd="16dp"
         android:background="@color/light_grey"
         android:gravity="center"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout4"
+        >
 
         <TextView
             android:id="@+id/textView58"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/payment_gateway" />
+            android:text="@string/payment_gateway"
+            android:fontFamily="@font/roboto_regular"
+            />
 
         <TextView
             android:id="@+id/textView59"
@@ -198,7 +222,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="@string/cod"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_regular"
+            />
 
     </RelativeLayout>
 
@@ -223,7 +249,7 @@
 
         <RelativeLayout
             android:visibility="gone"
-        android:id="@+id/relativeLayout6"
+            android:id="@+id/relativeLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -240,14 +266,18 @@
             android:gravity="center"
             android:text="@string/coupon"
             android:textColor="@color/purple_700"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto_regular"
+            />
 
         <TextView
             android:id="@+id/tv_coupons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/ic_green_double_arrow" />
+            android:drawableRight="@drawable/ic_green_double_arrow"
+            android:fontFamily="@font/roboto_regular"
+            />
     </RelativeLayout>
 
     <RelativeLayout
@@ -281,7 +311,6 @@
     </RelativeLayout>
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/textView63"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -293,10 +322,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout7"
         android:textColor="@color/purple_700"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
+        />
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
         android:id="@+id/invoice_cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -319,18 +349,22 @@
                android:layout_height="wrap_content"
                android:orientation="horizontal">
                <TextView
+                   android:id="@+id/tvItemCountLabel"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:text="@string/items"
                    android:textColor="@color/grey"
+                   android:fontFamily="@font/roboto_regular"
                    />
                <TextView
+                   android:id="@+id/tvItemCountPrice"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
                    android:gravity="right"
                    android:text="AED 328.00"
+                   android:fontFamily="@font/roboto_regular"
                    />
            </LinearLayout>
 
@@ -341,20 +375,25 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lnr_items"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/shipping"
+                    android:text="@string/deliveryCharge"
                     android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto_regular"
                     />
                 <TextView
+                    android:id="@+id/tvDeliveryCharge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="AED 40.00"
+                    android:fontFamily="@font/roboto_regular"
+
                     />
             </LinearLayout>
             <LinearLayout
@@ -365,18 +404,24 @@
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tvVat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/vat"
                     android:textColor="@color/grey"
+                    android:fontFamily="@font/roboto_regular"
+
                     />
                 <TextView
+                    android:id="@+id/tvVatTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="AED 16.00"
+                    android:fontFamily="@font/roboto_regular"
+
                     />
             </LinearLayout>
 
@@ -396,14 +441,19 @@
                     android:layout_weight="1"
                     android:text="@string/total_price"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textStyle="bold"
                     />
                 <TextView
+                    android:id="@+id/tvTotalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:textColor="@color/green"
                     android:text="AED 384.04"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textStyle="bold"
                     />
 
             </LinearLayout>
@@ -435,6 +485,7 @@
             android:layout_weight="1"
             android:text="@string/terms_and_conditions"
             android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
             />
 
     </LinearLayout>
@@ -454,7 +505,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btnCheckOut">
         </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
-
 
         <Button
         android:id="@+id/btnCheckOut"

@@ -44,10 +44,10 @@
                 <LinearLayout
                     android:id="@+id/lnr_location_cart"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_grey">
+                    android:layout_height="wrap_content">
 
                     <ImageView
+                        android:visibility="gone"
                         android:id="@+id/location_imageview"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -59,10 +59,14 @@
                         android:id="@+id/tvCurrentLocation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_weight="1"
-                        android:text="150,1,Infantry Rd,Opp Commissioner office,Shivaji Nagar,Bengaluru,Karnatak 560001"
-                        android:textColor="@color/grey" />
+                        android:text="Food Category's"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/green"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        />
 
                     <ImageView
                         android:id="@+id/logout_imageview"
@@ -74,6 +78,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_below="@+id/lnr_location_cart"
@@ -136,63 +141,7 @@
                 android:text="@string/button_name_meals" />
         </FrameLayout>-->
 
-        <RelativeLayout
-            android:id="@+id/toggleGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.09"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar">
 
-            <TextView
-                android:id="@+id/tvBreakfast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/breakfast"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                />
-
-            <View
-                android:id="@+id/viewLineBreakfast"
-                android:layout_width="60dp"
-                android:layout_height="3dp"
-                android:layout_below="@+id/tvBreakfast"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="4dp"
-                android:background="@color/green" />
-
-            <TextView
-                android:id="@+id/tvBrunch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/tvBreakfast"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/brunch"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <View
-                android:id="@+id/viewLineBrunch"
-                android:layout_width="45dp"
-                android:layout_height="3dp"
-                android:layout_below="@+id/tvBrunch"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
-                android:layout_toRightOf="@+id/tvBreakfast"
-                android:background="@color/green"
-                android:visibility="gone"
-                />
-
-
-        </RelativeLayout>
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:visibility="gone"
@@ -243,7 +192,7 @@
             app:layout_constraintEnd_toStartOf="@+id/breakfastSubCategoryRecyclerview"
             app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
@@ -254,7 +203,7 @@
             android:orientation="horizontal"
             android:padding="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
             tools:listitem="@layout/item_row_breakfast_sub_category" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -269,7 +218,7 @@
             app:layout_constraintEnd_toStartOf="@+id/brunchSubCategoryRecyclerview"
             app:layout_constraintHorizontal_bias="0.35"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:visibility="gone"
@@ -280,23 +229,102 @@
             android:orientation="horizontal"
             android:padding="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
             tools:listitem="@layout/item_row_brunch_sub_category" />
 
 
         <ImageView
             android:id="@+id/breakfastBannerImageView"
             android:layout_width="match_parent"
-            android:layout_height="116dp"
+            android:layout_height="130dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bannarimage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.727"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/breakfastSubCategoryRecyclerview"
+            app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <RelativeLayout
+            android:id="@+id/rltMainCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView">
+
+            <TextView
+                android:id="@+id/tvBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/breakfast"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/viewLineBreakfast"
+                android:layout_width="75dp"
+                android:layout_height="3dp"
+                android:layout_below="@+id/tvBreakfast"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="4dp"
+                android:background="@color/green" />
+
+            <TextView
+                android:id="@+id/tvBrunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tvBreakfast"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/brunch"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/viewLineBrunch"
+                android:layout_width="55dp"
+                android:layout_height="3dp"
+                android:layout_below="@+id/tvBrunch"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/tvBreakfast"
+                android:background="@color/green"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/tvSubscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tvBrunch"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/subscription"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/viewLineSubscription"
+                android:layout_width="100dp"
+                android:layout_height="3dp"
+                android:layout_below="@+id/tvSubscription"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@+id/tvBrunch"
+                android:background="@color/green"
+                android:visibility="gone"
+                />
+
+        </RelativeLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/subCategoryCardView"
@@ -308,9 +336,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView"
+            app:layout_constraintTop_toBottomOf="@+id/rltMainCategory"
             app:strokeColor="@color/gold"
-            app:strokeWidth="0.5dp">
+            app:strokeWidth="0.5dp"
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/subCategoryRecyclerView"
@@ -319,7 +348,16 @@
                 android:padding="4dp"
                 tools:listitem="@layout/item_row_sub_category"
                 android:clipToPadding="false"
-                android:layout_marginBottom="350dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subscriptionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                tools:listitem="@layout/item_row_subscription_packages"
+                android:clipToPadding="false"
+                android:visibility="gone"
                 />
         </com.google.android.material.card.MaterialCardView>
 

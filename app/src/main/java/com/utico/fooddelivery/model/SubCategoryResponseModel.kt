@@ -1,16 +1,14 @@
 package com.utico.fooddelivery.model
 
 data class SubCategoryResponseModel(
+    val SubCategoryData: List<SubCategoryData>,
     val message: String,
     val status: Boolean,
-    val statusCode: Int,
-    val subCategoryData: List<SubCategoryData>
+    val statusCode: Int
 )
 
 data class SubCategoryData(
-    val _id: String,
     val mainCategoryId: String,
     val subCategoryId: String,
-    val subCategoryName: String,
-    var  isSelected:String
+    val subCategoryName: String
 )

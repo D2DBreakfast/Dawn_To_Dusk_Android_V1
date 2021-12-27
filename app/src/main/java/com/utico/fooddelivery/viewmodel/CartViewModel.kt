@@ -1,10 +1,8 @@
 package com.utico.fooddelivery.viewmodel
+import com.utico.fooddelivery.model.DeleteCartItemResponse
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.utico.fooddelivery.model.AddToCartDetailsResponseModel
-import com.utico.fooddelivery.model.OrderPlacedResponse
-import com.utico.fooddelivery.model.PlaceOrderArray
-import com.utico.fooddelivery.model.PlaceOrderSendDataModel
+import com.utico.fooddelivery.model.*
 import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
@@ -12,33 +10,38 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CartViewModel : ViewModel() {
-   private var cartResponseData:MutableLiveData<AddToCartDetailsResponseModel>
+   private var cartResponseData:MutableLiveData<ViewCartResponseModel>
    private var cartPlaceResponse:MutableLiveData<OrderPlacedResponse>
    private lateinit var errorResponse:MutableLiveData<String>
+   private var deleteCartItemResponse:MutableLiveData<DeleteCartItemResponse>
+   private var incrementOrDecrementCartItemResponse:MutableLiveData<CartIncrementOrDecrementResponse>
 
     init {
         cartResponseData = MutableLiveData()
         cartPlaceResponse = MutableLiveData()
         errorResponse = MutableLiveData()
+        deleteCartItemResponse = MutableLiveData()
+        incrementOrDecrementCartItemResponse = MutableLiveData()
+
     }
 
     /*This is used to fetch the data from addToCart*/
-    fun getCartDetailsObservable():MutableLiveData<AddToCartDetailsResponseModel>{
+    fun getCartDetailsObservable():MutableLiveData<ViewCartResponseModel>{
         return cartResponseData
     }
 
     fun apiCall(userId:String){
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.getAddToCartDetails(userId)
-            call.enqueue(object :Callback<AddToCartDetailsResponseModel>{
-                override fun onResponse(call: Call<AddToCartDetailsResponseModel>,
-                    response: Response<AddToCartDetailsResponseModel>) {
+            call.enqueue(object :Callback<ViewCartResponseModel>{
+                override fun onResponse(call: Call<ViewCartResponseModel>,
+                    response: Response<ViewCartResponseModel>) {
                     if (response.isSuccessful){
                         cartResponseData.postValue(response.body())
                     }
                 }
 
-                override fun onFailure(call: Call<AddToCartDetailsResponseModel>, t: Throwable) {
+                override fun onFailure(call: Call<ViewCartResponseModel>, t: Throwable) {
                     cartResponseData.postValue(null)
                 }
 
@@ -69,6 +72,53 @@ class CartViewModel : ViewModel() {
                 }
 
             })
+    }
+
+    /*Delete Particular Cart Item*/
+    fun deleteCardItemObservable():MutableLiveData<DeleteCartItemResponse>{
+        return deleteCartItemResponse
+    }
+
+    fun apiCallCartItemDelete(userId: String,cardId:String){
+        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+        val call = retroInstance.deleteCartItem(userId,cardId)
+            call.enqueue(object :Callback<DeleteCartItemResponse>{
+                override fun onResponse(call: Call<DeleteCartItemResponse>, response: Response<DeleteCartItemResponse>) {
+                    if (response.isSuccessful){
+                        deleteCartItemResponse.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteCartItemResponse>, t: Throwable) {
+                    deleteCartItemResponse.postValue(null)
+                }
+
+            })
+    }
+
+
+    /*Increment Or Decrement Particular Cart Item*/
+
+    fun incrementOrDecrementCartObservable():MutableLiveData<CartIncrementOrDecrementResponse>{
+      return incrementOrDecrementCartItemResponse
+    }
+
+    fun callApiIcrementDecrementCartItem(userId:String,cartId:String,itemBaseQuantity:String){
+       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+       val call = retroInstance.editCart(userId,cartId,itemBaseQuantity)
+           call.enqueue(object :Callback<CartIncrementOrDecrementResponse>{
+               override fun onResponse(call: Call<CartIncrementOrDecrementResponse>, response: Response<CartIncrementOrDecrementResponse>) {
+                   if (response.isSuccessful){
+                       incrementOrDecrementCartItemResponse.postValue(response.body())
+                   }
+               }
+
+               override fun onFailure(call: Call<CartIncrementOrDecrementResponse>, t: Throwable) {
+                   incrementOrDecrementCartItemResponse.postValue(null)
+
+               }
+
+           })
     }
 
 }

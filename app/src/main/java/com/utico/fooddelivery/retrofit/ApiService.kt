@@ -1,5 +1,6 @@
 package com.utico.fooddelivery.retrofit
 
+import com.utico.fooddelivery.model.DeleteCartItemResponse
 import com.utico.fooddelivery.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -14,7 +15,7 @@ interface ApiService {
         /*Registration ApiService Call*/
     //@Headers("Content-Type:application/json")
     @FormUrlEncoded
-    @POST("register")
+    @POST("userRegister")
     fun userRegistration(
         @Field("countryCode") countryCode:String,
         @Field("fullName") fullName: String,
@@ -52,97 +53,138 @@ interface ApiService {
 
     /*Getting the Food Sub Category Data Method*/
     @FormUrlEncoded
-    @POST("admin/fetchSubCategory")
+    @POST("manager/fetchSubCategory")
     fun getSubCategoryList(
         @Field("mainCategoryId") mainCategoryId:String
     ): Call<SubCategoryResponseModel>
 
      /*get The sub category related data*/
     @FormUrlEncoded
-    @POST("fetchSubCategoryMenusDetails")
+    @POST("user/fetchSubCategoryMenusDetails")
     fun getSubCategoryRelatedDetails(
          @Field("mainCategoryId") mainCategoryId:String,
          @Field("subCategoryId") subCategoryId:String
-    ): Call<SubCategoryMenuDetailsModel>
+    ): Call<MenuDetailsResponseDataModel>
 
-    /*Home Screen Food Short Description List*/
-         @FormUrlEncoded
-         @POST("fetchMenuDetails")
-         fun getMenuDetailsList(
-          @Field("itemMainCategoryName") itemMainCategoryName:String
-         ): Call<MenuDetailsResponseModel>
 
-    /*Fetch the subCategory Menu details*/
-     @FormUrlEncoded
-     @POST("fetchSubCategoryMenusDetails")
-     fun getSubCategoryMenusDetails(
-        @Field("itemMainCategoryName") itemMainCategoryName:String,
-        @Field("itemSubCategoryName") itemSubCategoryName:String
-        ): Call<SubCategoryMenuDetailsModel>
+    /*get The sub category related data*/
+    @FormUrlEncoded
+    @POST("user/fetchVegMenu")
+    fun getVegMenuDetails(
+        @Field("mainCategoryId") mainCategoryId:String,
+        @Field("subCategoryId") subCategoryId:String,
+    ): Call<MenuDetailsResponseDataModel>
 
-     /*Fetch the Veg related data*/
-     @FormUrlEncoded
-     @POST("fetchVegMenusDetails")
-      fun getVegMenuDetails(
-         @Field("itemMainCategoryName") itemMainCategoryName:String,
-         @Field("itemSubCategoryName") itemSubCategoryName:String,
-         @Field("itemFoodType") itemFoodType:String
-      ) : Call<SubCategoryMenuDetailsModel>
+    /*Post AddOns Data*/
+    @FormUrlEncoded
+    @POST("user/getAddOnItemDetails")
+    fun getAddOns(
+        @Field("itemId") itemId:String
+    ): Call<AddOnsDataModel>
 
-     /*Post addToCart Items data*/
+
+
+    /*Post addToCart Items data*/
        @FormUrlEncoded
-       @POST("myCart")
+       @POST("user/addToCart")
        fun addToCart(
          @Field("itemMainCategoryName") itemMainCategoryName:String,
          @Field("itemSubCategoryName") itemSubCategoryName:String,
-         @Field("itemFoodType") itemFoodType:String,
+         @Field("itemFoodType") itemFoodType:Boolean,
          @Field("itemName") itemName:String,
          @Field("itemId") itemId:String,
-         @Field("itemQuantity") itemQuantity:String,
+         @Field("itemBaseQuantity") itemQuantity:String,
          @Field("itemPrice") itemPrice:String,
-         @Field("userId") userId:String
-    ): Call<ResponseBody>
+         @Field("itemImageUrl") itemImageUrl:String,
+         @Field("itemDescription") itemDescription:String,
+         @Field("userId") userId:String,
+         @Field("itemBasePrice") itemBasePrice:String
+    ): Call<CartIncrementOrDecrementResponse>
 
-    /*Fetch addToCart Items details*/
+    /*Fetch addToCart details*/
     @FormUrlEncoded
-    @POST("fetchCartDetails")
+    @POST("user/viewCart")
     fun getAddToCartDetails(
         @Field("userId") userId:String
-    ): Call<AddToCartDetailsResponseModel>
+    ): Call<ViewCartResponseModel>
 
+    /*Increment Or Decrement Item*/
+    @FormUrlEncoded
+    @POST("user/editCart")
+    fun editCart(
+        @Field("userId") userId:String,
+        @Field("cartId") cartId:String,
+        @Field("itemBaseQuantity") itemBaseQuantity:String
+    ): Call<CartIncrementOrDecrementResponse>
+
+
+    /*Delete Cart Item*/
+    @FormUrlEncoded
+    @POST("/user/deleteCart")
+      fun deleteCartItem(
+        @Field("userId") userId:String,
+        @Field("cartId") cartId: String
+      ): Call<DeleteCartItemResponse>
 
     /*Place Order*/
-    @POST("Placeorder")
+    @POST("user/placeOrder")
     fun placeOrder(
     @Body placeOrderSendDataModel: PlaceOrderSendDataModel
     ): Call<OrderPlacedResponse>
 
 
+    /*Get the subscription Types*/
+    @GET("manager/fetchSubscriptionTypes")
+    fun getSubscriptionTypes():Call<SubscriptionTypesDataResponseModel>
+
+    /*Get the fetch upcoming Meals*/
+    @FormUrlEncoded
+    @POST("user/fetchUpComingMeals")
+    fun subscriptionUpcomingMeals(
+        @Field("subscriptionId") subscriptionId:String
+    ):Call<SubscriptionUpcomingMealResponseModel>
+
+    /*Get the fetch upcoming Meals*/
+    @FormUrlEncoded
+    @POST("user/fetchSubcriptionPlans")
+    fun subscriptionPlans(
+        @Field("subscriptionId") subscriptionId:String
+    ):Call<SubscriptionPlansResponseModel>
 
 
+    /*Place the Subscription Plans*/
+    @FormUrlEncoded
+    @POST("user/placeOrder")
+    fun placeSubscription(
+        @Field("userId") userId:String,
+        @Field("sectorId") sectorId:String,
+        @Field("villa") villa:String,
+        @Field("landMark") landMark:String,
+        @Field("totalAmount") totalAmount:String,
+        @Field("categoryType") categoryType:String,
+        @Field("subscriptionPlan") plan:String,
+        @Field("startDate") startDate:String,
+        @Field("subscriptionType") subscriptionType:String
+    ):Call<OrderPlacedResponse>
 
+    /*Place Order History*/
+    @FormUrlEncoded
+    @POST("user/fetchAllUsersPlacedOrders")
+    fun orderHistory(
+     @Field("userId") userId:String
+    ): Call<PlacedOrderHistoryResponse>
 
+   /*get the Order Cancel Reason*/
+  @GET("user/cancelReason")
+    fun orderCancelReason():Call<OrderCancelReasonResponseModel>
 
-
-
-    /*Get Food Sub Category wise data*/
-         @GET("users?")
-         fun getFoodSubCategoryWiseList(@Query("page")FoodSubCategoryName:String): Call<FoodShortDescList>
-
-         /*Get Food Search*/
-         @GET("users?")
-         fun getHomeFoodSearchList(@Query("page")foodSearchText:String): Call<FoodShortDescList>
-
-         /*Meals Plan Method*/
-          @GET("users?page=2")
-          fun getAllMealPlanList(): Call<MealPlanList>
-
-         /*Get Food SearchList*/
-         @GET("users?page=2")
-         fun searchFoodList(): Call<FoodList>
-
-         /*Get Notifications*/
-         @GET("users?page=2")
-         fun getAllNotification(): Call<NotificationList>
+    /*Placed Order Cancel*/
+    @FormUrlEncoded
+    @POST("user/cancelOrder")
+    fun placedOderCancel(
+     @Field("userId") userId:String,
+     @Field("orderId") orderId:String,
+     @Field("reason") reason:String,
+     ):Call<OrderCancelResponse>
 
 }

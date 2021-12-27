@@ -26,6 +26,10 @@
     <string name="show_error">SHOW ERROR</string>
     <string name="show_success">SHOW Success</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="yourOrders">Your Orders</string>
+    <string name="add">Add</string>
+
+    <string name="view_cart">View Cart</string>
     <string name="add_cart">Add Cart</string>
     <string name="help_and_support">Help &amp; Support</string>
     <string name="payment_mode">Payment Mode</string>
@@ -48,6 +52,8 @@
     <string name="full_name"> Full Name</string>
     <string name="required">Required*</string>
     <string name="card_number">Card Number</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_reason">Cancel Reason</string>
     <string name="cvv">CVV</string>
     <string name="month_year">Month/Year</string>
     <string name="add_card">Add Card</string>
@@ -66,6 +72,7 @@
     <string name="other">Other</string>
     <string name="start_ordering">Start Ordering</string>
     <string name="nutritional_info">Nutritional Info</string>
+    <string name="allergy_info">Allergy Info</string>
     <string name="terms_condition">Terms &amp; Conditions</string>
     <string name="how_its_work">How it\'s Work</string>
     <string name="up_coming_meals">Upcoming Meals</string>
@@ -76,7 +83,7 @@
     <string name="payment_gateway">Payment gateway</string>
     <string name="invoice">Invoice</string>
     <string name="items">Items</string>
-    <string name="shipping">Shipping</string>
+    <string name="deliveryCharge">Delivery Charges</string>
     <string name="vat">VAT(5%)</string>
     <string name="total_price">Total Price</string>
     <string name="download_invoice">Download Invoice</string>
@@ -90,13 +97,24 @@
     <string name="meal_plans">Meal Plans</string>
     <string name="breakfast">Breakfast</string>
     <string name="brunch">Brunch</string>
+    <string name="subscription">Subscription</string>
+    <string name="start_from">Starts from</string>
     <string name="veg">Veg</string>
     <string name="select_delivery_date"> Select Delivery Date</string>
+    <string name="start_date"> Start Date</string>
     <string name="select_the_community"> Select the Community</string>
     <string name="coupon">Coupon</string>
     <string name="enter_coupon_code">Enter Coupon Code</string>
     <string name="apply">Apply</string>
-    <string name="terms_and_conditions">I am agree with above all the selection and delivery address which is mention above place</string>
+    <string name="terms_and_conditions">I agree to all Terms and Conditions</string>
+    <string name="termsAndConditions">Terms &amp; Conditions</string>
+    <string name="how_its_works">How its Work</string>
+    <string name="choose_subscription_plan">Choose Subscription Plan</string>
+    <string name="select_plan_start_date">Select Plan Start Date</string>
+    <string name="please_enter_villa_no">Please Enter Villa No</string>
+    <string name="please_enter_land_mark">Please Enter LandMark</string>
+
+
     <string name="check_out">Check Out</string>
     <string name="coupons">Coupons</string>
     <string name="track_order">Track Order</string>
@@ -107,9 +125,30 @@
     <string name="menu">MENU</string>
     <string name="order_details_sharedPreferences">Order short description Details </string>
     <string name="registration_details_sharedPreferences">Registration Details </string>
+    <string name="subscription_plan_details_sharedPreferences">Registration Details </string>
+
     <string name="cart_details_sharedPreferences">Order short description Details </string>
     <string name="order_tracking">Order Tracking</string>
     <string name="subCategory_sharedPreference_data">sub Category SharedPreference Data</string>
+    <string name="yourOrderDetails">Your Order Details</string>
+    <string name="reviewOrders">Review Your Orders</string>
+    <string name="pay_aed">Pay AED </string>
+    <string name="how_its_works_contents">•	Breakfast combos are delivered every day at around 6AM to the chosen address
+•	A predefined specially curated food item will be delivered daily
+•	Full flexibility to change subscription plan and delivery address anytime
+•	You can auto-renew subscriptions and get the best price per meal. Subscriptions renew on the same day of every week/month from the start date
+</string>
+    <string name="terms_and_condition_contents">•Food will be kept at a assigned location near the entrance  everyday around 6AM
+•	No food delivery on Fridays and Saturdays
+•	Subscription cannot be cancelled once bought
+</string>
+    <string name="allergy_info_contents">GF - Gluten free / D - Contains diary / N - Contains Nuts / SS -sea same seed / SO- soya / V - vegetarian / S spicy.</string>
+    <string name="item">Item</string>
+    <string name="aed">AED</string>
+    <string name="totalPrice"> Total Price</string>
+    <string name="days_plan">days plan</string>
+
+
 
 
     <string-array name="countryCode_array">
