@@ -8,9 +8,11 @@ data class PlacedOrderHistoryResponse(
     val totalOrders: Int
 )
 data class PlacedOrders(
+    val categoryType:String,
     val deliveryStatus: String,
     val landMark: String,
     val orderDate: String,
+    val endDate:String,
     val orderDetails: List<OrderDetail>,
     val orderId: String,
     val orderStatus: String,
@@ -19,7 +21,9 @@ data class PlacedOrders(
     val paymentStatus: String,
     val sectorId: String,
     val userId: String,
-    val villa: String
+    val villa: String,
+    val title:String
+
 )
 data class OrderDetail(
     val cartId: String,
@@ -28,6 +32,6 @@ data class OrderDetail(
     val itemMainCategoryName: String,
     val itemName: String,
     val itemPrice: String,
-    val itemQuantity: String,
+    val itemBaseQuantity: String,
     val itemSubCategoryName: String
 )

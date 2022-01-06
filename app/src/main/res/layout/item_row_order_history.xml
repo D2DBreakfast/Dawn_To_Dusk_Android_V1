@@ -10,61 +10,81 @@
     app:cardMaxElevation="10dp"
     >
 <RelativeLayout
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="4dp"
-    android:background="@color/light_grey"
+    android:background="@color/grey"
+
     >
 
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
         android:fontFamily="@font/roboto_regular"
         android:padding="2dp"
         android:text="@string/yourOrders"
-        android:textColor="@color/white"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        />
- <TextView
-     android:id="@+id/tvOrderDate"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="@string/yourOrders"
-     android:fontFamily="@font/roboto_regular"
-     android:layout_below="@+id/tvStatus"
-     android:layout_marginTop="5dp"
-     />
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tvOrderDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvStatus"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Your plan start date" />
+
+    <TextView
+        android:id="@+id/tvPlanEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrderDate"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Your plan end date" />
+
     <TextView
         android:id="@+id/tvOrderNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/yourOrders"
-        android:fontFamily="@font/roboto_bold"
-        android:layout_below="@+id/tvOrderDate"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:id="@+id/tvQuantityWithItemName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvOrderNumber"
+        android:layout_below="@+id/tvPlanEndDate"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/yourOrders" />
 
     <TextView
+        android:id="@+id/tvCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvOrderNumber"
+        android:layout_marginTop="10dp"
+        android:text="Subscription"
+        android:fontFamily="@font/roboto_bold" />
+
+    <TextView
+        android:id="@+id/tvSubscriptionPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Plan"
+        android:layout_below="@+id/tvOrderNumber"
+        android:layout_toRightOf="@+id/tvCategoryName"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/roboto_bold" />
+
+    <TextView
         android:id="@+id/tvPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvQuantityWithItemName"
+        android:layout_below="@+id/tvCategoryName"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/roboto_regular"
         android:text="AED 25.00"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
    <LinearLayout
        android:layout_width="match_parent"
@@ -79,7 +99,7 @@
           android:textColor="@color/white"
           android:text="@string/cancel"
           android:textAllCaps="false"
-          android:backgroundTint="@color/green"
+          android:backgroundTint="@color/red"
           />
        <!--<TextView
            android:id="@+id/tvCancelReason"

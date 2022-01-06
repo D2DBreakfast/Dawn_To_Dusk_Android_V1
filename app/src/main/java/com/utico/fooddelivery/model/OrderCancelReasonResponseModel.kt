@@ -1,12 +1,12 @@
 package com.utico.fooddelivery.model
 
 data class OrderCancelReasonResponseModel(
-    val cancelReasons: List<CancelReason>,
+    val CancelReasons: List<CancelReasons>,
     val message: String,
     val status: Boolean,
     val statusCode: Int
 )
 
-data class CancelReason(
+data class CancelReasons(
     val reason: String
 )

@@ -18,7 +18,7 @@
             <RelativeLayout
                 android:id="@+id/rltImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="230dp"
                 android:background="@drawable/login_shape"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.508"
@@ -31,6 +31,7 @@
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/dawntodusklogo" />
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/lnrTextRow"
                     android:layout_below="@+id/edit_profile_imageview"
                     android:layout_width="match_parent"

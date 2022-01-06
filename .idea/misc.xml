@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/font/roboto.xml" value="0.20989583333333334" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_login.xml" value="0.1796875" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_otpverfication.xml" value="0.1" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_registration.xml" value="0.22" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_cart.xml" value="0.1796875" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/fragment_home.xml" value="0.13994565217391305" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_maincategory.xml" value="0.22" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_order_history.xml" value="0.3333333333333333" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/item_row_subcategory_description.xml" value="0.1796875" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/order_history_fragment.xml" value="0.1796875" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/sub_category_description_fragment.xml" value="0.12318840579710146" />
+        <entry key="..\:/D2D/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/subscription_dialog.xml" value="0.16666666666666666" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable-v24/_rectangle_4.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/addons_spherical_shape.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/background_spherical_shape.xml" value="0.19583333333333333" />
@@ -38,6 +50,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/drawable/shape_status_remaining.xml" value="0.19583333333333333" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/font/roboto.xml" value="0.20989583333333334" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/_fragment.xml" value="0.13134057971014493" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/actionbar_cart_item_count.xml" value="0.11594202898550725" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_add_details_fragments_to.xml" value="0.1" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_dash_board.xml" value="0.17777777777777778" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/activity_login.xml" value="0.1" />
@@ -103,7 +116,7 @@
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/payment_mode_fragment.xml" value="0.1" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/profile_edit_fragment.xml" value="0.1" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/sub_category_description_fragment.xml" value="0.1" />
-        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/subscription_details_fragment.xml" value="0.22" />
+        <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/subscription_details_fragment.xml" value="0.21630094043887146" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/subscription_dialog.xml" value="0.22" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/layout/toggle_button_background.xml" value="0.11865942028985507" />
         <entry key="..\:/Dawn_To_Dusk_Android_V1/app/src/main/res/menu/menu.xml" value="0.1" />

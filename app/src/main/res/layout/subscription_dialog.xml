@@ -90,7 +90,7 @@
                 android:layout_below="@+id/lnrImageWithTitle"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/lnrImageView"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvPlans"
@@ -99,13 +99,21 @@
                     android:fontFamily="@font/roboto_regular"
                     android:maxLines="2"
                     android:text="Green Bin Potato Cheese" />
+
+                <TextView
+                    android:id="@+id/tvPlaneDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxLines="2"
+                    android:text="Plan Date" />
             </LinearLayout>
 
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:id="@+id/relativeLayout3"
+            android:id="@+id/rltShippingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -142,7 +150,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/rltShippingTitle">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -257,7 +265,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relativeLayout5"
+            android:id="@+id/rltPaymentGateHeader"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -320,7 +328,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout5">
+            app:layout_constraintTop_toBottomOf="@+id/rltPaymentGateHeader">
 
             <TextView
                 android:id="@+id/textView60"
@@ -374,7 +382,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView63"
+            android:id="@+id/tvInvoiceHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -398,7 +406,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView63"
+            app:layout_constraintTop_toBottomOf="@+id/tvInvoiceHeader"
             app:cardMaxElevation="0dp"
             app:cardCornerRadius="4dp">
 
@@ -524,7 +532,7 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:id="@+id/lnr_terms_and_condition"
+            android:id="@+id/lnrTermsAndCondition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -534,7 +542,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/invoice_cardview">
             <CheckBox
-                android:id="@+id/checkBox7"
+                android:id="@+id/termsAndConditionCheckBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.1"
@@ -564,9 +572,9 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnr_terms_and_condition" />-->
+            app:layout_constraintTop_toBottomOf="@+id/lnrTermsAndCondition" />-->
 
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFloatPay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -575,12 +583,13 @@
             android:text="Pay AED 150"
             android:textAlignment="center"
             android:textAllCaps="false"
+            android:enabled="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lnr_terms_and_condition"
+            app:layout_constraintTop_toBottomOf="@+id/lnrTermsAndCondition"
             >
-        </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
+        </com.google.android.material.button.MaterialButton>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

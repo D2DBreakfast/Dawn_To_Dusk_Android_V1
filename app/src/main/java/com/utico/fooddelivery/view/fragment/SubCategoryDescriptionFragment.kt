@@ -186,13 +186,10 @@ class SubCategoryDescriptionFragment : Fragment(), CallbackSubCategoryDescriptio
 
     /*search filter*/
     private fun searchFilter(searchText: String) {
-        Toast.makeText(context, searchText, Toast.LENGTH_LONG).show()
         val filteredMenuList = mutableListOf<SubCategoryMenuData>()
         for (data in menuItemList) {
-            if (data.itemName.toLowerCase(Locale.getDefault())
-                    .contains(searchText) ||
-                data.itemDescription.toLowerCase(Locale.getDefault()).contains(searchText)
-            ) {
+            if (data.itemName.toLowerCase(Locale.getDefault()).contains(searchText) ||
+                data.itemDescription.toLowerCase(Locale.getDefault()).contains(searchText)) {
                 filteredMenuList.add(data)
                 adapterSubCategoryDescription.menuList = filteredMenuList
                 adapterSubCategoryDescription.notifyDataSetChanged()
@@ -229,7 +226,7 @@ class SubCategoryDescriptionFragment : Fragment(), CallbackSubCategoryDescriptio
         val tvAllergyInfo = addToCartSheet.findViewById<TextView>(R.id.tvAllergyInfo)
         val tvItemPrice = addToCartSheet.findViewById<TextView>(R.id.tvPrice)
         val buttonAddToCart = addToCartSheet.findViewById<Button>(R.id.buttonAddToCart)
-        if (itemFoodType.equals("Veg")) {
+        if (itemFoodType) {
             vegOrNonVegImageView.setBackgroundResource(R.drawable.veg)
         } else {
             vegOrNonVegImageView.setBackgroundResource(R.drawable.non_veg)
@@ -241,6 +238,7 @@ class SubCategoryDescriptionFragment : Fragment(), CallbackSubCategoryDescriptio
         dialogAddToCart = BottomSheetDialog(activity as AppCompatActivity)
         dialogAddToCart.setContentView(addToCartSheet)
         dialogAddToCart.show()
+
         buttonAddToCart.setOnClickListener {
                 getAddOnDialog(itemMainCategoryName, itemSubCategoryName, itemFoodType, itemName, itemId, itemQuantity, itemPrice, itemImageUrl, itemDescription)
                 // addToCartPostData(itemMainCategoryName, itemSubCategoryName, itemFoodType, itemName, itemId, itemBaseQuantity, itemPrice, itemImageUrl, itemDescription, dialog)

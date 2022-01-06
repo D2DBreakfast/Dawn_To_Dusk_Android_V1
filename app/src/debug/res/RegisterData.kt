@@ -1,11 +1,3 @@
-package com.utico.fooddelivery.model
-
-data class UserRegistrationResponseModel(
-    val RegisterData: RegisterData,
-    val message: String,
-    val status: Boolean,
-    val statusCode: Int
-)
 data class RegisterData(
     val countryCode: String,
     val email: String,

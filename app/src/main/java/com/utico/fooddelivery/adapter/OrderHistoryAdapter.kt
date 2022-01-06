@@ -4,13 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.CallbackOrderHistory
 import com.utico.fooddelivery.databinding.ItemRowOrderHistoryBinding
 import com.utico.fooddelivery.model.PlacedOrders
-import okhttp3.internal.addHeaderLenient
 
 class OrderHistoryAdapter(val callbackOrderHistory: CallbackOrderHistory) : RecyclerView.Adapter<OrderHistoryAdapter.MyViewHolder>() {
     var orderHistoryList = mutableListOf<PlacedOrders>()
@@ -25,18 +23,16 @@ class OrderHistoryAdapter(val callbackOrderHistory: CallbackOrderHistory) : Recy
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         for (data in orderHistoryList){
-            itemQuantityWithName =data.orderDetails[position].itemQuantity+ "x" + data.orderDetails[position].itemName
         }
-        holder.bind(orderHistoryList[position],itemQuantityWithName!!)
+        holder.bind(orderHistoryList[position],context)
         val btnCancel = holder.binding.btnCancel
 
-           if (orderHistoryList[position].deliveryStatus.equals("delivered")||orderHistoryList[position].deliveryStatus.equals("Cancelled")){
+           if (orderHistoryList[position].deliveryStatus.equals("Delivered")||orderHistoryList[position].deliveryStatus.equals("Cancelled")){
                btnCancel.visibility = View.GONE
            }else{
                btnCancel.setOnClickListener {
                    callbackOrderHistory.orderCancelDialog()
                    callbackOrderHistory.placedOrderCancel(orderHistoryList[position].userId,orderHistoryList[position].orderId)
-
                }
            }
     }
@@ -46,19 +42,41 @@ class OrderHistoryAdapter(val callbackOrderHistory: CallbackOrderHistory) : Recy
     }
 
     class MyViewHolder(val binding: ItemRowOrderHistoryBinding) :RecyclerView.ViewHolder(binding.root){
+        val relativeLayout = binding.relativeLayout
         val tvOrderStatus = binding.tvStatus
         val tvOrderDate = binding.tvOrderDate
+        val tvPlanEndDate  = binding.tvPlanEndDate
         val tvOrderNumber = binding.tvOrderNumber
-        val tvQuantityWithItemName = binding.tvQuantityWithItemName
+        val tvCategoryName = binding.tvCategoryName
         val tvPrice = binding.tvPrice
+        val tvSubscriptionPlan = binding.tvSubscriptionPlan
 
+        fun bind(placeOrderHistoryData: PlacedOrders, context: Context?){
+            if (placeOrderHistoryData.orderStatus.equals("Received")){
+                tvOrderStatus.setTextColor(context!!.resources.getColor(R.color.gold))
+            }else if (placeOrderHistoryData.orderStatus.equals("Cancelled")){
+                tvOrderStatus.setTextColor(context!!.resources.getColor(R.color.red))
+            }else if (placeOrderHistoryData.orderStatus.equals("Delivered")){
+                tvOrderStatus.setTextColor(context!!.resources.getColor(R.color.green))
+            }
+            if (placeOrderHistoryData.categoryType.equals("Subscription")){
+                tvOrderNumber.text ="Order Number"+placeOrderHistoryData.orderId
+                tvPrice.text = "AED"+" "+placeOrderHistoryData.paymentPaid
+                tvOrderStatus.text = placeOrderHistoryData.orderStatus
+                tvCategoryName.text =placeOrderHistoryData.categoryType+" "+"Plan"
+                tvSubscriptionPlan.text = placeOrderHistoryData.title
+                tvOrderDate.text ="Your Plan Start on"+" "+placeOrderHistoryData.orderDate
+                tvPlanEndDate.text = "Your Plan End on "+" " +placeOrderHistoryData.endDate
+            }else{
+                tvCategoryName.visibility = View.GONE
+                tvSubscriptionPlan.visibility = View.GONE
+                tvPlanEndDate.visibility = View.GONE
+                tvOrderStatus.text = placeOrderHistoryData.orderStatus
+                tvOrderDate.text ="Your Delivery Order on"+" "+placeOrderHistoryData.orderDate
+                tvOrderNumber.text ="Order Number"+placeOrderHistoryData.orderId
+                tvPrice.text = "AED"+" "+placeOrderHistoryData.paymentPaid
 
-        fun bind(placeOrderHistoryData: PlacedOrders,itemNameWithQuantity:String){
-            tvOrderStatus.text = placeOrderHistoryData.orderStatus
-           tvOrderDate.text ="Your Delivery order on"+" "+placeOrderHistoryData.orderDate
-           tvOrderNumber.text ="Order Number"+placeOrderHistoryData.orderId
-           tvQuantityWithItemName.text = placeOrderHistoryData.orderDetails[adapterPosition].itemQuantity+"x"+placeOrderHistoryData.orderDetails[adapterPosition].itemName
-            tvPrice.text = "AED"+" "+placeOrderHistoryData.orderDetails[adapterPosition].itemPrice
+            }
 
         }
     }

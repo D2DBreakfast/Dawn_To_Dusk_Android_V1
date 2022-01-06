@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.CallbackSubscription
 import com.utico.fooddelivery.databinding.ItemRowSubscriptionPackagesBinding
-import com.utico.fooddelivery.model.subscriptionTypes
+import com.utico.fooddelivery.model.SubscriptionTitle
 import com.utico.fooddelivery.view.AddFragmentToActivity
 
 class SubscriptionPackageAdapter:RecyclerView.Adapter<SubscriptionPackageAdapter.MyViewHolder>() {
     private var context:Context? = null
     private var callbackSubscription:CallbackSubscription? = null
-    var subscriptionTypeList = mutableListOf<subscriptionTypes>()
+    var subscriptionTypeList = mutableListOf<SubscriptionTitle>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
        context=parent.context
       val inflater = LayoutInflater.from(parent.context)
@@ -33,11 +33,11 @@ class SubscriptionPackageAdapter:RecyclerView.Adapter<SubscriptionPackageAdapter
                 editor?.putString("subscriptionId",subscriptionTypeList[position].subscriptionId)
                 editor?.putString("subscriptionImage",subscriptionTypeList[position].subscriptionImage)
                 editor?.putString("subscriptionLeastAmount",subscriptionTypeList[position].subscriptionLeastAmount)
-                editor?.putString("subscriptionType",subscriptionTypeList[position].subscriptionType)
+                editor?.putString("subscriptionTitle",subscriptionTypeList[position].subscriptionTitle)
                 editor?.commit()
              context?.startActivity(intent)
              callbackSubscription?.subscriptionType(subscriptionTypeList[position].subscriptionDescription,subscriptionTypeList[position].subscriptionId,subscriptionTypeList[position].subscriptionImage,
-             subscriptionTypeList[position].subscriptionLeastAmount,subscriptionTypeList[position].subscriptionType)
+             subscriptionTypeList[position].subscriptionLeastAmount,subscriptionTypeList[position].subscriptionTitle)
         }
     }
 
@@ -49,8 +49,8 @@ class SubscriptionPackageAdapter:RecyclerView.Adapter<SubscriptionPackageAdapter
         val tvSubscriptionType = binding.tvSubscriptionType
         val tvDescription = binding.tvDescription
         val tvPrice = binding.tvPrice
-        fun bind(data: subscriptionTypes){
-            tvSubscriptionType.text = data.subscriptionType
+        fun bind(data: SubscriptionTitle){
+            tvSubscriptionType.text = data.subscriptionTitle
             tvDescription.text = data.subscriptionDescription
             tvPrice.text = data.subscriptionLeastAmount
       }

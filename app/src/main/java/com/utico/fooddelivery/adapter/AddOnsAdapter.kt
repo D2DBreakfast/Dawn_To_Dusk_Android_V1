@@ -44,11 +44,13 @@ class AddOnsAdapter(val callbackSubCategoryDescription: CallbackSubCategoryDescr
         val tvAddOnsPrice = binding.tvAddOnsPrice
         val tvItemName   = binding.tvItemName
         val checkBox = binding.checkBox
+        val vegOrNonVegImageView = binding.vegOrNonVegImageView
 
         fun bind(data: AddOnDetails) {
-            tvItemName.text = data.addOnName
-            tvAddOnsName.text = data.addOnType
+            tvItemName.text = data.addOnTitle
+            tvAddOnsName.text = data.addOnName
             tvAddOnsPrice.text = data.amount
+
         }
     }
 }

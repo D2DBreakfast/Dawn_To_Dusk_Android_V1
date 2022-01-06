@@ -16,11 +16,10 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:background="@color/card_background_light_green">
-
      <RelativeLayout
          android:id="@+id/imageView6"
          android:layout_width="match_parent"
-         android:layout_height="wrap_content"
+         android:layout_height="300dp"
          android:background="@drawable/login_shape"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.497"
@@ -33,44 +32,66 @@
              android:layout_height="200dp"
              android:layout_centerHorizontal="true"
              android:background="@drawable/dawntodusklogo" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="40dp"
+            android:padding="10dp"
+            >
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_label_login"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+            <View
+                android:visibility="gone"
+                android:id="@+id/viewLineLogin"
+                android:layout_width="45dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/gold" />
+
+        </LinearLayout>
+
          <LinearLayout
-             android:id="@+id/lnrTextRow"
-             android:layout_below="@+id/edit_profile_imageview"
-             android:layout_width="match_parent"
-             android:layout_marginTop="70dp"
+             android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:orientation="horizontal">
+             android:orientation="vertical"
+             android:layout_alignParentBottom="true"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="40dp"
+             android:padding="10dp"
+             >
              <TextView
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:textSize="18sp"
-                 android:textColor="@color/white"
-                 android:layout_marginLeft="70dp"
-                 android:text="Login"
-                 android:textStyle="bold"
-                 />
-
-             <View
-                 android:layout_width="0dp"
-                 android:layout_height="match_parent"
-                 android:layout_weight="1" />
-
-             <TextView
+                 android:id="@+id/tvRegister"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
+                 android:text="@string/tv_label_registration"
                  android:textSize="18sp"
                  android:textColor="@color/white"
-                 android:layout_marginRight="70dp"
                  android:textStyle="bold"
-                 android:text="Sign-up"/>
+                 />
+             <View
+                 android:id="@+id/viewLineRegister"
+                 android:layout_width="98dp"
+                 android:layout_height="3dp"
+                 android:layout_marginTop="2dp"
+                 android:background="@color/gold" />
+
          </LinearLayout>
+
 
      </RelativeLayout>
 
 
      <TextView
-         android:id="@+id/tv_registration"
+         android:id="@+id/tvHeaderName"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginStart="16dp"
@@ -86,7 +107,7 @@
          app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
      <com.google.android.material.textfield.TextInputLayout
-         android:id="@+id/full_name_textInputLayout"
+         android:id="@+id/fullNameTextInputLayout"
          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -98,18 +119,18 @@
          app:helperTextTextColor="@color/red"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/tv_registration">
+         app:layout_constraintTop_toBottomOf="@+id/tvHeaderName">
 
          <com.google.android.material.textfield.TextInputEditText
              android:id="@+id/til_full_name"
-             android:text="@={registrationViewModel.name}"
+             android:text="@={registrationViewModel.fullName}"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:hint="@string/full_name" />
      </com.google.android.material.textfield.TextInputLayout>
 
      <com.google.android.material.textfield.TextInputLayout
-         android:id="@+id/email_TextInputLayout"
+         android:id="@+id/emailTextInputLayout"
          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -120,7 +141,7 @@
          app:helperTextTextColor="@color/red"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/full_name_textInputLayout">
+         app:layout_constraintTop_toBottomOf="@+id/fullNameTextInputLayout">
 
          <com.google.android.material.textfield.TextInputEditText
              android:id="@+id/til_email"
@@ -142,11 +163,11 @@
          app:helperTextTextColor="@color/red"
          app:layout_constraintEnd_toStartOf="@+id/textInputLayout17"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/email_TextInputLayout">
+         app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout">
 
          <AutoCompleteTextView
              android:id="@+id/country_code"
-             android:text="@={registrationViewModel.country_code}"
+             android:text="@={registrationViewModel.countryCode}"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:gravity="center"
@@ -172,7 +193,7 @@
          app:layout_constraintVertical_bias="0.0">
 
          <com.google.android.material.textfield.TextInputEditText
-             android:text="@={registrationViewModel.mobilenumber}"
+             android:text="@={registrationViewModel.mobileNumber}"
              android:id="@+id/til_mobile_number"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -182,11 +203,11 @@
      </com.google.android.material.textfield.TextInputLayout>
 
      <Button
-         android:id="@+id/btn_registration"
+         android:id="@+id/btnSubmit"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_marginStart="16dp"
-         android:layout_marginTop="120dp"
+         android:layout_marginTop="50dp"
          android:layout_marginEnd="16dp"
          android:backgroundTint="@color/green"
          android:text="@string/tv_label_registration"
@@ -208,8 +229,7 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.075"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/btn_registration" />
-
+         app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
 
  </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -14,12 +14,17 @@ interface ApiService {
 
         /*Registration ApiService Call*/
     //@Headers("Content-Type:application/json")
+
+    /*get MainCategory list*/
+    @GET("manager/fetchMainCategory")
+    fun fetchMainCategory():Call<MainCategoryResponseModel>
+
     @FormUrlEncoded
-    @POST("userRegister")
+    @POST("user/userRegistration")
     fun userRegistration(
-        @Field("countryCode") countryCode:String,
         @Field("fullName") fullName: String,
         @Field("mobileNo") mobileNumber: String,
+        @Field("countryCode") countryCode:String,
         @Field("email") email: String,
         ): Call<UserRegistrationResponseModel>
 
@@ -35,8 +40,8 @@ interface ApiService {
     /*OTPVerify Method*/
    // @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
-    @POST("verifyOtp")
-       fun otpVerfication(
+    @POST("user/verifyOtp")
+       fun otpVerification(
         @Field("countryCode") countryCode: String,
         @Field("mobileNo") mobileNumber: String,
         @Field("mobileOtp") mobileOtp:String
@@ -45,7 +50,7 @@ interface ApiService {
     /*Login ApiService Call*/
    // @Headers("api_key:JPcopEq16fyQGjnzY3QXVDnGDZrgQAs1")
     @FormUrlEncoded
-    @POST("userLogin")
+    @POST("user/userLogin")
     fun userLogin(
         @Field("countryCode") countryCode:String,
         @Field("mobileNo") mobileNumber: String
@@ -60,7 +65,7 @@ interface ApiService {
 
      /*get The sub category related data*/
     @FormUrlEncoded
-    @POST("user/fetchSubCategoryMenusDetails")
+    @POST("user/fetchUserMenuOld")
     fun getSubCategoryRelatedDetails(
          @Field("mainCategoryId") mainCategoryId:String,
          @Field("subCategoryId") subCategoryId:String
@@ -77,7 +82,7 @@ interface ApiService {
 
     /*Post AddOns Data*/
     @FormUrlEncoded
-    @POST("user/getAddOnItemDetails")
+    @POST("user/fetchAddOnDetails")
     fun getAddOns(
         @Field("itemId") itemId:String
     ): Call<AddOnsDataModel>
@@ -134,8 +139,8 @@ interface ApiService {
 
 
     /*Get the subscription Types*/
-    @GET("manager/fetchSubscriptionTypes")
-    fun getSubscriptionTypes():Call<SubscriptionTypesDataResponseModel>
+    @GET("manager/fetchSubscriptionTitle")
+    fun getSubscriptionTypes():Call<SubscriptionTitleDataResponseModel>
 
     /*Get the fetch upcoming Meals*/
     @FormUrlEncoded
@@ -164,12 +169,12 @@ interface ApiService {
         @Field("categoryType") categoryType:String,
         @Field("subscriptionPlan") plan:String,
         @Field("startDate") startDate:String,
-        @Field("subscriptionType") subscriptionType:String
+        @Field("subscriptionTitle") subscriptionTitle:String
     ):Call<OrderPlacedResponse>
 
     /*Place Order History*/
     @FormUrlEncoded
-    @POST("user/fetchAllUsersPlacedOrders")
+    @POST("user/userOrderHistory")
     fun orderHistory(
      @Field("userId") userId:String
     ): Call<PlacedOrderHistoryResponse>

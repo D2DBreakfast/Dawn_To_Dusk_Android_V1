@@ -10,7 +10,7 @@ class RetroInstance {
 /*
         val baseUrl ="https://d2dbackendmain.azurewebsites.net/"
 */
-        val baseUrl="http://10.12.15.32:3000/"
+        val baseUrl="http://10.12.12.67:3000/"
         fun getRetroInstance(): Retrofit {
             val logging = HttpLoggingInterceptor()
             logging.level = (HttpLoggingInterceptor.Level.BODY)

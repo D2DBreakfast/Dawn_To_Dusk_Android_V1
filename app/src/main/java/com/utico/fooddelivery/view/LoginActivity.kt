@@ -3,6 +3,7 @@ package com.utico.fooddelivery.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -57,6 +58,19 @@ class LoginActivity : AppCompatActivity(),LoginListener {
                 val selectedItem = parent.getItemAtPosition(position) as String
                 toast(selectedItem)
             }
+
+        binding.tvLogin.setOnClickListener {
+            binding.viewLineRegister.visibility = View.INVISIBLE
+            binding.viewLineLogin.visibility = View.VISIBLE
+        }
+
+        binding.tvRegister.setOnClickListener {
+            binding.viewLineLogin.visibility = View.INVISIBLE
+            binding.viewLineRegister.visibility = View.VISIBLE
+            val intent=Intent(this, RegistrationActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun logIn(loginResponse: LiveData<String>) {
@@ -70,8 +84,8 @@ class LoginActivity : AppCompatActivity(),LoginListener {
     }
 
     override fun regiStration() {
-        val intent=Intent(this, RegistrationActivity::class.java)
-          startActivity(intent)
+       /* val intent=Intent(this, RegistrationActivity::class.java)
+          startActivity(intent)*/
     }
 
 

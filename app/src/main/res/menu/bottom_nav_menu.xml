@@ -9,8 +9,10 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_white_shopping_cart"
-        android:title="@string/cart" />
-
+        android:title="@string/cart"/>
+<!--
+  https://stackoverflow.com/questions/39496301/how-to-add-item-number-on-the-cart-icon-at-top-toolbar-android/50063628
+-->
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"

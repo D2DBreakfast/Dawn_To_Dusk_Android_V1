@@ -19,14 +19,14 @@
         android:fillViewport="true">
 
         <RelativeLayout
-            android:id="@+id/rltImage"
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_shape"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" >
 
             <ImageView
                 android:id="@+id/edit_profile_imageview"
@@ -35,38 +35,59 @@
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/dawntodusklogo" />
             <LinearLayout
-                android:id="@+id/lnrTextRow"
-                android:layout_below="@+id/edit_profile_imageview"
-                android:layout_width="match_parent"
-                android:layout_marginTop="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="40dp"
+                android:padding="10dp"
+                >
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:layout_weight="1"
-                    android:text="Login"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
+                    android:id="@+id/tvLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{loginviewmodel::newRegistrationButtonClick}"
+                    android:text="@string/tv_label_login"
                     android:textSize="18sp"
                     android:textColor="@color/white"
-                    android:layout_marginRight="70dp"
                     android:textStyle="bold"
-                    android:text="Sign-up"/>
+                    />
+                <View
+                    android:id="@+id/viewLineLogin"
+                    android:layout_width="45dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/gold" />
+
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="40dp"
+                android:padding="10dp"
+                >
+                <TextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_label_registration"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    />
+                <View
+                    android:visibility="gone"
+                    android:id="@+id/viewLineRegister"
+                    android:layout_width="98dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/gold" />
+
+            </LinearLayout>
+
 
         </RelativeLayout>
 
@@ -84,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rltImage" />
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout16"
@@ -163,7 +184,6 @@
             app:layout_constraintHorizontal_bias="0.135"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button3" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
    </ScrollView>
 </layout>

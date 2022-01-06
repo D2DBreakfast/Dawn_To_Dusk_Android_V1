@@ -8,6 +8,7 @@
     tools:context=".view.fragment.CartFragment"
     android:layout_marginBottom="65dp">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cartConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,7 +43,7 @@
 -->
 
     <RelativeLayout
-        android:id="@+id/relativeLayout3"
+        android:id="@+id/rltShippingTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -57,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shipping_details"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -79,9 +80,10 @@
         app:cardCornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/rltShippingTitle">
 
         <RelativeLayout
+            android:id="@+id/rltAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
@@ -194,7 +196,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout5"
+        android:id="@+id/rltPaymentGateHeader"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -212,9 +214,8 @@
             android:id="@+id/textView58"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/payment_gateway"
             android:fontFamily="@font/roboto_regular"
-            />
+            android:text="@string/payment_gateway" />
 
         <TextView
             android:id="@+id/textView59"
@@ -257,7 +258,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/rltPaymentGateHeader">
 
         <TextView
             android:id="@+id/textView60"
@@ -311,7 +312,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView63"
+        android:id="@+id/tvInvoiceHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -321,7 +322,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout7"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:fontFamily="@font/roboto_regular"
         />
@@ -335,11 +336,12 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/tvInvoiceHeader"
         app:cardMaxElevation="0dp"
         app:cardCornerRadius="4dp">
 
         <RelativeLayout
+            android:id="@+id/rltInvoiceDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">
@@ -462,7 +464,7 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
-        android:id="@+id/lnr_terms_and_condition"
+        android:id="@+id/lnrTermsAndCondition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -472,7 +474,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invoice_cardview">
         <CheckBox
-            android:id="@+id/checkBox7"
+            android:id="@+id/termsAndConditionCheckBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
@@ -506,18 +508,19 @@
             app:layout_constraintBottom_toTopOf="@+id/btnCheckOut">
         </com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCheckOut"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_bg"
         android:text="@string/check_out"
+        android:textAllCaps="false"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lnr_terms_and_condition" />
+        app:layout_constraintTop_toBottomOf="@+id/lnrTermsAndCondition" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

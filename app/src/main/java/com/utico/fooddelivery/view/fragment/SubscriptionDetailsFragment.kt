@@ -9,9 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +35,7 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
     private var userId:String? = null
     private var beforeVatPlanPrice:String? = null
     private var afterVatPlanPrice:String? = null
-    private var subscriptiontype:String? = null
+    private var subscriptionTitle:String? = null
     private var planStartDate:String? = null
     private var villaNumber:String? = null
     private var landMark:String? = null
@@ -48,6 +46,7 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
     private lateinit var tvAfterVat:TextView
     private var itemPrice:String? = null
     private var packagePlanSharedPreferences: SharedPreferences? = null
+    private var subscriptionPlanDate:String? = null
 
     private  var subscriptionDescription:String? = null
     private  var subscriptionTypeId: String? = null
@@ -72,7 +71,7 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
         subscriptionTypeId = packagePlanSharedPreferences?.getString("subscriptionId","")
         subscriptionImage = packagePlanSharedPreferences?.getString("subscriptionImage","")
         subscriptionLeastAmount = packagePlanSharedPreferences?.getString("subscriptionLeastAmount","")
-        subscriptionType = packagePlanSharedPreferences?.getString("subscriptionType","")
+        subscriptionType = packagePlanSharedPreferences?.getString("subscriptionTitle","")
 
         val view = binding.root
         initAdapter()
@@ -110,7 +109,7 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
          subscriptionPlanNumberOfDay = numberOfPlanDays
          vatCalculation = (price.toInt())*0.05
          afterVatPlanPrice = (price.toInt()+vatCalculation).toString()
-         subscriptiontype = subscriptionType
+        subscriptionTitle = subscriptionType
          itemPrice = price
     }
 
@@ -123,15 +122,18 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
              subscriptionDetailsAdapter.notifyDataSetChanged()
          }
      })
-        Toast.makeText(context,subscriptionTypeId,Toast.LENGTH_LONG).show()
-
         viewModel.apiCallUpcomingMeals(subscriptionTypeId!!)
     }
 
     private fun mealPlans(){
         viewModel.subscriptionPlanObservable().observe(viewLifecycleOwner, Observer<SubscriptionPlansResponseModel> {
-            subscriptionPackagePlansAdapter?.packageTypeList = it.subscriptionPlans.toMutableList()
-            subscriptionPackagePlansAdapter?.notifyDataSetChanged()
+             if (it.statusCode == 400){
+                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+             }else{
+                 subscriptionPackagePlansAdapter?.packageTypeList = it.subscriptionPlans.toMutableList()
+                 subscriptionPackagePlansAdapter?.notifyDataSetChanged()
+             }
+
         })
         viewModel.apiCallPlan(subscriptionTypeId!!)
     }/*get the Meals Plan like the 7 Days 15Days and 30 Days*/
@@ -147,8 +149,9 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
 
        lnrCalendar.setOnClickListener {
             val datePicker = DatePickerDialog(activity as Context, DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
-                    tvDate.setText(""+ dayOfMonth + "/" + month + "/" + year)
-                    planStartDate =(""+ year + "-" + month + "-" + dayOfMonth)
+                    tvDate.setText(""+ dayOfMonth + "-" + (month+1) + "-" + year)
+                    planStartDate =(""+ year + "-" + (month+1) + "-" + dayOfMonth)
+                   subscriptionPlanDate =(""+ dayOfMonth + "-" + (month+1) + "-" + year)
             },year,month,day)
             datePicker.getDatePicker().setMinDate(calendar.getTimeInMillis());
             datePicker.show()
@@ -176,17 +179,20 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
         val subscriptionBottomSheetDialogLayout = layoutInflater.inflate(R.layout.subscription_dialog,null)
             val editTextVillaNo = subscriptionBottomSheetDialogLayout.findViewById<EditText>(R.id.edtVillaNo)
             val editTextEnterLandMark = subscriptionBottomSheetDialogLayout.findViewById<EditText>(R.id.edtLandMark)
-            val btnPay = subscriptionBottomSheetDialogLayout.findViewById<ExtendedFloatingActionButton>(R.id.btnFloatPay)
+            val btnPay = subscriptionBottomSheetDialogLayout.findViewById<Button>(R.id.btnFloatPay)
             val tvPlanPrice = subscriptionBottomSheetDialogLayout.findViewById<TextView>(R.id.tvPlanPrice)
             val tvSubscriptionType = subscriptionBottomSheetDialogLayout.findViewById<TextView>(R.id.tvSubscriptionType)
             val tvPlans = subscriptionBottomSheetDialogLayout.findViewById<TextView>(R.id.tvPlans)
+            val tvPlanDate = subscriptionBottomSheetDialogLayout.findViewById<TextView>(R.id.tvPlaneDate)
+            val termsAndConditionCheckBox = subscriptionBottomSheetDialogLayout.findViewById<CheckBox>(R.id.termsAndConditionCheckBox)
                tvBeforeVat = subscriptionBottomSheetDialogLayout.findViewById<EditText>(R.id.beforeVatTotal)
                tvVat = subscriptionBottomSheetDialogLayout.findViewById<EditText>(R.id.tvVatTotal)
                tvAfterVat = subscriptionBottomSheetDialogLayout.findViewById<EditText>(R.id.tvAfterVatTotal)
-               tvPlanPrice.text = resources.getString(R.string.aed)+" "+ afterVatPlanPrice
-               tvSubscriptionType.text = subscriptiontype
+               tvPlanPrice.text = resources.getString(R.string.aed)+" "+ itemPrice
+               tvSubscriptionType.text = subscriptionTitle
                tvBeforeVat.text = itemPrice
                tvPlans.text =subscriptionPlanNumberOfDay +" "+ resources.getString(R.string.days_plan)
+               tvPlanDate.text = "Plan Start Date"+" "+subscriptionPlanDate
                tvVat.text = vatCalculation.toString()
                tvAfterVat.text = afterVatPlanPrice
                btnPay.text =resources.getString(R.string.pay_aed)+" "+afterVatPlanPrice
@@ -195,6 +201,18 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
             val bottomDialog = BottomSheetDialog(activity as AppCompatActivity)
                 bottomDialog.setContentView(subscriptionBottomSheetDialogLayout)
                 bottomDialog.show()
+
+        termsAndConditionCheckBox.setOnClickListener {
+            if (termsAndConditionCheckBox.isChecked){
+                btnPay.isEnabled = true
+                btnPay.setTextColor(resources.getColor(R.color.white))
+                btnPay.setBackgroundColor(resources.getColor(R.color.green))
+            }else{
+                btnPay.isEnabled = false
+                btnPay.setBackgroundColor(resources.getColor(R.color.greyLight))
+            }
+        }
+
 
         btnPay.setOnClickListener {
             villaNumber = editTextVillaNo.text.toString()
@@ -214,7 +232,7 @@ class SubscriptionDetailsFragment : Fragment(),CallbackSubscription {
                         }
                     })
                 viewModel.apiCallPlaceSubscriptionPlan(userId!!, "2", villaNumber!!, landMark!!, afterVatPlanPrice!!,
-                                                        "Subscription", subscriptionPlanNumberOfDay!!, planStartDate!!, subscriptiontype!!)
+                                                        "Subscription", subscriptionPlanNumberOfDay!!, planStartDate!!, subscriptionTitle!!)
 
             }
         }

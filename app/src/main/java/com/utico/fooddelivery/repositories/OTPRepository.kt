@@ -1,6 +1,5 @@
 package com.utico.fooddelivery.repositories
 
-import android.net.DnsResolver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.utico.fooddelivery.retrofit.ApiService
@@ -14,7 +13,7 @@ class OTPRepository {
     fun otpVerfication(countryCode:String,mobileNumber:String,mobileOtp:String):LiveData<String>{
       val otpResponse  = MutableLiveData<String>()
       val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
-      val call = retroInstance.otpVerfication(countryCode,mobileNumber,mobileOtp)
+      val call = retroInstance.otpVerification(countryCode,mobileNumber,mobileOtp)
 
           call.enqueue(object : Callback<ResponseBody>{
               override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

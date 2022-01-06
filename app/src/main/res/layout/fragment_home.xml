@@ -247,7 +247,7 @@
             app:layout_constraintTop_toBottomOf="@+id/home_custom_toolbar"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <RelativeLayout
+       <!-- <RelativeLayout
             android:id="@+id/rltMainCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -257,7 +257,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.09"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView">
+            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView"
+            >
 
             <TextView
                 android:id="@+id/tvBreakfast"
@@ -324,7 +325,20 @@
                 android:visibility="gone"
                 />
 
-        </RelativeLayout>
+        </RelativeLayout>-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/maiCategoryRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/breakfastBannerImageView"
+            tools:listitem="@layout/item_row_maincategory"
+            />
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/subCategoryCardView"
@@ -336,7 +350,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.718"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rltMainCategory"
+            app:layout_constraintTop_toBottomOf="@+id/maiCategoryRecyclerview"
             app:strokeColor="@color/gold"
             app:strokeWidth="0.5dp"
             >

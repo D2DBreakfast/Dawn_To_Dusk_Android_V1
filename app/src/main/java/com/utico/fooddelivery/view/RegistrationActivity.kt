@@ -5,14 +5,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import com.utico.fooddelivery.R
-import com.utico.fooddelivery.`interface`.RegistrationInterface
 import com.utico.fooddelivery.databinding.ActivityRegistrationBinding
 import com.utico.fooddelivery.model.UserRegistrationResponseModel
 import com.utico.fooddelivery.util.toast
@@ -73,8 +72,7 @@ class RegistrationActivity : AppCompatActivity(){
                 mobileNumber = text!!.toString()
             }
 
-
-
+        
         val countryCode = resources.getStringArray(R.array.countryCode_array)
         val arrayAdapter = ArrayAdapter(this,R.layout.dropdown_item,countryCode)
         binding.countryCode.setAdapter(arrayAdapter)
@@ -85,26 +83,35 @@ class RegistrationActivity : AppCompatActivity(){
                 toast(selectedItem)
             }
 
+        binding.tvLogin.setOnClickListener {
+           /* binding.viewLineLogin.visibility = View.VISIBLE
+            binding.viewLineRegister.visibility =View.INVISIBLE
+            binding.fullNameTextInputLayout.visibility = View.GONE
+            binding.emailTextInputLayout.visibility = View.GONE
+            binding.tvLogin.text=this.resources.getString(R.string.tv_label_login)
+            binding.tvHeaderName.text=this.resources.getString(R.string.tv_label_login)
+            binding.btnSubmit.text=this.resources.getString(R.string.tv_label_login)*/
+
+             val intent = Intent(this,LoginActivity::class.java)
+                 startActivity(intent)
+                 finish()
+        }
+        binding.tvRegister.setOnClickListener {
+            binding.viewLineLogin.visibility = View.INVISIBLE
+            binding.viewLineRegister.visibility =View.VISIBLE
+            binding.fullNameTextInputLayout.visibility = View.VISIBLE
+            binding.emailTextInputLayout.visibility = View.VISIBLE
+            binding.tvLogin.text=this.resources.getString(R.string.tv_label_login)
+            binding.tvHeaderName.text=this.resources.getString(R.string.tv_label_registration)
+            binding.btnSubmit.text=this.resources.getString(R.string.tv_label_registration)
+
+
+        }
+
     }
 
-
-   /* override fun registration(registerResponse: LiveData<String>) {
-        registerResponse.observe(this,Observer{
-            toast(it)
-            editor.putString("fullName",binding.tilFullName.text.toString())
-            editor.putString("mobileNumber",binding.tilMobileNumber.text.toString())
-            editor.putString("email",binding.tilEmail.text.toString())
-            editor.putString("countryCode",binding.countryCode.text.toString())
-            editor.commit()
-            val intent = Intent(this,OtpVerficationActivity::class.java)
-            intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
-            startActivity(intent)
-
-        })
-    }*/
-
     fun clickSubmitButton(){
-       binding.btnRegistration.setOnClickListener {
+       binding.btnSubmit.setOnClickListener {
            //start temp
           /* editor.putString("fullName","Shivanad Patil")
            editor.putString("mobileNumber","9535347309")
@@ -117,20 +124,34 @@ class RegistrationActivity : AppCompatActivity(){
            startActivity(intent)//temp Remove later*/
 
            viewModel.getRegistrationObservable().observe(this, Observer<UserRegistrationResponseModel> {
-               if (it.statusCode == 200){
+               if (it.statusCode == 400){
                    toast(it.message)
-                   editor.putString("fullName",it.loginData.fullName)
-                   editor.putString("mobileNumber",it.loginData.mobileNo)
-                   editor.putString("email",it.loginData.email)
-                   editor.putString("countryCode",it.loginData.countryCode)
-                   editor.putString("userId",it.loginData.userId)
-                   editor.commit()
-                   val intent = Intent(this,OtpVerficationActivity::class.java)
+                  /* editor.putString("fullName",it.RegisterData.fullName)
+                   editor.putString("mobileNumber",it.RegisterData.mobileNo)
+                   editor.putString("email",it.RegisterData.email)
+                   editor.putString("countryCode",it.RegisterData.countryCode)
+                   editor.putString("userId",it.RegisterData.userId)
+                   editor.commit()*/
+                 /*  val intent = Intent(this,OtpVerficationActivity::class.java)
                    intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+mobileNumber)
-                   startActivity(intent)
+                   startActivity(intent)*/
+               }else{
+                   toast(it.RegisterData.fullName)
+                   editor.putString("fullName",it.RegisterData.fullName)
+                   editor.putString("mobileNumber",it.RegisterData.mobileNo)
+                   editor.putString("email",it.RegisterData.email)
+                   editor.putString("countryCode",it.RegisterData.countryCode)
+                   editor.putString("userId",it.RegisterData.userId)
+                   editor.commit()
+                    val intent = Intent(this,OtpVerficationActivity::class.java)
+                     intent.putExtra("mobileNumber","Please type the verification code sent to" +" "+it.RegisterData.mobileNo)
+                     startActivity(intent)
+                  // toast(it.RegisterData.fullName +it.RegisterData.mobileNo + it.RegisterData.email +it.RegisterData.countryCode + it.RegisterData.userId)
                }
            })
            viewModel.ApiCall()
        }
     }
+
+
 }

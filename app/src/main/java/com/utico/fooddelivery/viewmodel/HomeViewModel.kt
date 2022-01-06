@@ -2,21 +2,18 @@ package com.utico.fooddelivery.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.SortedList
 import com.utico.fooddelivery.model.*
 import com.utico.fooddelivery.retrofit.ApiService
 import com.utico.fooddelivery.retrofit.RetroInstance
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.HttpException
 import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
 
-    //lateinit var menuDetailsResponseData: MutableLiveData<MenuDetailsResponseModel>
+    lateinit var mainCategoryResponse:MutableLiveData<MainCategoryResponseModel>
     lateinit var recyclerSubCategoryData: MutableLiveData<SubCategoryResponseModel>
-   // lateinit var subCategoruMenudetailsResponse: MutableLiveData<SubCategoryMenuDetailsModel>
-    lateinit var subscriptionTypeResponse: MutableLiveData<SubscriptionTypesDataResponseModel>
+    lateinit var subscriptionTypeResponse: MutableLiveData<SubscriptionTitleDataResponseModel>
     lateinit var errResponse:MutableLiveData<String>
 
 
@@ -24,9 +21,8 @@ class HomeViewModel : ViewModel() {
     var mainCategoryId: String? = "1"
 
     init {
-       // menuDetailsResponseData = MutableLiveData()
+        mainCategoryResponse = MutableLiveData()
         recyclerSubCategoryData = MutableLiveData()
-       // subCategoruMenudetailsResponse = MutableLiveData()
         subscriptionTypeResponse = MutableLiveData()
     }
 
@@ -84,6 +80,27 @@ class HomeViewModel : ViewModel() {
         })
     }
 */
+
+    /*get the Main Category list of data*/
+    fun mainCategoryObservable():MutableLiveData<MainCategoryResponseModel>{
+        return mainCategoryResponse
+    }
+
+    fun apiCallForMainCategoryListing(){
+        val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
+        val call = retroInstance.fetchMainCategory()
+            call.enqueue(object :Callback<MainCategoryResponseModel>{
+                override fun onResponse(call: Call<MainCategoryResponseModel>, response: Response<MainCategoryResponseModel>) {
+                    if (response.isSuccessful){
+                        mainCategoryResponse.postValue(response.body())
+                    }
+                }
+                override fun onFailure(call: Call<MainCategoryResponseModel>, t: Throwable) {
+                    mainCategoryResponse.postValue(null)
+                }
+            })
+    }
+
 
     /*Get the food sub Category list function*/
     fun getSubCategoryObservable(): MutableLiveData<SubCategoryResponseModel> {
@@ -196,24 +213,24 @@ class HomeViewModel : ViewModel() {
 */
 
     /*Get subscription Type*/
-    fun subscriptionTypeObservable(): MutableLiveData<SubscriptionTypesDataResponseModel> {
+    fun subscriptionTypeObservable(): MutableLiveData<SubscriptionTitleDataResponseModel> {
         return subscriptionTypeResponse
     }
 
     fun apiCallSubscriptionTypes() {
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.getSubscriptionTypes()
-        call.enqueue(object : Callback<SubscriptionTypesDataResponseModel> {
+        call.enqueue(object : Callback<SubscriptionTitleDataResponseModel> {
             override fun onResponse(
-                call: Call<SubscriptionTypesDataResponseModel>,
-                response: Response<SubscriptionTypesDataResponseModel>
+                call: Call<SubscriptionTitleDataResponseModel>,
+                response: Response<SubscriptionTitleDataResponseModel>
             ) {
                 if (response.isSuccessful) {
                     subscriptionTypeResponse.postValue(response.body())
                 }
             }
 
-            override fun onFailure(call: Call<SubscriptionTypesDataResponseModel>, t: Throwable) {
+            override fun onFailure(call: Call<SubscriptionTitleDataResponseModel>, t: Throwable) {
                 subscriptionTypeResponse.postValue(null)
 
             }

@@ -10,8 +10,7 @@ import com.utico.fooddelivery.R
 import com.utico.fooddelivery.`interface`.CallbackSubCategoryDescription
 import com.utico.fooddelivery.databinding.ItemRowSubcategoryDescriptionBinding
 import com.utico.fooddelivery.model.SubCategoryMenuData
-import com.utico.fooddelivery.view.AddFragmentToActivity
-import com.utico.fooddelivery.view.RegistrationActivity
+import com.utico.fooddelivery.view.LoginActivity
 
 class AdapterSubCategoryDescription(var callbackSubCategoryDescription: CallbackSubCategoryDescription) :RecyclerView.Adapter<AdapterSubCategoryDescription.MyViewHolder>(){
      var menuList = mutableListOf<SubCategoryMenuData>()
@@ -31,7 +30,7 @@ class AdapterSubCategoryDescription(var callbackSubCategoryDescription: Callback
                    userId = registrationSharedPreferences?.getString("userId", "")
              if (userId.equals("") || userId.equals(null)) {
                  Toast.makeText(context, "Before Add to Cart Please Register!!", Toast.LENGTH_LONG).show()
-                 val intent = Intent(context, RegistrationActivity::class.java)
+                 val intent = Intent(context, LoginActivity::class.java)
                  context?.startActivity(intent)
              }
              else if ((menuList[position].itemQuantity).toInt()<=0) {
@@ -46,11 +45,13 @@ class AdapterSubCategoryDescription(var callbackSubCategoryDescription: Callback
 
         holder.binding.addOnsButton.setOnClickListener {
           /*  callbackSubCategoryDescription.addOnsButtonClickEvent(menuList[position].itemName, menuList[position].itemDescription,menuList[position].itemPrice,
-                menuList[position].itemMainCategoryName,menuList[position].itemSubCategoryName, menuList[position].itemFoodType,menuList[position].itemQuantity,
+                menuList[position].itemMainCategoryName,menuList[position].itemSubCategoryName, menuList[position].itemFoodType,menuList[position].itemBaseQuantity,
                 menuList[position].itemId,menuList[position].itemImageUrl)*/
+            val sharedPreferences = context?.getSharedPreferences(context?.resources?.getString(R.string.registration_details_sharedPreferences), Context.MODE_PRIVATE)
+            userId = sharedPreferences?.getString("userId", "")
             if (userId.equals("") || userId.equals(null)) {
                 Toast.makeText(context, "Before Add to Cart Please Register!!", Toast.LENGTH_LONG).show()
-                val intent = Intent(context, RegistrationActivity::class.java)
+                val intent = Intent(context, LoginActivity::class.java)
                 context?.startActivity(intent)
             }else if ((menuList[position].itemQuantity).toInt()<=0) {
                 Toast.makeText(context, "Out of Stock!!", Toast.LENGTH_LONG).show()
@@ -79,7 +80,7 @@ class AdapterSubCategoryDescription(var callbackSubCategoryDescription: Callback
          tvTitle.text = data.itemName
          tvDescription.text = data.itemDescription
          tvPrice.text = "AED"+" "+data.itemPrice
-           if (data.itemFoodType.equals("Veg")) {
+           if (data.itemFoodType) {
               vegNonVegImageview.setBackgroundResource(R.drawable.veg)
            }else{
                vegNonVegImageview.setBackgroundResource(R.drawable.non_veg)

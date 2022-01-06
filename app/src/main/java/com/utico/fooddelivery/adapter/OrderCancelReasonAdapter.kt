@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.`interface`.CallbackOrderHistory
 import com.utico.fooddelivery.databinding.ItemRowOrderCancelReasonBinding
-import com.utico.fooddelivery.model.CancelReason
+import com.utico.fooddelivery.model.CancelReasons
 
 class OrderCancelReasonAdapter(val callbackOrderHistory: CallbackOrderHistory):RecyclerView.Adapter<OrderCancelReasonAdapter.MyViewHolder>(){
-    var cancelist = mutableListOf<CancelReason>()
+    var cancelist = mutableListOf<CancelReasons>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val inflater =LayoutInflater.from(parent.context)
         val  binding = ItemRowOrderCancelReasonBinding.inflate(inflater,parent,false)
@@ -28,7 +28,7 @@ class OrderCancelReasonAdapter(val callbackOrderHistory: CallbackOrderHistory):R
     class MyViewHolder(binding: ItemRowOrderCancelReasonBinding):RecyclerView.ViewHolder(binding.root){
         val tvReason =binding.tvCancelReason
         val radioButton = binding.radioButton
-      fun bind(data : CancelReason){
+      fun bind(data : CancelReasons){
           tvReason.text = data.reason
       }
     }

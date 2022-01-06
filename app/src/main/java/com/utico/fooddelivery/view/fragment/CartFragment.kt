@@ -74,7 +74,7 @@ class CartFragment : Fragment(),CallbackViewCart {
         toCheckUserRegisterOrNot(userId)
         initAdapter()
         getViewCartData()
-        buttonClicksOrSetupDataToUi()
+        clickEvents()
         return root
 
     }
@@ -103,8 +103,8 @@ class CartFragment : Fragment(),CallbackViewCart {
 
 
 
-    /*Theis function is used to set all the btnAddToCart click event here*/
-    fun buttonClicksOrSetupDataToUi(){
+    /*this function is used to set all the btnAddToCart click event here*/
+    private fun clickEvents(){
         binding.tvCoupons.setOnClickListener {
           val intent = Intent(context,AddFragmentToActivity::class.java)
               intent.putExtra("FragmentName","CouponsFragment")
@@ -120,32 +120,55 @@ class CartFragment : Fragment(),CallbackViewCart {
 
        /*Checkout button*/
         binding.btnCheckOut.setOnClickListener {
-            viewModel.placeObservable().observe(viewLifecycleOwner, Observer<OrderPlacedResponse> {
-                Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
-                val naviController = findNavController()
-                 naviController.popBackStack()
-            })
-
             villaNo = binding.edtVillaNo.text.toString()
             landMark = binding.edtLandMark.text.toString()
-            placeOrderSendDataModel= PlaceOrderSendDataModel(villaNo,landMark,placeOrderSetData,"Vij560040",totalAmount,userId,categoryType!!)
-            viewModel.apiCallPlaceOrder(placeOrderSendDataModel)
-           // println(placeOrderSetData)
-           // Toast.makeText(context,placeOrderSetData.toString(),Toast.LENGTH_LONG).show()
+            if (villaNo.equals("")||villaNo.equals(null)){
+                Toast.makeText(context,resources.getString(R.string.please_enter_villa_no),Toast.LENGTH_SHORT).show()
+            }else if (landMark.equals("")||landMark.equals(null)){
+                Toast.makeText(context,resources.getString(R.string.please_enter_land_mark),Toast.LENGTH_SHORT).show()
+            }else{
+                viewModel.placeObservable().observe(viewLifecycleOwner, Observer<OrderPlacedResponse> {
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+                    val naviController = findNavController()
+                        naviController.popBackStack()
+                })
+                placeOrderSendDataModel= PlaceOrderSendDataModel(villaNo,landMark,placeOrderSetData,"2",totalAmount,userId,categoryType!!)
+                viewModel.apiCallPlaceOrder(placeOrderSendDataModel)
+                // println(placeOrderSetData)
+                // Toast.makeText(context,placeOrderSetData.toString(),Toast.LENGTH_LONG).show()
+            }
+
+        }
+
+        binding.termsAndConditionCheckBox.setOnClickListener {
+         if (binding.termsAndConditionCheckBox.isChecked){
+             binding.btnCheckOut.isEnabled = true
+             binding.btnCheckOut.setTextColor(resources.getColor(R.color.white))
+             binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.green))
+         }else{
+             binding.btnCheckOut.isEnabled = false
+             binding.btnCheckOut.setBackgroundColor(resources.getColor(R.color.greyLight))
+         }
+
         }
 
     }
 
     fun getViewCartData(){
        viewModel.getCartDetailsObservable().observe(viewLifecycleOwner, Observer<ViewCartResponseModel> {
-           if (it.ViewCartData== null){
+           if (it.statusCode == 400){
                Toast.makeText(context,it.message,Toast.LENGTH_LONG).show()
-           }else {
+               adapterCart.notifyDataSetChanged()
+               adapterCart.addToCartList.clear()
+               binding.cartConstraintLayout.visibility = View.INVISIBLE
+             }else {
                adapterCart.addToCartList = it.ViewCartData.toMutableList()
                adapterCart.notifyDataSetChanged()
                totalAmount = it.priceAfterVat
+               binding.cartConstraintLayout.visibility = View.VISIBLE
                setBackendDataToUi(it.itemCount,it.priceBeforeVat,it.deliveryCharge,it.itemVat,totalAmount!!)
            }
+
        })
         viewModel.apiCall(userId!!)
     }
@@ -191,5 +214,6 @@ class CartFragment : Fragment(),CallbackViewCart {
         viewModel.callApiIcrementDecrementCartItem(userId,cartId,itemBaseQuantity)
 
     }
+
 
 }

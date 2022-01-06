@@ -3,7 +3,6 @@ package com.utico.fooddelivery.view.fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.utico.fooddelivery.R
+import com.utico.fooddelivery.`interface`.CallbackHome
 import com.utico.fooddelivery.adapter.*
 import com.utico.fooddelivery.databinding.FragmentHomeBinding
 import com.utico.fooddelivery.model.*
@@ -26,7 +26,7 @@ import com.utico.fooddelivery.view.RegistrationActivity
 import com.utico.fooddelivery.viewmodel.HomeViewModel
 
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment(),CallbackHome{
 
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
@@ -47,6 +47,7 @@ class HomeFragment : Fragment(){
     private var userId: String? = null
     private var searchFilterMenuList = mutableListOf<MenuDetailsResponseDataModel>()
     private var mainCategoryName: String? = "Breakfast"
+    private lateinit var mainCategoryListAdapter:MainCategoryListAdapter
 
 /*
     private lateinit var AdapterSubCategory : AdapterSubCategory()
@@ -115,12 +116,13 @@ class HomeFragment : Fragment(){
         }*/
 
         initAdapter()
+        fetchMainCategoryList()
         //getBreakfastMenuDetails(breakfastItemMainCategoryName!!)
         // searchFood()
         // buttonBreakfast()
         // buttonmBrunch()
         // getBreakfastSubCategoryData()
-        setClickEvents()
+       //  setClickEvents()
         // vegOrNonVegSwitch()
         return view
     }
@@ -154,6 +156,13 @@ class HomeFragment : Fragment(){
         brunchSubcategoryRecyclerView.adapter = adapterBrunchSubCategory
 */
 
+        /*MainCategory Listing Adapter*/
+        val mainCategoryRecyclerView = binding.maiCategoryRecyclerview
+            mainCategoryRecyclerView.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+            mainCategoryListAdapter = MainCategoryListAdapter(this)
+            mainCategoryRecyclerView.adapter = mainCategoryListAdapter
+
+        /*SubCategory Listing Adapter*/
         val subCategoryRecyclerView = binding.subCategoryRecyclerView
         subCategoryRecyclerView.layoutManager = GridLayoutManager(activity, 2)
         /* val decoration  = DividerItemDecoration(activity,DividerItemDecoration.VERTICAL)
@@ -384,7 +393,9 @@ class HomeFragment : Fragment(){
     }*/
 
 
-    private fun setClickEvents() {
+
+
+   /* private fun setClickEvents() {
         val tvBreakfast = binding.tvBreakfast
         val tvBrunch = binding.tvBrunch
         val tvSubscription = binding.tvSubscription
@@ -432,14 +443,28 @@ class HomeFragment : Fragment(){
             tvBrunch.setTypeface(null, Typeface.NORMAL)
             getSubscriptionTypes()
         }//Click event for subscription
-    }
+    }*/
 
+
+    override fun mainCategoryClickEvent(mainCategoryId: String,position:Int) {
+        if (position>=2){
+            binding.subscriptionRecyclerView.visibility = View.VISIBLE
+            binding.subCategoryRecyclerView.visibility = View.GONE
+            getSubscriptionTypes()
+
+        }else {
+            getSubCategory(mainCategoryId)
+            binding.subscriptionRecyclerView.visibility = View.GONE
+            binding.subCategoryRecyclerView.visibility = View.VISIBLE
+        }
+    }
 
     private fun getSubCategory(mainCategoryId: String) {
         viewModel.getSubCategoryObservable()
             .observe(viewLifecycleOwner, Observer<SubCategoryResponseModel> {
                 if (it.statusCode == 400) {
                     adapterSubCategory.notifyDataSetChanged()
+                    adapterSubCategory.subCategoryList.clear()
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 } else {
                     adapterSubCategory.subCategoryList = it.SubCategoryData?.toMutableList()
@@ -452,17 +477,31 @@ class HomeFragment : Fragment(){
 
     private fun getSubscriptionTypes() {
         viewModel.subscriptionTypeObservable()
-            .observe(viewLifecycleOwner, Observer<SubscriptionTypesDataResponseModel> {
+            .observe(viewLifecycleOwner, Observer<SubscriptionTitleDataResponseModel> {
                 if (it.statusCode == 400) {
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 } else {
                     subscriptionPackageAdapter.subscriptionTypeList =
-                        it.subscriptionTypes.toMutableList()
+                        it.SubscriptionTitle.toMutableList()
                     subscriptionPackageAdapter.notifyDataSetChanged()
                 }
             })
         viewModel.apiCallSubscriptionTypes()
     }
+
+
+    private fun fetchMainCategoryList(){
+      viewModel.mainCategoryObservable().observe(viewLifecycleOwner, Observer<MainCategoryResponseModel> {
+        if (it.statusCode == 400) {
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+        }else{
+           mainCategoryListAdapter.mainCategoryList = it.MainCategoryData.toMutableList()
+            mainCategoryListAdapter.notifyDataSetChanged()
+        }
+      })
+      viewModel.apiCallForMainCategoryListing()
+    }
+
 
 }
 

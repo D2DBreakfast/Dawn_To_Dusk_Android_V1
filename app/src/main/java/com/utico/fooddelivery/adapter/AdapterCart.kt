@@ -3,6 +3,7 @@ package com.utico.fooddelivery.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.utico.fooddelivery.`interface`.CallbackViewCart
 import com.utico.fooddelivery.databinding.ItemRowCartBinding
@@ -34,10 +35,14 @@ class AdapterCart(val callbackViewCart: CallbackViewCart): RecyclerView.Adapter<
         /*Quantity Decrement*/
         holder.binding.tvDecrement.setOnClickListener {
                 val itemBaseQuantity = addToCartList[position].itemBaseQuantity.toInt()
-               // val itemDecrement = (itemBaseQuantity - 1).toString()
-                    addToCartList[position].itemBaseQuantity = (itemBaseQuantity - 1).toString()
-                    callbackViewCart.decrementOrIncremenItem(addToCartList[position].userId,addToCartList[position].cartId,addToCartList[position].itemBaseQuantity,addToCartList[position].itemPrice)
-                   notifyItemChanged(position)
+                 if(itemBaseQuantity==1){
+                     callbackViewCart.deleteItem(addToCartList[position].userId,addToCartList[position].cartId)
+                 }else{
+                     addToCartList[position].itemBaseQuantity = (itemBaseQuantity - 1).toString()
+                     callbackViewCart.decrementOrIncremenItem(addToCartList[position].userId,addToCartList[position].cartId,addToCartList[position].itemBaseQuantity,addToCartList[position].itemPrice)
+                     notifyItemChanged(position)
+                 }
+
 
             //callbackViewCart.passPlaceOrderList(addToCartList)
                 //Toast.makeText(context, "This option under developing..", Toast.LENGTH_LONG).show()

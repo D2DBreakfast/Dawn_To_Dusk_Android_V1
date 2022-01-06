@@ -1,15 +1,15 @@
 package com.utico.fooddelivery.model
 
-data class SubscriptionTypesDataResponseModel(
+data class SubscriptionTitleDataResponseModel(
     val message: String,
     val status: Boolean,
     val statusCode: Int,
-    val subscriptionTypes: List<subscriptionTypes>
+        val SubscriptionTitle: List<SubscriptionTitle>
 )
-data class subscriptionTypes(
+data class SubscriptionTitle(
     val subscriptionDescription: String,
     val subscriptionId: String,
     val subscriptionImage: String,
     val subscriptionLeastAmount: String,
-    val subscriptionType: String
+    val subscriptionTitle: String
 )

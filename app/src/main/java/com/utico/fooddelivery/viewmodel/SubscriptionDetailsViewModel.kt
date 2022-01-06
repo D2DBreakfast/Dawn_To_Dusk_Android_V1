@@ -84,11 +84,11 @@ class SubscriptionDetailsViewModel : ViewModel() {
         userId: String, sectorId: String,
         villa: String, landMark: String, totalAmount: String,
         categoryType: String, plan: String, startDate: String,
-        subscriptionType: String
+        subscriptionTitle: String
     ) {
         val retroInstance = RetroInstance.getRetroInstance().create(ApiService::class.java)
         val call = retroInstance.placeSubscription(userId,sectorId, villa, landMark,
-            totalAmount, categoryType, plan, startDate, subscriptionType)
+            totalAmount, categoryType, plan, startDate, subscriptionTitle)
         call.enqueue(object : Callback<OrderPlacedResponse> {
             override fun onResponse(call: Call<OrderPlacedResponse>, response: Response<OrderPlacedResponse>) {
                 if (response.isSuccessful) {

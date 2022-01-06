@@ -1,5 +1,7 @@
 package com.utico.fooddelivery.view.fragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,6 +33,8 @@ class OrderHistoryFragment : Fragment(),CallbackOrderHistory {
     private var cancelUserId:String? = null
     private var cancelOrderId:String? = null
     private var orderCancelReason:String? = null
+    private var sharedPreferences:SharedPreferences? = null
+    private var userId:String? = null
 
 
     companion object {
@@ -44,6 +48,8 @@ class OrderHistoryFragment : Fragment(),CallbackOrderHistory {
     ): View? {
         viewModel = ViewModelProvider(this).get(OrderHistoryViewModel::class.java)
         binding = OrderHistoryFragmentBinding.inflate(inflater,container,false)
+        sharedPreferences = context?.getSharedPreferences(resources.getString(R.string.registration_details_sharedPreferences),Context.MODE_PRIVATE)
+        userId = sharedPreferences?.getString("userId","")
 
         val view:View = binding.root
         setUpAdapter()
@@ -69,7 +75,7 @@ class OrderHistoryFragment : Fragment(),CallbackOrderHistory {
              orderHistoryAdapter.notifyDataSetChanged()
             }
         })
-        viewModel.apiCallOrderHistory("9")
+        viewModel.apiCallOrderHistory(userId!!)
     }
 
 
@@ -98,8 +104,13 @@ class OrderHistoryFragment : Fragment(),CallbackOrderHistory {
             cancelReasonRecyclerView.layoutManager = LinearLayoutManager(activity)
             cancelReasonRecyclerView.adapter = orderCancelReasonAdapter
             viewModel.cancelReasonObservable().observe(viewLifecycleOwner, Observer<OrderCancelReasonResponseModel> {
-                orderCancelReasonAdapter.cancelist = it.cancelReasons.toMutableList()
-                orderCancelReasonAdapter.notifyDataSetChanged()
+                if (it.statusCode == 400){
+                    Toast.makeText(context,it.message,Toast.LENGTH_SHORT).show()
+                }else{
+                    orderCancelReasonAdapter.cancelist = it.CancelReasons.toMutableList()
+                    orderCancelReasonAdapter.notifyDataSetChanged()
+                }
+
             })
             viewModel.apiCallForOrderCancelReason()
 
